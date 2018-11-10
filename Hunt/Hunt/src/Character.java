@@ -12,17 +12,32 @@ public class Character implements Serializable {
 	private int curHp;
 	private Weapon weapon;
 	private Armor armor;
+	private boolean solid = true;
+	private int x;
+	private int y;
+	
+	private char icon;
+	
+	private String color;
 	
 	public Character() {
 		// this makes it a bean
 	}
 	
-	public Character(int str, int agi, int vit, Weapon w, Armor a) {
+	public Character(int str, int agi, int vit, Weapon w, Armor a, char icon, 
+			String color, int x, int y) {
 		strength = str;
 		agility = agi;
 		vitality = vit;
 		weapon = w;
 		armor = a;
+		
+		this.icon = icon;
+		
+		this.color = color;
+		
+		this.x = x;
+		this.y = y;
 		
 		calcDamage();
 		calcMoveSpeed();
@@ -30,6 +45,30 @@ public class Character implements Serializable {
 		curHp = hp;
 	}
 	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void move(int x, int y, Dungeon d) {
+		if ((this.x + x) < d.getWidth() && (this.x + x > 0)
+			&& (this.y + y) < d.getHeight() && (this.y + y > 0)) {
+				if (d.getTile(this.x + x, this.y + y).isSolid() == false) {
+					d.changeEntities(this.x, this.y, d.getTile(this.x, this.y).getIcon());
+					this.x += x;
+					this.y += y;
+					d.changeEntities(this.x, this.y, this.icon);
+				}
+		}
+	}
+
 	public int getStrength() {
 		return strength;
 	}
@@ -83,6 +122,17 @@ public class Character implements Serializable {
 	}
 	public void setArmor(Armor armor) {
 		this.armor = armor;
+	}
+	
+	public boolean isSolid(){
+		return solid;	
+	}
+
+	public char geticon() {
+		return icon;
+	}
+	public String getColor() {
+		return color;
 	}
 
 	public void calcDamage() {

@@ -11,9 +11,9 @@ public class Monster extends Character implements Serializable {
 	}
 	
 	public Monster(String type, int expOnKill, int str, int agi, int vit, Weapon weapon, 
-			Armor armor) {
+			Armor armor, char icon, String color, int x, int y) {
 		
-		super(str, agi, vit, weapon, armor);
+		super(str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		this.type = type;
 		this.expOnKill = expOnKill;

@@ -21,11 +21,13 @@ public class CombatTester {
 		totalPoints-=str;
 		
 		
-		Player player = new Player("Stabby McStabberson", str, agi, vit);
+		Player player = new Player("Stabby McStabberson", str, agi, vit, '@', "#FFFF00"
+				, 0, 1);
 		
 		// Make a monster
 		Weapon club = new Weapon("club", '!', 5);
-		Monster monster = new Monster("goblin", 10, 1, 1, 1, club, null);
+		Monster monster = new Monster("goblin", 10, 1, 1, 1, club, null, 'G', "#006400"
+				, 0, 1);
 		
 		// print starting stats
 		System.out.println("--------------------------------------------------");

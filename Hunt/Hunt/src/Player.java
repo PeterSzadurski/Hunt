@@ -1,6 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-// test edit
+
 public class Player extends Character implements Serializable {
 	
 	private String name;
@@ -9,6 +9,9 @@ public class Player extends Character implements Serializable {
 	private int expForNextLevel;
 	private int hunger;
 	private ArrayList<Item> backpack;
+	
+	private char icon = '@';
+	private String color = "#FFFF00";
 	
 	public Player() {
 		// just to make it a bean
@@ -21,9 +24,11 @@ public class Player extends Character implements Serializable {
 	 * @param agi Number of points to allocate to agility
 	 * @param vit Number of points to allocate to vitality
 	 */
-	public Player(String name, int str, int agi, int vit) {
+	public Player(String name, int str, int agi, int vit, char icon, String color,
+			int x, int y) {
 		
-		super(str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1));
+		super(str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1),
+				icon, color, x, y);
 		
 		this.name = name;
 		level = 1;
@@ -54,9 +59,10 @@ public class Player extends Character implements Serializable {
 	 * @param backpack
 	 */
 	public Player(String name, int level, int str, int agi, int vit, Armor armor, Weapon weapon, 
-			int curHP, int exp, int hunger, ArrayList<Item> backpack) {
+			int curHP, int exp, int hunger, ArrayList<Item> backpack,
+			char icon, String color, int x, int y) {
 		
-		super(str, agi, vit, weapon, armor);
+		super(str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		this.name = name;
 		this.level = level;
