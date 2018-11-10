@@ -1,6 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-
+// test edit
 public class Player extends Character implements Serializable {
 	
 	private String name;
