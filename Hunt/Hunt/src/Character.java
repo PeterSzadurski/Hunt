@@ -58,15 +58,16 @@ public class Character implements Serializable {
 	}
 
 	public void move(int x, int y, Dungeon d) {
-		if ((this.x + x) < d.getWidth() && (this.x + x > 0)
-			&& (this.y + y) < d.getHeight() && (this.y + y > 0)) {
+		if ((this.x + x) < d.getWidth() && (this.x + x > -1)
+			&& (this.y + y) < d.getHeight() && (this.y + y > -1)) {
 				if (d.getTile(this.x + x, this.y + y).isSolid() == false) {
-					d.changeEntities(this.x, this.y, d.getTile(this.x, this.y).getIcon());
+					d.changeEntities(this.y, this.x, d.getTile(this.x, this.y).getIcon());
 					this.x += x;
 					this.y += y;
-					d.changeEntities(this.x, this.y, this.icon);
+					d.changeEntities(this.y, this.x, this.icon);
 				}
 		}
+		System.out.println("X: " + this.x + " Y: " + this.y);
 	}
 
 	public int getStrength() {

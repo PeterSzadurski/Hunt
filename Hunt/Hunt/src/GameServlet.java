@@ -38,10 +38,10 @@ public class GameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		if (firstPrint) {
-			dungeon.addActor(player);
-			firstPrint = false;
-		}
+	//	if (firstPrint) {
+		//	dungeon.addActor(player);
+	//		firstPrint = false;
+		//}
 		response.setContentType("text/html");
 		int key = Integer.parseInt(request.getParameter("key"));
 		PrintWriter out = response.getWriter();
