@@ -61,10 +61,11 @@ public class Character implements Serializable {
 		if ((this.x + x) < d.getWidth() && (this.x + x > -1)
 			&& (this.y + y) < d.getHeight() && (this.y + y > -1)) {
 				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
-					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon());
+					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
+							d.getTile(this.y, this.x).getColor());
 					this.x += x;
 					this.y += y;
-					d.changeEntities(this.y, this.x, this.icon);
+					d.changeEntities(this.y, this.x, this.icon, this.color);
 				}
 				else {System.out.println("solid");}
 		}

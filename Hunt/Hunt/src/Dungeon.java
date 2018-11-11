@@ -6,8 +6,8 @@ public class Dungeon {
 	
 	
 	
-	Tile wall = new Tile('#', true, "#000000");
-	Tile floor = new Tile('.', false, "#686868");
+	Tile wall = new Tile('#', true, "#878787");
+	Tile floor = new Tile('.', false, "#878787");
 	Tile layout[][] = {
 			{wall, floor, floor, floor, floor, wall, floor, floor, floor, wall},
 			{floor, floor, floor, floor, wall, wall, floor, floor, floor, floor},
@@ -25,7 +25,7 @@ public class Dungeon {
 
 	
 	
-	char entities[][] = new char [10][10];
+	Entity entities[][] = new Entity [10][10];
 	
 	
 	
@@ -33,7 +33,11 @@ public class Dungeon {
 
 		for(int i = 0; i < entities[0].length; i++) {
 			for (int n = 0; n < entities[1].length; n++) {
-				entities[i][n] = layout[i][n].getIcon();
+				//entities[i][n].setIcon(layout[i][n].getIcon());
+				
+				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor()); 				
+				//entities[i][n].setColor(layout[i][n].getColor());
+				//entities[i][n].setSolid(false);
 			}
 		}
 	}
@@ -55,8 +59,9 @@ public class Dungeon {
 		return this.layout;
 	}
 	
-	public void changeEntities (int x, int y, char c) {
-		entities[x][y] = c;
+	public void changeEntities (int x, int y, char icon, String color) {
+		entities[x][y].setIcon(icon);
+		entities[x][y].setColor(color);
 	}
 	
 	public void printLayout(PrintWriter writer, Player p) {
@@ -83,9 +88,11 @@ public class Dungeon {
 	
 	public void firstPrint(PrintWriter writer) {
 		
+		writer.print("<div id =\"screen\" class=\"grid\">");
 		for (int row = 0; row < entities[0].length; row++) {
 			for (int column = 0; column < entities[1].length; column++) {
-				writer.print("<div>" + entities[row][column] + "</div>");
+				writer.print("<div style=\"color:"  + 
+						entities[row][column].getColor() + "\">" + entities[row][column].getIcon() + "</div>");
 				//System.out.print(entities[row][column]);
 
 					
@@ -103,6 +110,7 @@ public class Dungeon {
 		
 		//writer.print("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
 		//System.out.println("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
+		writer.println("</div>");
 	}
 	
 

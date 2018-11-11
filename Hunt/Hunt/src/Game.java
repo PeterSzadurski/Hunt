@@ -27,8 +27,8 @@ public class Game {
 	
 	public static void update(Dungeon d) {
 		for (int i = 0; i < actors.size(); i++) {
-		d.changeEntities(actors.get(i).getY(), actors.get(i).getX(),
-				actors.get(i).geticon());
+		d.changeEntities(actors.get(i).getY(), actors.get(i).getX(), 
+				actors.get(i).geticon(), actors.get(i).getColor());
 		}
 		System.out.println("UPDATE!");
 	};

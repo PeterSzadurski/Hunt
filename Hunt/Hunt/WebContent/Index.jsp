@@ -3,6 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+
+	body {
+		background-color: black;
+		text: white;
+	}
+
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>HUNT</title>
 
@@ -79,8 +88,8 @@ test
 <form id="keyInput" action = "GameServlet">
 <input type = "hidden" id = "key" name = "key">
 </form>
-<div class="grid" id ="gameOutput">
-
+<div id ="gameOutput">
+	
  </div>
 </body>
 </html>
