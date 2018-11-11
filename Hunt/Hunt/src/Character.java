@@ -68,7 +68,7 @@ public class Character implements Serializable {
 				}
 				else {System.out.println("solid");}
 		}
-		Game.update(d);
+		//Game.update(d);
 		System.out.println("X: " + this.x + " Y: " + this.y);
 	}
 
