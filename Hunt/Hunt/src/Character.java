@@ -67,6 +67,7 @@ public class Character implements Serializable {
 					d.changeEntities(this.y, this.x, this.icon);
 				}
 		}
+		Game.update(d);
 		System.out.println("X: " + this.x + " Y: " + this.y);
 	}
 

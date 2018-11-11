@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Dungeon {
 	
-	private ArrayList<Character> actors = new ArrayList<Character>();
+	
 	
 	Tile wall = new Tile('#', true, "#000000");
 	Tile floor = new Tile('.', false, "#686868");
@@ -99,13 +99,7 @@ public class Dungeon {
 		//System.out.println("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
 	}
 	
-	public void addActor (Character c) {
-		actors.add(c);
-	}
-	
-	public void removeActor (int index) {
-		actors.remove(index);
-	}
+
 	
 	
 }

@@ -29,6 +29,11 @@ public class GameServlet extends HttpServlet {
     Player player = new Player("Dave", 10, 10, 10, '@', "#FFFF00"
 			, 0, 1);
     
+	
+	Monster monster = new Monster("goblin", 10, 1, 1, 1, Game.club, null, 'G', "#006400"
+			, 0, 2);
+	
+    
    // dungeon.firstPrint(out);
    //dungeon.addActor(player);
     
@@ -46,6 +51,7 @@ public class GameServlet extends HttpServlet {
 		int key = Integer.parseInt(request.getParameter("key"));
 		PrintWriter out = response.getWriter();
 		counter++;
+		Game.addActors(monster);
 		//out.println("key press " + key + " Counter: " + counter);
 		
 		switch (key) {
