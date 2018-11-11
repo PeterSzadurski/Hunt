@@ -72,7 +72,7 @@ public class GameServlet extends HttpServlet {
 				player.setX(0);
 				break;
 		}
-		
+		Game.update(dungeon);
 		dungeon.firstPrint(out);
 		
 		//out.print(counter);

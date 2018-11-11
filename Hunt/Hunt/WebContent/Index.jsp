@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>HUNT</title>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -63,8 +63,7 @@ $(document).ready (function(){
 <style>
 .grid {
 	display: grid;
-	grid-template-columns: 10px 10px 10px 10px 10px;
-	
+	grid-template-columns: 10px 10px 10px 10px 10px 10px 10px 10px 10px 10px;
 	align-content: end;
 }
 .grid > div {

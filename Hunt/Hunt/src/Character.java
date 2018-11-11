@@ -60,12 +60,13 @@ public class Character implements Serializable {
 	public void move(int x, int y, Dungeon d) {
 		if ((this.x + x) < d.getWidth() && (this.x + x > -1)
 			&& (this.y + y) < d.getHeight() && (this.y + y > -1)) {
-				if (d.getTile(this.x + x, this.y + y).isSolid() == false) {
-					d.changeEntities(this.y, this.x, d.getTile(this.x, this.y).getIcon());
+				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
+					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon());
 					this.x += x;
 					this.y += y;
 					d.changeEntities(this.y, this.x, this.icon);
 				}
+				else {System.out.println("solid");}
 		}
 		Game.update(d);
 		System.out.println("X: " + this.x + " Y: " + this.y);

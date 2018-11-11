@@ -9,17 +9,23 @@ public class Dungeon {
 	Tile wall = new Tile('#', true, "#000000");
 	Tile floor = new Tile('.', false, "#686868");
 	Tile layout[][] = {
-			{wall, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor},
-			{floor, floor, wall, floor, floor},
-			{floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, wall}
-		};
+			{wall, floor, floor, floor, floor, wall, floor, floor, floor, wall},
+			{floor, floor, floor, floor, wall, wall, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
+			
+	};
 	
 
 	
 	
-	char entities[][] = new char [5][5];
+	char entities[][] = new char [10][10];
 	
 	
 	
@@ -80,7 +86,7 @@ public class Dungeon {
 		for (int row = 0; row < entities[0].length; row++) {
 			for (int column = 0; column < entities[1].length; column++) {
 				writer.print("<div>" + entities[row][column] + "</div>");
-				System.out.print(entities[row][column]);
+				//System.out.print(entities[row][column]);
 
 					
 
@@ -91,7 +97,7 @@ public class Dungeon {
 				//}
 				
 			}
-			System.out.println();
+			//System.out.println();
 		}
 		//System.out.println("END");
 		
