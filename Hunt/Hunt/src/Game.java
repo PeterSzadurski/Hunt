@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Game {
@@ -12,7 +13,8 @@ public class Game {
 	
 	//static Player player = new Player("Dave", 10, 10, 10, '@', "#FFFF00"
 		//		, 0, 1);
-	
+	static String log = ("");
+	static int menu = 0;
 	
 	// Generate weapons
 	
@@ -40,5 +42,17 @@ public class Game {
 	
 	public static void addActors (Character c) {
 		actors.add(c);
+	}
+	
+	public static void display(PrintWriter writer, Dungeon d) {
+		
+		d.firstPrint(writer);
+		writer.println("<tr><td>" + log + "</td></tr>");
+		switch (menu) {
+			case 0:
+				break;
+			case 1:
+				writer.print("<tr><td> menu </td></tr>");
+		}
 	}
 }

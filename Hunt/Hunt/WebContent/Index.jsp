@@ -7,7 +7,8 @@
 
 	body {
 		background-color: black;
-		text: white;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
 	}
 
 </style>
@@ -72,7 +73,7 @@ $(document).ready (function(){
 <style>
 .grid {
 	display: grid;
-	grid-template-columns: 10px 10px 10px 10px 10px 10px 10px 10px 10px 10px;
+	grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
 	align-content: end;
 }
 .grid > div {
@@ -88,8 +89,8 @@ test
 <form id="keyInput" action = "GameServlet">
 <input type = "hidden" id = "key" name = "key">
 </form>
-<div id ="gameOutput">
+<table id ="gameOutput">
 	
- </div>
+ </table>
 </body>
 </html>

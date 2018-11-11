@@ -87,7 +87,7 @@ public class Dungeon {
 	}
 	
 	public void firstPrint(PrintWriter writer) {
-		
+		writer.print("<tr><td>");
 		writer.print("<div id =\"screen\" class=\"grid\">");
 		for (int row = 0; row < entities[0].length; row++) {
 			for (int column = 0; column < entities[1].length; column++) {
@@ -111,6 +111,7 @@ public class Dungeon {
 		//writer.print("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
 		//System.out.println("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
 		writer.println("</div>");
+		writer.print("</tr></td>");
 	}
 	
 

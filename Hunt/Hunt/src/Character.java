@@ -66,8 +66,12 @@ public class Character implements Serializable {
 					this.x += x;
 					this.y += y;
 					d.changeEntities(this.y, this.x, this.icon, this.color);
+					Game.log = ("Move Freely");
 				}
-				else {System.out.println("solid");}
+				else {
+					System.out.println("solid");
+					Game.log = ("Cannot Move");
+				}
 		}
 		//Game.update(d);
 		System.out.println("X: " + this.x + " Y: " + this.y);

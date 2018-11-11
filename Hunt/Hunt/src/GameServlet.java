@@ -73,12 +73,13 @@ public class GameServlet extends HttpServlet {
 				break;
 			case 75: // k
 				//player.setY(2);
-				Game.update(dungeon);
+				Game.menu = 1;
 				//player.setX(0);
 				break;
 		}
 		Game.update(dungeon);
-		dungeon.firstPrint(out);
+		Game.display(out, dungeon);
+		//dungeon.firstPrint(out);
 		
 		//out.print(counter);
 		/*if (firstPrint) {
