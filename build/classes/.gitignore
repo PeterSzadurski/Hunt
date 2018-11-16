@@ -1,5 +1,13 @@
-/Tile.class
+/Armor.class
+/Character.class
+/CombatTester.class
 /Dungeon.class
-/GameServlet.class
-/Game.class
 /Entity.class
+/Food.class
+/Game.class
+/GameServlet.class
+/Item.class
+/Monster.class
+/Player.class
+/Tile.class
+/Weapon.class

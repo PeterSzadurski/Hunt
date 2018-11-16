@@ -46,13 +46,18 @@ public class Game {
 	
 	public static void display(PrintWriter writer, Dungeon d) {
 		
-		d.firstPrint(writer);
-		writer.println("<tr><td>" + log + "</td></tr>");
+		
 		switch (menu) {
 			case 0:
 				break;
 			case 1:
-				writer.print("<tr><td> menu </td></tr>");
+				writer.print("<tr><td> menu </td>");
+				break;
+			default:
+				writer.print("<tr>");
+				break;
 		}
+		d.firstPrint(writer);
+		writer.println("<tr><td></td><td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}
 }
