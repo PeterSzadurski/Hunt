@@ -58,8 +58,17 @@ public class Character implements Serializable {
 	}
 
 	public void move(int x, int y, Dungeon d) {
-		if ((this.x + x) < d.getWidth() && (this.x + x > -1)
+		
+		for (int i = 0; i < Game.actors.size(); i++) {
+			if (((this.x + x) == Game.actors.get(i).getX()) && ((this.y + y) == Game.actors.get(i).getY())) {
+				
+			}
+				
+		}
+		// if inside the Dungeon bounds
+		 if ((this.x + x) < d.getWidth() && (this.x + x > -1)
 			&& (this.y + y) < d.getHeight() && (this.y + y > -1)) {
+			// check if not solid
 				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
 					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
 							d.getTile(this.y, this.x).getColor());
@@ -67,7 +76,11 @@ public class Character implements Serializable {
 					this.y += y;
 					d.changeEntities(this.y, this.x, this.icon, this.color);
 					Game.log = ("Move Freely");
+				
 				}
+				
+				
+				
 				else {
 					System.out.println("solid");
 					Game.log = ("Cannot Move");
