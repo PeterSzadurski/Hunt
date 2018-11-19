@@ -52,7 +52,10 @@ public class GameServlet extends HttpServlet {
 		int key = Integer.parseInt(request.getParameter("key"));
 		PrintWriter out = response.getWriter();
 		counter++;
+		
+		// player will always be actor 0
 		Game.addActors(player);
+		
 		Game.addActors(monster);
 		
 		

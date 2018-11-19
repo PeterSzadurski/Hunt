@@ -58,6 +58,9 @@ public class Game {
 				break;
 		}
 		d.firstPrint(writer);
+		// draw player health
+		writer.println("<tr><td></td><td>&thinsp;&thinsp;HP: " + actors.get(0).getCurHp() + "/" + actors.get(0).getHp() + "</td></tr>");
+		// draw game log
 		writer.println("<tr><td></td><td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}
 }
