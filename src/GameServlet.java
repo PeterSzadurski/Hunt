@@ -28,6 +28,7 @@ public class GameServlet extends HttpServlet {
 		
 		Game.addActors(monster);
 		Game.addActors(monster2);
+		Game.addActors(monster3);
         // TODO Auto-generated constructor stub
     }
     int counter = 0;
@@ -38,12 +39,15 @@ public class GameServlet extends HttpServlet {
     
 	
     
-	Monster monster = new Monster("Goblin", 10, 1, 1, 1, Game.club, null, 'G', "#006400"
+	Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
 			, 0, 2);
 	
 	
-	Monster monster2 = new Monster("Bat", 10, 2, 2, 1, Game.club, null, 'B', "#ffffff "
+	Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
 			, 1, 2);
+	
+	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
+			, 5, 5);
 	
     
 	
