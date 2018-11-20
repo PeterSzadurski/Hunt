@@ -3,19 +3,20 @@ import java.util.Random;
 
 public class Monster extends Character implements Serializable {
 	
-	private String type;
+	//private String type;
 	private int expOnKill;
+	private double turnCount = 0;
 	
 	public Monster() {
 		// makes it a bean
 	}
 	
-	public Monster(String type, int expOnKill, int str, int agi, int vit, Weapon weapon, 
+	public Monster(String name, int expOnKill, int str, int agi, int vit, Weapon weapon, 
 			Armor armor, char icon, String color, int x, int y) {
 		
-		super(str, agi, vit, weapon, armor, icon, color, x, y);
+		super(name, str, agi, vit, weapon, armor, icon, color, x, y);
 		
-		this.type = type;
+		//this.name = name;
 		this.expOnKill = expOnKill;
 		
 		super.calcDamage();
@@ -23,12 +24,12 @@ public class Monster extends Character implements Serializable {
 		super.calcMoveSpeed();
 	}
 
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+/*	public String getName() {
+		return name;
+	} */
+	//public void setType(String type) {
+		//this.type = type;
+	//}
 	
 	
 	public int getExpOnKill() {
@@ -39,9 +40,17 @@ public class Monster extends Character implements Serializable {
 		this.expOnKill = expOnKill;
 	}
 
+	public void setTurnCount (double turnCount) {
+		this.turnCount = turnCount;
+	}
+	
+	public double getTurnCount () {
+		return turnCount;
+	}
+	
 	public String toString() {
 		StringBuilder monsterString = new StringBuilder();
-		monsterString.append("Type: " + type + "\n");
+		monsterString.append("Type: " + getName() + "\n");
 		monsterString.append("Strength: " + getStrength() + "\n");
 		monsterString.append("Agility: " + getAgility() + "\n");
 		monsterString.append("Vitality: " + getVitality() + "\n");

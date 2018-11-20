@@ -20,21 +20,33 @@ public class GameServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public GameServlet() {
+    	
         super();
+        
+     // player will always be actor 0
+		Game.addActors(player);
+		
+		Game.addActors(monster);
+		Game.addActors(monster2);
         // TODO Auto-generated constructor stub
     }
     int counter = 0;
     boolean firstPrint = true;
     Dungeon dungeon = new Dungeon();
-    Player player = new Player("Dave", 10, 10, 10, '@', "#FFFF00"
+    Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
 			, 0, 1);
     
 	
     
-	Monster monster = new Monster("goblin", 10, 1, 1, 1, Game.club, null, 'G', "#006400"
+	Monster monster = new Monster("Goblin", 10, 1, 1, 1, Game.club, null, 'G', "#006400"
 			, 0, 2);
 	
+	
+	Monster monster2 = new Monster("Bat", 10, 2, 2, 1, Game.club, null, 'B', "#ffffff "
+			, 1, 2);
+	
     
+	
    // dungeon.firstPrint(out);
    //dungeon.addActor(player);
     
@@ -53,10 +65,8 @@ public class GameServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		counter++;
 		
-		// player will always be actor 0
-		Game.addActors(player);
 		
-		Game.addActors(monster);
+
 		
 		
 		//out.println("key press " + key + " Counter: " + counter);

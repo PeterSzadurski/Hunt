@@ -27,7 +27,7 @@ public class Player extends Character implements Serializable {
 	public Player(String name, int str, int agi, int vit, char icon, String color,
 			int x, int y) {
 		
-		super(str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1),
+		super(name,str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1),
 				icon, color, x, y);
 		
 		this.name = name;
@@ -62,7 +62,7 @@ public class Player extends Character implements Serializable {
 			int curHP, int exp, int hunger, ArrayList<Item> backpack,
 			char icon, String color, int x, int y) {
 		
-		super(str, agi, vit, weapon, armor, icon, color, x, y);
+		super(name, str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		this.name = name;
 		this.level = level;
@@ -224,6 +224,46 @@ public class Player extends Character implements Serializable {
 		playerString.append("Armor: " + getArmor().getName() + "\n");
 		
 		return playerString.toString();
+	}
+	@Override
+	public void move(int x, int y, Dungeon d) {
+		int collideActor = -1;
+		for (int i = 0; i < Game.actors.size(); i++) {
+			if (((this.getX() + x) == Game.actors.get(i).getX()) && ((this.getY() + y) == Game.actors.get(i).getY())) {
+				collideActor = i;
+			}
+
+		}
+		
+		// if there isn't an actor in the way
+		if (collideActor == -1) {
+
+			// if inside the Dungeon bounds
+			if ((this.getX() + x) < d.getWidth() && (this.getX() + x > -1) && (this.getY() + y) < d.getHeight() && (this.getY() + y > -1)) {
+				// check if not solid
+				if (d.getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
+					d.changeEntities(this.getY(), this.getX(), d.getTile(this.getY(), this.getX()).getIcon(),
+							d.getTile(this.getY(), this.getX()).getColor());
+					this.setX(this.getX() + x);
+					this.setY(this.getY() + y);
+					d.changeEntities(this.getY(), this.getX(), this.icon, this.color);
+					Game.log = ("Move Freely");
+
+				}
+
+				else {
+					//System.out.println("solid");
+					Game.log = ("Cannot Move");
+				}
+			}
+			// Game.update(d);
+			//System.out.println("X: " + this.x + " Y: " + this.y);
+		}
+		
+		else {
+			Game.log = (Game.actors.get(collideActor).getName() + ": HP: " + Game.actors.get(collideActor).getCurHp() + 
+					"/" + Game.actors.get(collideActor).getHp());
+		}
 	}
 
 }
