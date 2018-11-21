@@ -7,16 +7,18 @@ public class Item implements Serializable {
 	private char icon;
 	private String effectText;
 	private int magnitude = 0;
+	private Effect effect;
 	
 	public Item() {
 		
 	}
 	
-	public Item(String name, char icon, String effectText, int magnitude) {
+	public Item(String name, char icon, String effectText, int magnitude, Effect effect) {
 		this.name = name;
 		this.icon = icon;
 		this.effectText = effectText;
 		this.magnitude = magnitude;
+		this.effect = effect;
 	}
 	
 	public Item(String name, char icon) {
@@ -54,6 +56,10 @@ public class Item implements Serializable {
 	
 	public String getEffectText () {
 		return effectText;
+	}
+	
+	public void use (int target) {
+		Game.effects(target, this.magnitude, this.effect);
 	}
 	
 	@Override

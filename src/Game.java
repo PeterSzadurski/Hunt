@@ -19,19 +19,39 @@ public class Game {
 	// Generate weapons
 
 	static Weapon club = new Weapon("club", '!', 5);
-	static Weapon rustyDagger = new Weapon ("Rusty Dagger", '!', 2);
-	
+	static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
+
 	// Generate armors
-	
+
 	static Armor clothes = new Armor("Clothes", '+', 1);
 	static Armor steelPlate = new Armor("Steel Plate", '+', 20);
-	
-	// Generate items
-	static Item smallPotion = new Item("Small Potion", 'i', "Restores 10HP", 10);
-	static Item largePotion = new Item("Large Potion", 'i', "Restores 50HP", 50);
 
-	
-	
+	// Generate items
+	static Item smallPotion = new Item("Small Potion", 'i', "Restores 10HP", 10, Effect.RESTORE_HEALTH);
+	static Item largePotion = new Item("Large Potion", 'i', "Restores 50HP", 50, Effect.RESTORE_HEALTH);
+
+	// effects methods
+	public static void effects(int target, int magnitude, Effect effect) {
+		switch (effect) {
+		case RESTORE_HEALTH:
+			if (Game.actors.get(target).getHp() == Game.actors.get(target).getCurHp()) {
+				System.out.println("invalid");
+			} else {
+				// heal actor
+				System.out.println("heal");
+				Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() + magnitude);
+				// makes sure the hp does not overflow
+				if (Game.actors.get(target).getCurHp() > Game.actors.get(target).getHp()) {
+					Game.actors.get(target).setCurHp(Game.actors.get(target).getHp());
+				}
+			}
+			break;
+		default:
+			System.out.println("PLACEHOLDER");
+			break;
+		}
+
+	}
 
 	public void createPlayer() {
 		// Player player = new Player("Dave", 10, 10, 10, '@', "#FFFF00"
@@ -87,15 +107,12 @@ public class Game {
 				}
 				((Monster) actors.get(n)).setTurnCount(0);
 			}
-			
-	
-			
 
 		}
 		// }
 
 	};
-	
+
 	public static void start(Dungeon d) {
 
 		for (int i = 0; i < actors.size(); i++) {
@@ -115,7 +132,7 @@ public class Game {
 	}
 
 	public static void display(PrintWriter writer, Dungeon d) {
-		
+
 		String insert = "";
 
 		switch (menu) {
@@ -125,28 +142,33 @@ public class Game {
 			break;
 		case 1:
 			insert = "<td></td>";
-				switch (select) {
-				case 0:
-					// inventory selected
-					writer.print("<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
-					break;
-				case 1:
-					// magic selected
-					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
-					break;
-				case 2:
-					// Stats selected
-					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
-					break;
-				case 3:
-					// sign out selected
-					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
-					break;
-				}
-				break;
-		case 2: insert = "<td></td>";
 			switch (select) {
-			
+			case 0:
+				// inventory selected
+				writer.print(
+						"<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 1:
+				// magic selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 2:
+				// Stats selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 3:
+				// sign out selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
+				break;
+			}
+			break;
+		case 2:
+			insert = "<td></td>";
+			switch (select) {
+
 			case 0:
 				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
 				break;
@@ -164,9 +186,10 @@ public class Game {
 		}
 		d.firstPrint(writer);
 		// draw game hud
-		writer.println("<tr>" + insert  + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: " + ((Player) actors.get(0)).getLevel() + " | HP: "
-				+ actors.get(0).getCurHp() + "/" + actors.get(0).getHp() + " | EXP: " + ((Player) actors.get(0)).getExp() + "/" + ((Player) actors.get(0)).getExpForNextLevel()
-				+  "</td></tr>");
+		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: "
+				+ ((Player) actors.get(0)).getLevel() + " | HP: " + actors.get(0).getCurHp() + "/"
+				+ actors.get(0).getHp() + " | EXP: " + ((Player) actors.get(0)).getExp() + "/"
+				+ ((Player) actors.get(0)).getExpForNextLevel() + "</td></tr>");
 		// draw game log
 		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}

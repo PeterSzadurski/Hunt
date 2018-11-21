@@ -29,6 +29,7 @@ public class GameServlet extends HttpServlet {
 		Game.addActors(monster);
 		Game.addActors(monster2);
 		Game.addActors(monster3);
+		player.getBackpack().add(Game.largePotion);
         // TODO Auto-generated constructor stub
     }
     int counter = 0;
@@ -155,6 +156,13 @@ public class GameServlet extends HttpServlet {
 				case 2:
 					Game.menu = 1;
 				}
+				break;
+				
+			case 220:
+				player.setCurHp(10);
+				break;
+			case 221:
+				Game.largePotion.use(0);
 				break;
 			
 		}
