@@ -29,7 +29,12 @@ public class GameServlet extends HttpServlet {
 		Game.addActors(monster);
 		Game.addActors(monster2);
 		Game.addActors(monster3);
-		player.getBackpack().add(Game.largePotion);
+		player.pickUp(Game.smallPotion);
+		player.pickUp(Game.smallPotion);
+		player.pickUp(Game.largePotion);
+		player.pickUp(Game.smallPoison);
+		player.pickUp(Game.largePotion);
+		
         // TODO Auto-generated constructor stub
     }
     int counter = 0;
@@ -78,6 +83,9 @@ public class GameServlet extends HttpServlet {
 		//Game.display(out, dungeon);
 		
 		Game.start(dungeon);
+		
+		// controls
+		
 		switch (key) {
 			case 38: // up
 				switch (Game.menu) {
@@ -92,6 +100,19 @@ public class GameServlet extends HttpServlet {
 					else {
 						Game.select--;
 					}
+					break;
+				case 2: // inner menu
+					switch (Game.select) {
+					case 0: // inventory navigation
+						if (Game.innerSelect == 0) {
+							Game.innerSelect = player.getBackpack().size();
+						}
+						else {
+							Game.innerSelect--;
+						}
+						break;
+					}
+					
 					break;
 				}
 
@@ -128,6 +149,19 @@ public class GameServlet extends HttpServlet {
 						Game.select++;
 					}
 					break;
+					
+				case 2: // inner menu
+					switch (Game.select) {
+					case 0: //inventory controls
+						if (Game.innerSelect == player.getBackpack().size()) {
+							Game.innerSelect = 0;
+						}
+						else {
+							Game.innerSelect++;
+						}
+						break;
+					}
+					break;
 				}
 
 				break;
@@ -142,6 +176,8 @@ public class GameServlet extends HttpServlet {
 				case 1:
 					// close menu
 					Game.menu = 0;
+					Game.select = 0;
+					Game.innerSelect = 0;
 					break;
 				default:
 					Game.menu = 1;
@@ -154,7 +190,15 @@ public class GameServlet extends HttpServlet {
 					Game.menu = 2;
 					break;
 				case 2:
-					Game.menu = 1;
+					switch (Game.select) {
+						default:
+							Game.menu = 1;
+							break;
+						case 0:
+							player.useFromBackpack(Game.innerSelect);
+							break;
+					}
+					
 				}
 				break;
 				

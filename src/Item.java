@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
 	
-	private int count = 0;
+	private int count = 1;
 	private String name;
 	private char icon;
 	private String effectText;
@@ -58,7 +58,13 @@ public class Item implements Serializable {
 		return effectText;
 	}
 	
+	/*
+	 * use the item effect
+	 * @param target
+	 */
+	
 	public void use (int target) {
+		
 		Game.effects(target, this.magnitude, this.effect);
 	}
 	

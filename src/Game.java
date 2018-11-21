@@ -15,6 +15,10 @@ public class Game {
 	static String log = ("");
 	static int menu = 0;
 	static int select = 0;
+	static int innerSelect = 0;
+	static boolean ifUsed = false;
+	static String buffColor = "#00baff";
+	static String debuffColor = "#ff0000";
 
 	// Generate weapons
 
@@ -27,30 +31,50 @@ public class Game {
 	static Armor steelPlate = new Armor("Steel Plate", '+', 20);
 
 	// Generate items
-	static Item smallPotion = new Item("Small Potion", 'i', "Restores 10HP", 10, Effect.RESTORE_HEALTH);
-	static Item largePotion = new Item("Large Potion", 'i', "Restores 50HP", 50, Effect.RESTORE_HEALTH);
+	static Item smallPotion = new Item("Small Potion", 'i', "<span style = \"color:" + buffColor + "\">Restores</span> 10HP", 10, Effect.RESTORE_HEALTH);
+	static Item largePotion = new Item("Large Potion", 'i', "<span style = \"color:" + buffColor + "\">Restores</span> 50HP", 50, Effect.RESTORE_HEALTH);
+	static Item smallPoison = new Item("Small Poison", 'i', "<span style = \"color:" + debuffColor + "\">Damages</span> 15HP", 15, Effect.DAMAGE_HEALTH);
+
 
 	// effects methods
 	public static void effects(int target, int magnitude, Effect effect) {
+		//boolean ifUsed = false;
 		switch (effect) {
 		case RESTORE_HEALTH:
 			if (Game.actors.get(target).getHp() == Game.actors.get(target).getCurHp()) {
+				
+				// show log if player
+				if (Game.actors.get(target) instanceof Player ) {
+					Game.log = ("You are already fully healed.");
+					ifUsed = false;
+				}
+				
 				System.out.println("invalid");
 			} else {
 				// heal actor
+				
+				// show log if player
+				if (Game.actors.get(target) instanceof Player ) {
+					Game.log = ("You restore " + (magnitude) +"HP");
+				}
 				System.out.println("heal");
 				Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() + magnitude);
 				// makes sure the hp does not overflow
 				if (Game.actors.get(target).getCurHp() > Game.actors.get(target).getHp()) {
 					Game.actors.get(target).setCurHp(Game.actors.get(target).getHp());
 				}
+				ifUsed = true;
 			}
 			break;
+		case DAMAGE_HEALTH:
+			Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() - magnitude);
+			ifUsed = true;
+			break;
 		default:
+			ifUsed = false;
 			System.out.println("PLACEHOLDER");
 			break;
 		}
-
 	}
 
 	public void createPlayer() {
@@ -169,7 +193,7 @@ public class Game {
 			insert = "<td></td>";
 			switch (select) {
 
-			case 0:
+			case 0: // inventory screen
 				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
 				break;
 			case 2:
