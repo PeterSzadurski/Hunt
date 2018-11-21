@@ -14,10 +14,24 @@ public class Game {
 	// , 0, 1);
 	static String log = ("");
 	static int menu = 0;
+	static int select = 0;
 
 	// Generate weapons
 
 	static Weapon club = new Weapon("club", '!', 5);
+	static Weapon rustyDagger = new Weapon ("Rusty Dagger", '!', 2);
+	
+	// Generate armors
+	
+	static Armor clothes = new Armor("Clothes", '+', 1);
+	static Armor steelPlate = new Armor("Steel Plate", '+', 20);
+	
+	// Generate items
+	static Item smallPotion = new Item("Small Potion", 'i', "Restores 10HP", 10);
+	static Item largePotion = new Item("Large Potion", 'i', "Restores 50HP", 50);
+
+	
+	
 
 	public void createPlayer() {
 		// Player player = new Player("Dave", 10, 10, 10, '@', "#FFFF00"
@@ -81,6 +95,16 @@ public class Game {
 		// }
 
 	};
+	
+	public static void start(Dungeon d) {
+
+		for (int i = 0; i < actors.size(); i++) {
+			d.changeEntities(actors.get(i).getY(), actors.get(i).getX(), actors.get(i).geticon(),
+					actors.get(i).getColor());
+		}
+		// }
+
+	};
 
 	ArrayList<Character> getActors() {
 		return actors;
@@ -91,22 +115,59 @@ public class Game {
 	}
 
 	public static void display(PrintWriter writer, Dungeon d) {
+		
+		String insert = "";
 
 		switch (menu) {
-		case 0:
+		case 0: // no menu
+			writer.print("<tr>");
+			insert = "";
 			break;
 		case 1:
-			writer.print("<tr><td> menu </td>");
+			insert = "<td></td>";
+				switch (select) {
+				case 0:
+					// inventory selected
+					writer.print("<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+					break;
+				case 1:
+					// magic selected
+					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+					break;
+				case 2:
+					// Stats selected
+					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
+					break;
+				case 3:
+					// sign out selected
+					writer.print("<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
+					break;
+				}
+				break;
+		case 2: insert = "<td></td>";
+			switch (select) {
+			
+			case 0:
+				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
+				break;
+			case 2:
+				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");
+				break;
+			default:
+				writer.print("<tr><td>PLACEHOLDER</td>");
+				break;
+			}
 			break;
 		default:
 			writer.print("<tr>");
 			break;
 		}
 		d.firstPrint(writer);
-		// draw player health
-		writer.println("<tr><td></td><td>&thinsp;&thinsp;" + actors.get(0).getName() + " | HP: "
-				+ actors.get(0).getCurHp() + "/" + actors.get(0).getHp() + " | EXP: 0/10 " + "</td></tr>");
+		// draw game hud
+		writer.println("<tr>" + insert  + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: " + ((Player) actors.get(0)).getLevel() + " | HP: "
+				+ actors.get(0).getCurHp() + "/" + actors.get(0).getHp() + " | EXP: " + ((Player) actors.get(0)).getExp() + "/" + ((Player) actors.get(0)).getExpForNextLevel()
+				+  "</td></tr>");
 		// draw game log
-		writer.println("<tr><td></td><td>&thinsp;&thinsp;" + log + "</td></tr>");
+		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}
 }

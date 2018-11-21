@@ -22,7 +22,7 @@ public class GameServlet extends HttpServlet {
     public GameServlet() {
     	
         super();
-        
+        Game.menu = 0; // default menu
      // player will always be actor 0
 		Game.addActors(player);
 		
@@ -74,28 +74,93 @@ public class GameServlet extends HttpServlet {
 		
 		
 		//out.println("key press " + key + " Counter: " + counter);
+		//Game.display(out, dungeon);
 		
+		Game.start(dungeon);
 		switch (key) {
 			case 38: // up
-				player.move(0, -1, dungeon);
+				switch (Game.menu) {
+				case 0: // no menu open
+					player.move(0, -1, dungeon);
+					Game.update(dungeon);
+					break;
+				case 1: // menu navigation
+					if (Game.select == 0) {
+						Game.select = 3;
+					}
+					else {
+						Game.select--;
+					}
+					break;
+				}
+
 				break;
 			case 37: // left
-				player.move(-1, 0, dungeon);
+				switch (Game.menu) {
+				case 0: // no menu open
+					player.move(-1, 0, dungeon);
+					Game.update(dungeon);
+					break;
+				}
+
 				break;
 			case 39: // right
-				player.move(1, 0, dungeon);
+				switch (Game.menu) {
+				case 0: // no menu open
+					player.move(1, 0, dungeon);
+					Game.update(dungeon);
+					break;
+				}
+
 				break;
 			case 40: // down
-				player.move( 0, 1, dungeon);
+				switch (Game.menu) {
+				case 0: // no menu open
+					player.move( 0, 1, dungeon);
+					Game.update(dungeon);
+					break;
+				case 1: // menu navigation
+					if (Game.select == 3) {
+						Game.select = 0;
+					}
+					else {
+						Game.select++;
+					}
+					break;
+				}
+
 				break;
-			case 75: // k
-				//player.setY(2);
-				Game.menu = 1;
-				//player.setX(0);
+			case 73: // i
+				
+				switch (Game.menu) {
+				
+				case 0:
+					// open menu
+					Game.menu = 1;
+					break;
+				case 1:
+					// close menu
+					Game.menu = 0;
+					break;
+				default:
+					Game.menu = 1;
+				}
 				break;
+				
+			case 13: // enter
+				switch (Game.menu) {
+				case 1: // menu open
+					Game.menu = 2;
+					break;
+				case 2:
+					Game.menu = 1;
+				}
+				break;
+			
 		}
-		Game.update(dungeon);
 		Game.display(out, dungeon);
+		
+		
 		//dungeon.firstPrint(out);
 		
 		//out.print(counter);

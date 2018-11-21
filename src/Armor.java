@@ -10,6 +10,7 @@ public class Armor extends Item implements Serializable {
 	
 	public Armor(String name, char icon, int hpBonus) {
 		super(name, icon);
+		
 		this.hpBonus = hpBonus;
 	}
 

@@ -122,9 +122,10 @@ public class Player extends Character implements Serializable {
 	public String displayBackpack() {
 		
 		StringBuilder pack = new StringBuilder();
-		
+		pack.append("<b>" + getWeapon().getName() + " |<span style=\"color: #ff0000\"> Power: " + getWeapon().getDamage() + "</span></b><br>");
+		pack.append("<b>" + getArmor().getName() + " |<span style=\"color: #00baff\"> Rating: " + getArmor().getHpBonus() + "</span></b><br>");
 		for(int i = 0; i < backpack.size(); i++) {
-			pack.append(backpack.get(i).getName());
+			pack.append(backpack.get(i).getName() + "<br>");
 		}
 		
 		return pack.toString();
@@ -136,6 +137,8 @@ public class Player extends Character implements Serializable {
 	 * @param index
 	 * @return The selected Item from the backpack.
 	 */
+	
+	
 	public Item getItemFromPack(int index) {
 		return backpack.remove(index);
 	}
@@ -214,14 +217,14 @@ public class Player extends Character implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder playerString = new StringBuilder();
-		playerString.append("Name: " + name + "\n");
-		playerString.append("Strength: " + getStrength() + "\n");
-		playerString.append("Agility: " + getAgility() + "\n");
-		playerString.append("Vitality: " + getVitality() + "\n");
-		playerString.append("Current HP: " + getCurHp() + "\n");
-		playerString.append("Hunger: " + hunger + "\n");
-		playerString.append("Weapon: " + getWeapon().getName() + "\n");
-		playerString.append("Armor: " + getArmor().getName() + "\n");
+		playerString.append("Name: " + name + "<br>");
+		playerString.append("Strength: " + getStrength() + "<br>");
+		playerString.append("Agility: " + getAgility() + "<br>");
+		playerString.append("Vitality: " + getVitality() + "<br>");
+		playerString.append("Current HP: " + getCurHp() + "<br>");
+		playerString.append("Hunger: " + hunger + "<br>");
+		playerString.append("Weapon: " + getWeapon().getName() + "<br>");
+		playerString.append("Armor: " + getArmor().getName() + "<br>");
 		
 		return playerString.toString();
 	}
