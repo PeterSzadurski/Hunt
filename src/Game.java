@@ -67,7 +67,8 @@ public class Game {
 			}
 			break;
 		case DAMAGE_HEALTH:
-			Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() - magnitude);
+			Game.actors.get(target).setCurHp(5);
+			System.out.println("Cur hp " + actors.get(target).getCurHp());
 			ifUsed = true;
 			break;
 		default:
@@ -136,6 +137,8 @@ public class Game {
 		// }
 
 	};
+	
+	
 
 	public static void start(Dungeon d) {
 

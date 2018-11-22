@@ -105,7 +105,7 @@ public class GameServlet extends HttpServlet {
 					switch (Game.select) {
 					case 0: // inventory navigation
 						if (Game.innerSelect == 0) {
-							Game.innerSelect = player.getBackpack().size();
+							Game.innerSelect = player.getBackpack().size() - 1;
 						}
 						else {
 							Game.innerSelect--;
@@ -153,7 +153,7 @@ public class GameServlet extends HttpServlet {
 				case 2: // inner menu
 					switch (Game.select) {
 					case 0: //inventory controls
-						if (Game.innerSelect == player.getBackpack().size()) {
+						if (Game.innerSelect == player.getBackpack().size() - 1) {
 							Game.innerSelect = 0;
 						}
 						else {
@@ -171,6 +171,7 @@ public class GameServlet extends HttpServlet {
 				
 				case 0:
 					// open menu
+					Game.innerSelect = 0;
 					Game.menu = 1;
 					break;
 				case 1:
@@ -195,20 +196,39 @@ public class GameServlet extends HttpServlet {
 							Game.menu = 1;
 							break;
 						case 0:
+							if (player.getBackpack().isEmpty()){
+								
+							}
+							else {
 							player.useFromBackpack(Game.innerSelect);
+							}
 							break;
 					}
 					
 				}
 				break;
 				
+			// these are for debugging, will be removed
 			case 220:
 				player.setCurHp(10);
 				break;
 			case 221:
 				Game.largePotion.use(0);
 				break;
-			
+			case 192:
+				if (player.getBackpack().isEmpty()) {
+					System.out.println("Empty");
+				}
+				else {
+					System.out.println("it ain't");
+				}
+				break;
+			case 16:
+				player.useFromBackpack(0);
+				break;
+			case 17:
+				player.getBackpack().clear();
+				break;
 		}
 		Game.display(out, dungeon);
 		
