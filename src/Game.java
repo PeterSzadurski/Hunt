@@ -67,8 +67,9 @@ public class Game {
 			}
 			break;
 		case DAMAGE_HEALTH:
-			Game.actors.get(target).setCurHp(5);
+			Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() - magnitude);
 			System.out.println("Cur hp " + actors.get(target).getCurHp());
+			System.out.println("damage");
 			ifUsed = true;
 			break;
 		default:
@@ -100,15 +101,15 @@ public class Game {
 		System.out.println("UPDATE! " + actors.size());
 
 		for (int n = 1; n < actors.size(); n++) {
-			System.out.println("First: " + turnRate(n) + " " + actors.get(n).getName());
-			System.out.println(actors.get(n).getName() + " AGI = " + actors.get(n).getAgility());
+			//System.out.println("First: " + turnRate(n) + " " + actors.get(n).getName());
+			//System.out.println(actors.get(n).getName() + " AGI = " + actors.get(n).getAgility());
 
 			// find how close the monster is to move in a turn
 			((Monster) actors.get(n)).setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(n));
 
 			if (((Monster) actors.get(n)).getTurnCount() >= turn) {
 				for (int t = 0; t < turnRate(n); t++) {
-					System.out.println(turnRate(n) + " " + actors.get(n).getName());
+					//System.out.println(turnRate(n) + " " + actors.get(n).getName());
 					int rand = (int) (Math.random() * 4) + 0;
 					// System.out.println("choice: " + rand );
 

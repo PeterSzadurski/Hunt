@@ -210,7 +210,7 @@ public class GameServlet extends HttpServlet {
 				
 			// these are for debugging, will be removed
 			case 220:
-				player.setCurHp(10);
+				Game.smallPoison.use(0);;
 				break;
 			case 221:
 				Game.largePotion.use(0);
@@ -224,7 +224,7 @@ public class GameServlet extends HttpServlet {
 				}
 				break;
 			case 16:
-				player.useFromBackpack(0);
+				player.useFromBackpack(2);
 				break;
 			case 17:
 				player.getBackpack().clear();

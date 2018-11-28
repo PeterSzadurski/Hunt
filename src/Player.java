@@ -121,11 +121,11 @@ public class Player extends Character implements Serializable {
 	}
 
 	public void useFromBackpack(int index) {
-		backpack.get(index).use(index);
+		backpack.get(index).use(0);
 		if (Game.ifUsed) {
 			if (backpack.get(index).getCount() == 1) {
 				backpack.remove(index);
-				if (Game.innerSelect > backpack.size()) {
+				if (Game.innerSelect >= backpack.size()) {
 					Game.innerSelect--;
 				}
 			} else {
