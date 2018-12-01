@@ -34,9 +34,11 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.largePotion);
 		player.pickUp(Game.smallPoison);
 		player.pickUp(Game.largePotion);
+		player.pickUp(Game.scrollTeleportation);
 		
         // TODO Auto-generated constructor stub
     }
+	int doublePress = 0;
     int counter = 0;
     boolean firstPrint = true;
     Dungeon dungeon = new Dungeon();
@@ -112,7 +114,9 @@ public class GameServlet extends HttpServlet {
 						}
 						break;
 					}
-					
+					break;
+				case 3: // aiming
+					Game.aiming.move(0, -1, dungeon);
 					break;
 				}
 
@@ -123,6 +127,9 @@ public class GameServlet extends HttpServlet {
 					player.move(-1, 0, dungeon);
 					Game.update(dungeon);
 					break;
+				case 3: // aiming
+					Game.aiming.move(-1, 0, dungeon);
+					break;
 				}
 
 				break;
@@ -131,6 +138,9 @@ public class GameServlet extends HttpServlet {
 				case 0: // no menu open
 					player.move(1, 0, dungeon);
 					Game.update(dungeon);
+					break;
+				case 3: // aiming
+					Game.aiming.move(1, 0, dungeon);
 					break;
 				}
 
@@ -161,6 +171,10 @@ public class GameServlet extends HttpServlet {
 						}
 						break;
 					}
+					break;
+					
+				case 3: // aiming
+					Game.aiming.move(0, 1, dungeon);
 					break;
 				}
 
@@ -205,6 +219,33 @@ public class GameServlet extends HttpServlet {
 							break;
 					}
 					
+				case 3: // aiming menu
+					switch (Game.aiming.getEffect()) {
+						// effect on aiming teleportation
+						case TELEPORT:
+							// used to prevent the effect from triggering right when it is selected
+							doublePress++;
+								if (doublePress == 2) {
+									Game.aiming.setShow(false);
+									Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									Game.menu = 0;
+									
+									dungeon.changeEntities(player.getY(), player.getX(), dungeon.getTile(player.getY(), player.getX()).getIcon(),
+											dungeon.getTile(player.getY(), player.getX()).getColor());
+									
+									player.setX(Game.aiming.x);
+									player.setY(Game.aiming.y);
+									dungeon.changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
+									Game.update(dungeon);
+									
+								}
+							break;
+					default:
+						break;
+						
+							
+					}
+					break; 
 				}
 				break;
 				
@@ -223,8 +264,20 @@ public class GameServlet extends HttpServlet {
 					System.out.println("it ain't");
 				}
 				break;
-			case 16:
-				player.useFromBackpack(2);
+			case 16: // shift, aim test
+				if (Game.menu == 0) {
+					Game.menu = 3;
+					Game.log = "[AIMING!]";
+					
+					Game.aiming.setX(player.getX());
+					Game.aiming.setY(player.getY());
+					Game.aiming.setShow(true);
+
+				}
+				else if (Game.menu == 3) {
+
+					
+				}
 				break;
 			case 17:
 				player.getBackpack().clear();

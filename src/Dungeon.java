@@ -91,9 +91,14 @@ public class Dungeon {
 		writer.print("<div id =\"screen\" class=\"grid\">");
 		for (int row = 0; row < entities[0].length; row++) {
 			for (int column = 0; column < entities[1].length; column++) {
-				writer.print("<div style=\"color:"  + 
+				if ((Game.aiming.getX() == column) && (Game.aiming.getY() == row) && (Game.aiming.isShow())) {
+					writer.print("<div>" + Game.aiming.geticon() + "</div>");
+				}
+				else {
+					writer.print("<div style=\"color:"  + 
 						entities[row][column].getColor() + "\">" + entities[row][column].getIcon() + "</div>");
-				//System.out.print(entities[row][column]);
+					}
+					//System.out.print(entities[row][column]);
 
 					
 

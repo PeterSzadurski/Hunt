@@ -19,11 +19,14 @@ public class Game {
 	static boolean ifUsed = false;
 	static String buffColor = "#00baff";
 	static String debuffColor = "#ff0000";
+	static String magicEffectColor = "#9e00d8";
 
 	// Generate weapons
 
 	static Weapon club = new Weapon("club", '!', 5);
 	static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
+	
+	static Aiming aiming = new Aiming(0,0);
 
 	// Generate armors
 
@@ -34,6 +37,7 @@ public class Game {
 	static Item smallPotion = new Item("Small Potion", 'i', "<span style = \"color:" + buffColor + "\">Restores</span> 10HP", 10, Effect.RESTORE_HEALTH);
 	static Item largePotion = new Item("Large Potion", 'i', "<span style = \"color:" + buffColor + "\">Restores</span> 50HP", 50, Effect.RESTORE_HEALTH);
 	static Item smallPoison = new Item("Small Poison", 'i', "<span style = \"color:" + debuffColor + "\">Damages</span> 15HP", 15, Effect.DAMAGE_HEALTH);
+	static Item scrollTeleportation = new Item("Scroll of Teleportation", 'i', "<span style = \"color: "+ magicEffectColor + "\">Teleports</span> the user", 0, Effect.TELEPORT);
 
 
 	// effects methods
@@ -70,6 +74,16 @@ public class Game {
 			Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() - magnitude);
 			System.out.println("Cur hp " + actors.get(target).getCurHp());
 			System.out.println("damage");
+			ifUsed = true;
+			break;
+		case TELEPORT: 
+			Game.menu = 3;
+			Game.log = "[AIMING!]";
+			
+			Game.aiming.setX(Game.actors.get(target).getX());
+			Game.aiming.setY(Game.actors.get(target).getY());
+			Game.aiming.setShow(true);
+			Game.aiming.setEffect(Effect.TELEPORT);
 			ifUsed = true;
 			break;
 		default:
@@ -210,6 +224,7 @@ public class Game {
 			break;
 		default:
 			writer.print("<tr>");
+			insert = "";
 			break;
 		}
 		d.firstPrint(writer);
