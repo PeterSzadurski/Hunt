@@ -116,7 +116,7 @@ public class GameServlet extends HttpServlet {
 					}
 					break;
 				case 3: // aiming
-					Game.aiming.move(0, -1, dungeon);
+					Game.aiming.restrictedMove(0, -1, dungeon);
 					break;
 				}
 
@@ -128,7 +128,7 @@ public class GameServlet extends HttpServlet {
 					Game.update(dungeon);
 					break;
 				case 3: // aiming
-					Game.aiming.move(-1, 0, dungeon);
+					Game.aiming.restrictedMove(-1, 0, dungeon);
 					break;
 				}
 
@@ -140,7 +140,7 @@ public class GameServlet extends HttpServlet {
 					Game.update(dungeon);
 					break;
 				case 3: // aiming
-					Game.aiming.move(1, 0, dungeon);
+					Game.aiming.restrictedMove(1, 0, dungeon);
 					break;
 				}
 
@@ -174,7 +174,7 @@ public class GameServlet extends HttpServlet {
 					break;
 					
 				case 3: // aiming
-					Game.aiming.move(0, 1, dungeon);
+					Game.aiming.restrictedMove(0, 1, dungeon);
 					break;
 				}
 
@@ -237,7 +237,7 @@ public class GameServlet extends HttpServlet {
 									player.setY(Game.aiming.y);
 									dungeon.changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
 									Game.update(dungeon);
-									
+									doublePress = 0;
 								}
 							break;
 					default:
@@ -275,7 +275,8 @@ public class GameServlet extends HttpServlet {
 
 				}
 				else if (Game.menu == 3) {
-
+					Game.aiming.setShow(false);
+					Game.menu = 0;
 					
 				}
 				break;

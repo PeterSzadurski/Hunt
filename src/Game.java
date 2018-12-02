@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Game {
 
 	public static ArrayList<Character> actors = new ArrayList<Character>();
-
+	public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	
 	public Game() {
 		// this.player = player;
 		// actors.add(player);
