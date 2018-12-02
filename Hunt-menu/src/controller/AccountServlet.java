@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
-import model.UserBean;
+import model.User;
 import util.ServletUtil;
 
 @WebServlet("/AccountServlet")
@@ -38,7 +38,7 @@ public class AccountServlet extends HttpServlet {
 				if (!userDAO.userExists(username)) {
 					
 					// create a new user with form params 
-					UserBean user = new UserBean(username, password);
+					User user = new User(username, password);
 					
 					// add user to database
 					userDAO.addUser(user);
