@@ -8,12 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.UserBean;
+import model.User;
 import util.DBUtil;
 
 public class UserDAO {
 	
-	public void addUser(UserBean user) throws SQLException {
+	public void addUser(User user) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
@@ -30,12 +30,12 @@ public class UserDAO {
 		}
 	}
 	
-	public void deleteUser(UserBean user) {
+	public void deleteUser(User user) {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement("delete from User where UserId = ?");
-			pStmt.setInt(1, user.getUserId());
+			pStmt.setInt(1, user.getUserID());
 			pStmt.executeUpdate();
 		} catch (SQLException ex) {
 			ex.getMessage();
@@ -46,13 +46,13 @@ public class UserDAO {
 		}
 	}
 	
-	public void updateUser(UserBean user) {
+	public void updateUser(User user) {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement("update User set Username = ? where UserId = ?");
 			pStmt.setString(1, user.getUsername());
-			pStmt.setInt(2, user.getUserId());
+			pStmt.setInt(2, user.getUserID());
 			pStmt.executeQuery();
 		} catch (SQLException ex) {
 			ex.getMessage();
@@ -63,16 +63,21 @@ public class UserDAO {
 		}
 	}
 	
-	public List<UserBean> getAllPlayers() {
+	
+	/*
+	 * 
+	 * If we want to create a scoreboard with all users who have signed up and played
+	 */
+	public List<User> getAllUsers() {
 		Connection conn = null;
-		List<UserBean> userList = new ArrayList<UserBean>();
+		List<User> userList = new ArrayList<User>();
 		try {
 			conn = DBUtil.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery("select * from user");
 			
 			while(result.next()) {
-				UserBean user = new UserBean();
+				User user = new User();
 				user.setUsername(result.getString("Username"));
 				userList.add(user);
 			}
@@ -91,9 +96,12 @@ public class UserDAO {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
+			
 			PreparedStatement pStmt = conn.prepareStatement("select * from User where username = ?");
 			pStmt.setString(1, username);
+			
 			ResultSet result = pStmt.executeQuery();
+			
 			if (result.next()) {
 				if(username.equalsIgnoreCase(result.getString("username"))) {
 					userExists = true;
@@ -133,30 +141,34 @@ public class UserDAO {
 		return passwordMatches;
 	}
 	
-	public UserBean getUserById(int userId) {
-		UserBean user = new UserBean();
+	public User getUserById(int id) {
+		User user = new User();
 		Connection conn = null;
+		
 		try {
 			conn = DBUtil.getConnection();
+			
 			PreparedStatement pStmt = conn.prepareStatement("select * from User where UserId = ?");
-			pStmt.setInt(1, userId);
+			pStmt.setInt(1, id);
+			
 			ResultSet result = pStmt.executeQuery();
+			
 			while(result.next()) {
 				user.setUsername(result.getString("username"));
 				user.setPassword(result.getString("password"));
 			}
+			
 		} catch(SQLException ex) {
 			ex.getMessage();
+			
 		} catch(Exception ex) {
 			ex.getMessage();
+			
 		} finally {
 			DBUtil.closeConnection();
+			
 		}
 		return user;
 	}
-	
-	public int getUserId(String username) {
-		int userId = 0;
-		return userId;
-	}
+
 }
