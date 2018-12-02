@@ -24,6 +24,7 @@ public class Projectile  {
 	public void setColor(String color) {
 		this.color = color;
 	}
+	// test
 	public int getX() {
 		return x;
 	}
