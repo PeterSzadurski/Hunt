@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Character Creation</title>
+<script>
+
+// To Do:
+// - make sure character has a name
+// - make sure the player uses all of their points
+
+var allow = false;
+
+function updatePoints() {
+	var points = document.getElementById("pointsLeft");
+	var numPoints = 5;
+	var str = document.getElementById("str").value;
+	var agi = document.getElementById("agi").value;
+	var vit = document.getElementById("vit").value;
+	numPoints = numPoints - str - agi - vit;
+	
+	// prevent player from making the character if they used too many (or too few) points
+	if (numPoints != 0) {
+		document.getElementById("error").style.display = "block";
+		allow = false;
+	} else {
+		document.getElementById("error").style.display = "none";	
+		allow = true;
+	}
+	
+	// update points remaining
+	points.innerHTML = numPoints;
+}
+
+function finish() {
+	if(allow) {
+		var name = document.getElementById("name").value;
+		console.log(name);
+		if(name == "" || name == " " || name == null) {
+			document.getElementById("nameError").style.display = "block";
+		} else {
+			document.getElementById("nameError").style.display = "none";
+			document.getElementById("makeCharacter").submit();
+		}
+	}
+}
+
+</script>
+<style>
+	body {
+		background-color: black;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
+	}
+	input {
+		background-color: black;
+		border-color: white;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
+	}
+	td {
+		padding: 5px;
+	}
+	#error, #nameError {
+		color: red;
+	}
+</style>
+</head>
+<body>
+
+<div>Character Creation</div>
+
+<form id="makeCharacter" action="CharacterCreationServlet">
+<table>
+	<tr>
+		<td>Name:</td><td><input id="name" type="text" name="name"></td>
+	</tr>
+	<tr>
+		<td>Points Remaining:</td><td id="pointsLeft">5</td>
+	</tr>
+	<tr>
+		<td>Strength:</td><td><input type="number" id="str" name="str" value=0 onchange="updatePoints()"></td>
+	</tr>
+	<tr>
+		<td>Agility:</td><td><input type="number" id="agi" name="agi" value=0 onchange="updatePoints()"></td>
+	</tr>
+	<tr>
+		<td>Vitality:</td><td><input type="number" id="vit" name="vit" value=0 onchange="updatePoints()"></td>
+	</tr>
+	<tr>
+		<td></td><td><input type="button" value="Finish" onclick="finish()"></td>
+	</tr>
+</table>
+</form>
+
+<div id="error" style="display:none;">You must use 5 points.</div>
+<div id="nameError" style="display:none;">You must enter a name.</div>
+</body>
+</html>
