@@ -14,6 +14,7 @@ import model.Dungeon;
 import model.Game;
 import model.Monster;
 import model.Player;
+import model.Projectile;
 
 /**
  * Servlet implementation class GameServlet
@@ -41,6 +42,12 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.smallPoison);
 		player.pickUp(Game.largePotion);
 		player.pickUp(Game.scrollTeleportation);
+		player.pickUp(Game.scrollFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+
+
 		
         // TODO Auto-generated constructor stub
     }
@@ -122,7 +129,12 @@ public class GameServlet extends HttpServlet {
 					}
 					break;
 				case 3: // aiming
-					Game.aiming.move(0, -1, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(0, -1, dungeon);
+					}
+					else {
+						Game.aiming.move(0, -1, dungeon);
+					}
 					break;
 				}
 
@@ -133,8 +145,13 @@ public class GameServlet extends HttpServlet {
 					player.move(-1, 0, dungeon);
 					Game.update(dungeon);
 					break;
-				case 3: // aiming
-					Game.aiming.move(-1, 0, dungeon);
+				case 3: // aiming					
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(-1, 0, dungeon);
+					}
+					else {
+						Game.aiming.move(-1, 0, dungeon);
+					}
 					break;
 				}
 
@@ -146,7 +163,12 @@ public class GameServlet extends HttpServlet {
 					Game.update(dungeon);
 					break;
 				case 3: // aiming
-					Game.aiming.move(1, 0, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(1, 0, dungeon);
+					}
+					else {
+						Game.aiming.move(1, 0, dungeon);
+					}
 					break;
 				}
 
@@ -180,7 +202,12 @@ public class GameServlet extends HttpServlet {
 					break;
 					
 				case 3: // aiming
-					Game.aiming.move(0, 1, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(0, 1, dungeon);
+					}
+					else {
+						Game.aiming.move(0, 1, dungeon);
+					}
 					break;
 				}
 
@@ -234,6 +261,7 @@ public class GameServlet extends HttpServlet {
 								if (doublePress == 2) {
 									Game.aiming.setShow(false);
 									Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									doublePress = 0;
 									Game.menu = 0;
 									
 									dungeon.changeEntities(player.getY(), player.getX(), dungeon.getTile(player.getY(), player.getX()).getIcon(),
@@ -244,8 +272,32 @@ public class GameServlet extends HttpServlet {
 									dungeon.changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
 									Game.update(dungeon);
 									
+									
 								}
 							break;
+						case RANGED:
+							doublePress++;
+							if (doublePress == 2) {
+								Game.aiming.setShow(false);
+								Game.log = "BURN!";
+								doublePress = 0;
+								Game.menu = 0;
+								if ((Game.aiming.getY() > player.getY()) && Game.aiming.getX() == player.getX()) { // if direction of aim is down
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, 1, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() < player.getY()) && (Game.aiming.getX() == Game.aiming.getX())) { // is direction of aim is up 
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, -1, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() > player.getX()) { // if direction of aim is right
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 1, 0, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() < player.getX()) { // if direction of aim is left
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), -1, 0, 20, Game.storeMagnitude));
+								}
+								dungeon.changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
+								//Game.actors.add(projectile);
+								Game.menu = 0;
+							}
 					default:
 						break;
 						

@@ -15,7 +15,7 @@ public class Item implements Serializable {
 		
 	}
 	
-	public Item(String name, char icon, String effectText, int magnitude, Effect effect) {
+	public Item(String name, char icon, String effectText, int magnitude, Effect effect, Effect subEffect) {
 		this.name = name;
 		this.icon = icon;
 		this.effectText = effectText;
