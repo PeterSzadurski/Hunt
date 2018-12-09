@@ -182,27 +182,46 @@ public class Game {
 
 			if (((Monster) actors.get(n)).getTurnCount() >= turn) {
 				for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
-					// System.out.println(turnRate(n) + " " + actors.get(n).getName());
-					int rand = (int) (Math.random() * 4) + 0;
-					// System.out.println("choice: " + rand );
-
-					switch (rand) {
-					case 0:
-						actors.get(n).move(0, 1, d);
-						break;
-					case 1:
-						actors.get(n).move(0, -1, d);
-						break;
-					case 2:
-						actors.get(n).move(1, 0, d);
-						break;
-					case 3:
-						actors.get(n).move(-1, 0, d);
-						break;
+					
+					switch (((Monster)actors.get(n)).getState()) {
 					default:
-						// stand still
+						break;
+					case IDLE :
+						int rand = (int) (Math.random() * 4) + 0;
+						// System.out.println("choice: " + rand );
+
+						switch (rand) {
+						case 0:
+							actors.get(n).move(0, 1, d);
+							break;
+						case 1:
+							actors.get(n).move(0, -1, d);
+							break;
+						case 2:
+							actors.get(n).move(1, 0, d);
+							break;
+						case 3:
+							actors.get(n).move(-1, 0, d);
+							break;
+						default:
+							// stand still
+							break;
+						}
+						if (((Monster)actors.get(n)).withinRange(actors.get(0), 3)) {
+							((Monster)actors.get(n)).setState(MonsterStates.TEST);
+						}
+						break;
+					case TEST:
+						if (((Monster)actors.get(n)).withinRange(actors.get(0), 3)) {
+						Game.log = "Within Range";
+						}
+						else {
+							((Monster)actors.get(n)).setState(MonsterStates.IDLE);
+						}
 						break;
 					}
+					// System.out.println(turnRate(n) + " " + actors.get(n).getName());
+
 				}
 				((Monster) actors.get(n)).setTurnCount(0);
 			}

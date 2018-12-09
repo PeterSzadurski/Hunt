@@ -15,6 +15,7 @@ import model.Game;
 import model.Monster;
 import model.Player;
 import model.Projectile;
+import monsters.*;
 
 /**
  * Servlet implementation class GameServlet
@@ -60,15 +61,18 @@ public class GameServlet extends HttpServlet {
     
 	
     
-	Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
-			, 0, 2);
+	//Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
+		//	, 0, 2);
+	Goblin monster = new Goblin();
 	
+	//Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
+		//	, 1, 2);
+	Bat monster2 = new Bat(1,2);
 	
-	Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
-			, 1, 2);
+	Troll monster3 = new Troll(5,5);
 	
-	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
-			, 5, 5);
+//	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
+	//		, 5, 5);
 	
     
 	
