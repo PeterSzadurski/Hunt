@@ -51,7 +51,7 @@ public class GameServlet extends HttpServlet {
 		
 		
 		
-		Game.itemsFloor.add(new ItemFloor(Game.scrollTeleportation, 8, 9));
+		Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
 		
         // TODO Auto-generated constructor stub
     }
@@ -305,6 +305,7 @@ public class GameServlet extends HttpServlet {
 								//Game.actors.add(projectile);
 								Game.menu = 0;
 							}
+							break;
 					default:
 						break;
 						

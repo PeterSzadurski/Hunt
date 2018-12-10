@@ -22,6 +22,7 @@ public class Game {
 	public static int select = 0;
 	public static int innerSelect = 0;
 	static boolean ifUsed = false;
+	static int timeFreeze = 0;
 	static final String buffColor = "#00baff";
 	static final String debuffColor = "#ff0000";
 	public static final String magicEffectColor = "#9e00d8";
@@ -53,6 +54,9 @@ public class Game {
 	public static Item scrollGreaterFireball = new Item("Scroll of Greater Fireball", 'i',
 			"Scorches the enemy for <span style=\"color:" + debuffColor + "\">100 damage</span>", -100, Effect.RANGED,
 			Effect.DAMAGE_HEALTH);
+	public static Item scrollMinorFrozenTime = new Item("Scroll of Minor Frozen Time", 'i',
+			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 5 turns", 5, Effect.STOP_TIME,
+			null);
 
 	// effects methods
 	public static void effects(int target, int magnitude, Effect effect) {
@@ -112,6 +116,11 @@ public class Game {
 			storeMagnitude = magnitude;
 			ifUsed = true;
 			break;
+		case STOP_TIME:
+			Game.log = "Time has stopped!";
+			timeFreeze += magnitude;
+			ifUsed = true;
+			break;
 		default:
 			ifUsed = false;
 			System.out.println("PLACEHOLDER");
@@ -140,26 +149,6 @@ public class Game {
 		}
 		System.out.println("UPDATE! " + actors.size());
 
-		if (!projectiles.isEmpty()) {
-			for (int p = 0; p < projectiles.size(); p++) {
-				// move projectiles
-				projectiles.get(p)
-						.setTurnCount((projectiles.get(p)).getTurnCount() + turnRate(projectiles.get(p).agility));
-				if (projectiles.get(p).getTurnCount() >= turn) {
-					for (int t = 0; t < turnRate(projectiles.get(p).getAgility()); t++) {
-						projectiles.get(p).move(d);
-						System.out.println("Move Ball");
-						// if (projectiles.get(p).isSetDestroy()) {
-						// projectiles.remove(p);
-					}
-				}
-				if (projectiles.get(p).isSetDestroy()) {
-					projectiles.remove(p);
-				}
-
-			}
-		}
-
 		// check for dead monsters
 		for (int n = 1; n < actors.size(); n++) {
 			if (actors.get(n).getCurHp() <= 0) {
@@ -171,67 +160,97 @@ public class Game {
 			}
 
 		}
+		if (timeFreeze == 0) {
 
-		for (int n = 1; n < actors.size(); n++) {
-			// System.out.println("First: " + turnRate(n) + " " + actors.get(n).getName());
-			// System.out.println(actors.get(n).getName() + " AGI = " +
-			// actors.get(n).getAgility());
-
-			// find how close the monster is to move in a turn
-			((Monster) actors.get(n))
-					.setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(actors.get(n).getAgility()));
-
-			if (((Monster) actors.get(n)).getTurnCount() >= turn) {
-				for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
-
-					switch (((Monster) actors.get(n)).getState()) {
-					default:
-						break;
-					case IDLE:
-						int rand = (int) (Math.random() * 4) + 0;
-						// System.out.println("choice: " + rand );
-
-						switch (rand) {
-						case 0:
-							actors.get(n).move(0, 1, d);
-							break;
-						case 1:
-							actors.get(n).move(0, -1, d);
-							break;
-						case 2:
-							actors.get(n).move(1, 0, d);
-							break;
-						case 3:
-							actors.get(n).move(-1, 0, d);
-							break;
-						default:
-							// stand still
-							break;
+			if (!projectiles.isEmpty()) {
+				for (int p = 0; p < projectiles.size(); p++) {
+					// move projectiles
+					projectiles.get(p)
+							.setTurnCount((projectiles.get(p)).getTurnCount() + turnRate(projectiles.get(p).agility));
+					if (projectiles.get(p).getTurnCount() >= turn) {
+						for (int t = 0; t < turnRate(projectiles.get(p).getAgility()); t++) {
+							projectiles.get(p).move(d);
+							System.out.println("Move Ball");
+							// if (projectiles.get(p).isSetDestroy()) {
+							// projectiles.remove(p);
 						}
-						if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-							((Monster) actors.get(n)).setState(MonsterStates.TEST);
-						}
-						break;
-					case TEST:
-						if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-							Game.log = "Within Range";
-						} else {
-							((Monster) actors.get(n)).setState(MonsterStates.IDLE);
-						}
-						break;
 					}
-					// System.out.println(turnRate(n) + " " + actors.get(n).getName());
+					if (projectiles.get(p).isSetDestroy()) {
+						projectiles.remove(p);
+					}
 
 				}
-				((Monster) actors.get(n)).setTurnCount(0);
 			}
 
+			for (int n = 1; n < actors.size(); n++) {
+				// System.out.println("First: " + turnRate(n) + " " + actors.get(n).getName());
+				// System.out.println(actors.get(n).getName() + " AGI = " +
+				// actors.get(n).getAgility());
+
+				// find how close the monster is to move in a turn
+				((Monster) actors.get(n))
+						.setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(actors.get(n).getAgility()));
+
+				if (((Monster) actors.get(n)).getTurnCount() >= turn) {
+					for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
+
+						switch (((Monster) actors.get(n)).getState()) {
+						default:
+							break;
+						case IDLE:
+							int rand = (int) (Math.random() * 4) + 0;
+							// System.out.println("choice: " + rand );
+
+							switch (rand) {
+							case 0:
+								actors.get(n).move(0, 1, d);
+								break;
+							case 1:
+								actors.get(n).move(0, -1, d);
+								break;
+							case 2:
+								actors.get(n).move(1, 0, d);
+								break;
+							case 3:
+								actors.get(n).move(-1, 0, d);
+								break;
+							default:
+								// stand still
+								break;
+							}
+							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+								((Monster) actors.get(n)).setState(MonsterStates.TEST);
+							}
+							break;
+						case TEST:
+							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+								Game.log = "Within Range";
+							} else {
+								((Monster) actors.get(n)).setState(MonsterStates.IDLE);
+							}
+							break;
+						}
+						// System.out.println(turnRate(n) + " " + actors.get(n).getName());
+
+					}
+					((Monster) actors.get(n)).setTurnCount(0);
+				}
+
+			}
 		}
+		else {
+			timeFreeze--;
+			if (timeFreeze == 0) {
+				Game.log = "Time has begun to move again!";
+			}
+		}
+		
 		// }
 
 		if (!itemsFloor.isEmpty()) {
 			for (int i = 0; i < itemsFloor.size(); i++) {
-				if (itemsFloor.get(i).getX() == actors.get(0).getX() && itemsFloor.get(i).getY() == actors.get(0).getY()) {
+				if (itemsFloor.get(i).getX() == actors.get(0).getX()
+						&& itemsFloor.get(i).getY() == actors.get(0).getY()) {
 					log = "Item: " + itemsFloor.get(i).getItem().getName();
 				}
 			}
