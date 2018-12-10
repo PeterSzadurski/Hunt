@@ -9,11 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Dungeon;
 import model.Game;
 import model.Monster;
 import model.Player;
+import model.Projectile;
+import monsters.*;
 
 /**
  * Servlet implementation class GameServlet
@@ -30,6 +33,7 @@ public class GameServlet extends HttpServlet {
         super();
         Game.menu = 0; // default menu
      // player will always be actor 0
+        player = new Player();
 		Game.addActors(player);
 		
 		Game.addActors(monster);
@@ -41,6 +45,12 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.smallPoison);
 		player.pickUp(Game.largePotion);
 		player.pickUp(Game.scrollTeleportation);
+		player.pickUp(Game.scrollFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+		player.pickUp(Game.scrollGreaterFireball);
+
+
 		
         // TODO Auto-generated constructor stub
     }
@@ -48,20 +58,22 @@ public class GameServlet extends HttpServlet {
     int counter = 0;
     boolean firstPrint = true;
     Dungeon dungeon = new Dungeon();
-    Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
-			, 0, 1);
+    Player player;
     
 	
     
-	Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
-			, 0, 2);
+	//Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
+		//	, 0, 2);
+	Goblin monster = new Goblin();
 	
+	//Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
+		//	, 1, 2);
+	Bat monster2 = new Bat(1,2);
 	
-	Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
-			, 1, 2);
+	Troll monster3 = new Troll(5,5);
 	
-	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
-			, 5, 5);
+//	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
+	//		, 5, 5);
 	
     
 	
@@ -73,6 +85,8 @@ public class GameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		player = (Player)session.getAttribute("player");
 		
 	//	if (firstPrint) {
 		//	dungeon.addActor(player);
@@ -122,7 +136,12 @@ public class GameServlet extends HttpServlet {
 					}
 					break;
 				case 3: // aiming
-					Game.aiming.move(0, -1, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(0, -1, dungeon);
+					}
+					else {
+						Game.aiming.move(0, -1, dungeon);
+					}
 					break;
 				}
 
@@ -133,8 +152,13 @@ public class GameServlet extends HttpServlet {
 					player.move(-1, 0, dungeon);
 					Game.update(dungeon);
 					break;
-				case 3: // aiming
-					Game.aiming.move(-1, 0, dungeon);
+				case 3: // aiming					
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(-1, 0, dungeon);
+					}
+					else {
+						Game.aiming.move(-1, 0, dungeon);
+					}
 					break;
 				}
 
@@ -146,7 +170,12 @@ public class GameServlet extends HttpServlet {
 					Game.update(dungeon);
 					break;
 				case 3: // aiming
-					Game.aiming.move(1, 0, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(1, 0, dungeon);
+					}
+					else {
+						Game.aiming.move(1, 0, dungeon);
+					}
 					break;
 				}
 
@@ -180,7 +209,12 @@ public class GameServlet extends HttpServlet {
 					break;
 					
 				case 3: // aiming
-					Game.aiming.move(0, 1, dungeon);
+					if (Game.aiming.isRestrict()) {
+						Game.aiming.restrictedMove(0, 1, dungeon);
+					}
+					else {
+						Game.aiming.move(0, 1, dungeon);
+					}
 					break;
 				}
 
@@ -234,6 +268,7 @@ public class GameServlet extends HttpServlet {
 								if (doublePress == 2) {
 									Game.aiming.setShow(false);
 									Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									doublePress = 0;
 									Game.menu = 0;
 									
 									dungeon.changeEntities(player.getY(), player.getX(), dungeon.getTile(player.getY(), player.getX()).getIcon(),
@@ -244,8 +279,32 @@ public class GameServlet extends HttpServlet {
 									dungeon.changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
 									Game.update(dungeon);
 									
+									
 								}
 							break;
+						case RANGED:
+							doublePress++;
+							if (doublePress == 2) {
+								Game.aiming.setShow(false);
+								Game.log = "BURN!";
+								doublePress = 0;
+								Game.menu = 0;
+								if ((Game.aiming.getY() > player.getY()) && Game.aiming.getX() == player.getX()) { // if direction of aim is down
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, 1, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() < player.getY()) && (Game.aiming.getX() == Game.aiming.getX())) { // is direction of aim is up 
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, -1, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() > player.getX()) { // if direction of aim is right
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 1, 0, 20, Game.storeMagnitude));
+								}
+								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() < player.getX()) { // if direction of aim is left
+									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), -1, 0, 20, Game.storeMagnitude));
+								}
+								dungeon.changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
+								//Game.actors.add(projectile);
+								Game.menu = 0;
+							}
 					default:
 						break;
 						

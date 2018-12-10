@@ -9,6 +9,9 @@ public class Monster extends Character implements Serializable {
 	private int expOnKill;
 	private double turnCount = 0;
 	
+	MonsterStates state = MonsterStates.IDLE;
+	
+	
 	public Monster() {
 		// makes it a bean
 	}
@@ -34,6 +37,14 @@ public class Monster extends Character implements Serializable {
 	//}
 	
 	
+	public MonsterStates getState() {
+		return state;
+	}
+
+	public void setState(MonsterStates state) {
+		this.state = state;
+	}
+
 	public int getExpOnKill() {
 		return expOnKill;
 	}
@@ -60,5 +71,11 @@ public class Monster extends Character implements Serializable {
 		
 		return monsterString.toString();
 	}
+	
+	public boolean withinRange (Character c, int range) {
+		return ((this.getX() - c.getX() <= range) && (this.getX() - c.getX() >= -range) && (this.getY() - c.getY() <= range) && (this.getY() - c.getY() >= -range));
+	}
+	
+	
 	
 }

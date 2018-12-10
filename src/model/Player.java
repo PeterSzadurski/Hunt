@@ -50,6 +50,24 @@ public class Player extends Character implements Serializable {
 		super.calcHP();
 
 	}
+	
+	public Player(String name, int str, int agi, int vit, int x, int y) {
+
+		super(name, str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1), '@', "#FFFF00", x, y);
+
+		this.name = name;
+		level = 1;
+		exp = 0;
+		expForNextLevel = 10;
+		hunger = 100;
+		backpack = new ArrayList<Item>();
+
+		// Calculate other stats
+		super.calcDamage();
+		super.calcMoveSpeed();
+		super.calcHP();
+
+	}
 
 	/**
 	 * For making a Player from a database record
