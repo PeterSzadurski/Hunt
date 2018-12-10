@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Dungeon;
 import model.Game;
+import model.ItemFloor;
 import model.Monster;
 import model.Player;
 import model.Projectile;
@@ -47,8 +48,10 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
-
-
+		
+		
+		
+		Game.itemsFloor.add(new ItemFloor(Game.scrollTeleportation, 8, 9));
 		
         // TODO Auto-generated constructor stub
     }
@@ -310,9 +313,19 @@ public class GameServlet extends HttpServlet {
 					break; 
 				}
 				break;
-				
+			case 80: // p
+				if (!Game.itemsFloor.isEmpty()) {
+					for (int i = 0; i < Game.itemsFloor.size(); i++) {
+						if(Game.itemsFloor.get(i).getX() == player.getX() && Game.itemsFloor.get(i).getY() == player.getY()) {
+							player.pickUp(Game.itemsFloor.get(i).getItem());
+							Game.log = "You pick up the \"" + Game.itemsFloor.get(i).getItem().getName() + "\"";
+							Game.itemsFloor.remove(i);
+						}
+					}
+				}
+				break;
 			// these are for debugging, will be removed
-			case 220:
+			 case 220:
 				Game.smallPoison.use(0);;
 				break;
 			case 221:
@@ -342,7 +355,7 @@ public class GameServlet extends HttpServlet {
 				}
 				break;
 			case 17:
-				player.getBackpack().clear();
+			//	player.getBackpack().clear();
 				break;
 		}
 		Game.display(out, dungeon);

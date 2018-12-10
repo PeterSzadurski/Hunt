@@ -87,6 +87,15 @@ public class Character implements Serializable {
 				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
 					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
 							d.getTile(this.y, this.x).getColor());
+					// check the floor for items
+					if (!Game.itemsFloor.isEmpty()) {
+						for (int o = 0; o < Game.itemsFloor.size(); o++) {
+							if (Game.itemsFloor.get(o).getX() == this.getX() && Game.itemsFloor.get(o).getY() == this.getY()) {
+							d.changeEntities(Game.itemsFloor.get(o).getY(), Game.itemsFloor.get(o).getX(),
+									Game.itemsFloor.get(o).getIcon(), Game.itemsFloor.get(o).getColor());
+							}
+						}
+					}
 					this.x += x;
 					this.y += y;
 					d.changeEntities(this.y, this.x, this.icon, this.color);

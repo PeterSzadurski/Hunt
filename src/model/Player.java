@@ -1,4 +1,5 @@
 package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ public class Player extends Character implements Serializable {
 
 	private int playerID;
 	private int currentDungeonID;
-	
+
 	private String name;
 	private int level;
 	private int exp;
@@ -80,15 +81,15 @@ public class Player extends Character implements Serializable {
 		expForNextLevel = 10 + (level - 1) * 5;
 
 	}
-	
+
 	public int getPlayerID() {
 		return this.playerID;
 	}
-	
+
 	public void setPlayerID(int id) {
 		this.playerID = id;
 	}
-	
+
 	public int getCurrentDungeonID() {
 		return currentDungeonID;
 	}
@@ -320,6 +321,15 @@ public class Player extends Character implements Serializable {
 				if (d.getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
 					d.changeEntities(this.getY(), this.getX(), d.getTile(this.getY(), this.getX()).getIcon(),
 							d.getTile(this.getY(), this.getX()).getColor());
+					// check for floor items
+					if (!Game.itemsFloor.isEmpty()) {
+						for (int o = 0; o < Game.itemsFloor.size(); o++) {
+							if (Game.itemsFloor.get(o).getX() == this.getX() && Game.itemsFloor.get(o).getY() == this.getY()) {
+							d.changeEntities(Game.itemsFloor.get(o).getY(), Game.itemsFloor.get(o).getX(),
+									Game.itemsFloor.get(o).getIcon(), Game.itemsFloor.get(o).getColor());
+							}
+						}
+					}
 					this.setX(this.getX() + x);
 					this.setY(this.getY() + y);
 					d.changeEntities(this.getY(), this.getX(), this.icon, this.color);

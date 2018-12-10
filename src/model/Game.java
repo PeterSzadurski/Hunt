@@ -7,6 +7,7 @@ public class Game {
 
 	public static ArrayList<Character> actors = new ArrayList<Character>();
 	public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public static ArrayList<ItemFloor> itemsFloor = new ArrayList<ItemFloor>();
 
 	public Game() {
 		// this.player = player;
@@ -182,11 +183,11 @@ public class Game {
 
 			if (((Monster) actors.get(n)).getTurnCount() >= turn) {
 				for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
-					
-					switch (((Monster)actors.get(n)).getState()) {
+
+					switch (((Monster) actors.get(n)).getState()) {
 					default:
 						break;
-					case IDLE :
+					case IDLE:
 						int rand = (int) (Math.random() * 4) + 0;
 						// System.out.println("choice: " + rand );
 
@@ -207,16 +208,15 @@ public class Game {
 							// stand still
 							break;
 						}
-						if (((Monster)actors.get(n)).withinRange(actors.get(0), 3)) {
-							((Monster)actors.get(n)).setState(MonsterStates.TEST);
+						if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+							((Monster) actors.get(n)).setState(MonsterStates.TEST);
 						}
 						break;
 					case TEST:
-						if (((Monster)actors.get(n)).withinRange(actors.get(0), 3)) {
-						Game.log = "Within Range";
-						}
-						else {
-							((Monster)actors.get(n)).setState(MonsterStates.IDLE);
+						if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+							Game.log = "Within Range";
+						} else {
+							((Monster) actors.get(n)).setState(MonsterStates.IDLE);
 						}
 						break;
 					}
@@ -229,10 +229,21 @@ public class Game {
 		}
 		// }
 
-	};
+		if (!itemsFloor.isEmpty()) {
+			for (int i = 0; i < itemsFloor.size(); i++) {
+				if (itemsFloor.get(i).getX() == actors.get(0).getX() && itemsFloor.get(i).getY() == actors.get(0).getY()) {
+					log = "Item: " + itemsFloor.get(i).getItem().getName();
+				}
+			}
+		}
+	}
 
 	public static void start(Dungeon d) {
 
+		for (int i = 0; i < itemsFloor.size(); i++) {
+			d.changeEntities(itemsFloor.get(i).getY(), itemsFloor.get(i).getX(), itemsFloor.get(i).getIcon(),
+					itemsFloor.get(i).getColor());
+		}
 		for (int i = 0; i < actors.size(); i++) {
 			d.changeEntities(actors.get(i).getY(), actors.get(i).getX(), actors.get(i).geticon(),
 					actors.get(i).getColor());
