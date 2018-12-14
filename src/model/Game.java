@@ -12,14 +12,15 @@ public class Game {
 										new Dungeon(3), new Dungeon(4), new Dungeon(5),
 										new Dungeon(6), new Dungeon(7), new Dungeon(8),
 										new Dungeon(9)};
+	
 	//dungeon[0] = new Dungeon(0);
 
 
 
 	public  Game() {
-		    for (int i = 0; i < 10; i++) {
-    	dungeon[i] = new Dungeon(i);
-    }
+		  //  for (int i = 0; i < 10; i++) {
+    	//dungeon[i] = new Dungeon(i);
+   // }
 		// this.player = player;
 		// actors.add(player);
 	}
@@ -308,6 +309,10 @@ public class Game {
 
 	public static void addActors(Character c) {
 		actors.add(c);
+	}
+	
+	public static void addPlayer(Player p) {
+		actors.add(0,p);
 	}
 
 	public static void display(PrintWriter writer) {

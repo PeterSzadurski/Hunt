@@ -36,11 +36,11 @@ public class GameServlet extends HttpServlet {
      // player will always be actor 0
     
     
-		Game.addActors(player);
+		Game.addPlayer(player);
 		
-		Game.addActors(monster);
-		Game.addActors(monster2);
-		Game.addActors(monster3);
+		//Game.addActors(monster);
+		//Game.addActors(monster2);
+		//Game.addActors(monster3);
 		player.pickUp(Game.smallPotion);
 		player.pickUp(Game.smallPotion);
 		player.pickUp(Game.largePotion);
@@ -52,7 +52,7 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
 		Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
-		
+		Game.getDungeon()[0].populate();
 		
 		// TODO Auto-generated constructor stub
 
@@ -96,13 +96,11 @@ public class GameServlet extends HttpServlet {
     
 	//Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
 		//	, 0, 2);
-	Goblin monster = new Goblin();
+
 	
 	//Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
 		//	, 1, 2);
-	Bat monster2 = new Bat(1,2);
-	
-	Troll monster3 = new Troll(5,5);
+
 	
 //	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
 	//		, 5, 5);

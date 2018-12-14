@@ -10,6 +10,7 @@ public class Goblin  extends Monster{
 	/**
 	 * 
 	 */
+	static int[] location = Game.getDungeon()[Game.floor].getLocation();
 	private static final long serialVersionUID = 1L;
 	private static String name = "Goblin";
 	private static int expOnKill = 10;
@@ -20,8 +21,8 @@ public class Goblin  extends Monster{
 	private static Armor armor = null;
 	private static char icon = 'G';
 	private static String color ="#006400";
-	private static int x =5;
-	private static int y = 5;
+	private static int x = location[1];
+	private static int y = location[0];
 	
 
 

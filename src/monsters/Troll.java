@@ -10,6 +10,7 @@ public class Troll  extends Monster{
 	/**
 	 * 
 	 */
+	static int[] location = Game.getDungeon()[Game.floor].getLocation();
 	private static final long serialVersionUID = 1L;
 	private static String name = "Troll";
 	private static int expOnKill = 15;
@@ -20,10 +21,11 @@ public class Troll  extends Monster{
 	private static Armor armor = null;
 	private static char icon = 'T';
 	private static String color ="#006400";
+	private static int x = location[1];
+	private static int y = location[0];
 
 
-
-	public Troll(int x, int y) {
+	public Troll() {
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
 
 		//this.name = name;

@@ -3,6 +3,7 @@ package model;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+import monsters.*;
 
 public class Dungeon {
 	
@@ -225,6 +226,10 @@ public class Dungeon {
 		else {
 			layout[down[0]][down[1]] = floor;
 		}
+		
+		
+		
+		
 		for(int i = 0; i < entities[0].length; i++) {
 			for (int n = 0; n < entities[1].length; n++) {
 				//entities[i][n].setIcon(layout[i][n].getIcon());
@@ -234,6 +239,7 @@ public class Dungeon {
 				//entities[i][n].setSolid(false);
 			}
 		}
+		
 	}
 	
 	
@@ -362,5 +368,38 @@ public class Dungeon {
 			}
 		}
 		return down;
+	}
+	
+	public void populate () {
+		int randMonster;
+		switch (Game.floor) {
+		case 0:
+			for (int i = 0; i < 10; i++) {
+				randMonster = (int) (Math.random() * 6) + 0;
+				switch (randMonster) {
+				default:
+					Game.addActors(new Bat());
+					break;
+				case 0:
+					Game.addActors(new Goblin());
+					break;
+				case 2:
+					Game.addActors(new Goblin());
+					break;
+				case 3: 
+					Game.addActors(new Bat());
+					break;
+				case 4:
+					Game.addActors(new Bat());
+					break;
+				case 5:
+					Game.addActors(new Troll());
+					break;
+				}
+			}
+			break;
+		default:
+			break;
+		}
 	}
 }
