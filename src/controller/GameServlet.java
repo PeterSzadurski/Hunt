@@ -33,9 +33,8 @@ public class GameServlet extends HttpServlet {
         super();
         Game.menu = 0; // default menu
      // player will always be actor 0
-        player = new Player();
+        player = new Player("Death", 2, 2, 1, 1, 1);
 		Game.addActors(player);
-		
 		Game.addActors(monster);
 		Game.addActors(monster2);
 		Game.addActors(monster3);
