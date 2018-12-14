@@ -302,7 +302,7 @@ public class Player extends Character implements Serializable {
 	}
 
 	@Override
-	public void move(int x, int y, Dungeon d) {
+	public void move(int x, int y) {
 		int collideActor = -1;
 		for (int i = 0; i < Game.actors.size(); i++) {
 			if (((this.getX() + x) == Game.actors.get(i).getX()) && ((this.getY() + y) == Game.actors.get(i).getY())) {
@@ -315,25 +315,34 @@ public class Player extends Character implements Serializable {
 		if (collideActor == -1) {
 
 			// if inside the Dungeon bounds
-			if ((this.getX() + x) < d.getWidth() && (this.getX() + x > -1) && (this.getY() + y) < d.getHeight()
+			if ((this.getX() + x) < Game.getDungeon()[Game.floor].getWidth() && (this.getX() + x > -1) && (this.getY() + y) < Game.getDungeon()[Game.floor].getHeight()
 					&& (this.getY() + y > -1)) {
 				// check if not solid
-				if (d.getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
-					d.changeEntities(this.getY(), this.getX(), d.getTile(this.getY(), this.getX()).getIcon(),
-							d.getTile(this.getY(), this.getX()).getColor());
+				if (Game.getDungeon()[Game.floor].getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
+					Game.getDungeon()[Game.floor].changeEntities(this.getY(), this.getX(), Game.getDungeon()[Game.floor].getTile(this.getY(), this.getX()).getIcon(),
+							Game.getDungeon()[Game.floor].getTile(this.getY(), this.getX()).getColor());
 					// check for floor items
 					if (!Game.itemsFloor.isEmpty()) {
 						for (int o = 0; o < Game.itemsFloor.size(); o++) {
 							if (Game.itemsFloor.get(o).getX() == this.getX() && Game.itemsFloor.get(o).getY() == this.getY()) {
-							d.changeEntities(Game.itemsFloor.get(o).getY(), Game.itemsFloor.get(o).getX(),
+								Game.getDungeon()[Game.floor].changeEntities(Game.itemsFloor.get(o).getY(), Game.itemsFloor.get(o).getX(),
 									Game.itemsFloor.get(o).getIcon(), Game.itemsFloor.get(o).getColor());
 							}
 						}
 					}
+					// check if on downtile
+					
 					this.setX(this.getX() + x);
 					this.setY(this.getY() + y);
-					d.changeEntities(this.getY(), this.getX(), this.icon, this.color);
+					Game.getDungeon()[Game.floor].changeEntities(this.getY(), this.getX(), this.icon, this.color);
 					Game.log = ("Move Freely");
+					if (Game.onDown(this)) {
+						Game.log = "Press [Enter] to go down";
+					}
+					else if (Game.onUp(this)) {
+						Game.log = "Press [Enter] to go up";
+					}
+
 
 				}
 

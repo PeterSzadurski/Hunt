@@ -67,7 +67,7 @@ public class Projectile {
 		return turnCount;
 	}
 	
-	public void move(Dungeon d) {
+	public void move() {
 		int collideActor = -1;
 		for (int i = 0; i < Game.actors.size(); i++) {
 			if (((this.x + movX) == Game.actors.get(i).getX()) && ((this.y + movY) == Game.actors.get(i).getY())) {
@@ -80,30 +80,30 @@ public class Projectile {
 		if (collideActor == -1) {
 
 			// if inside the Dungeon bounds
-			if ((this.x + movX) < d.getWidth() && (this.x + movX > -1) && (this.y + movY) < d.getHeight() && (this.y + movY > -1)) {
+			if ((this.x + movX) < Game.getDungeon()[Game.floor].getWidth() && (this.x + movX > -1) && (this.y + movY) < Game.getDungeon()[Game.floor].getHeight() && (this.y + movY > -1)) {
 				// check if not solid
-				if (d.getTile(this.y + movY, this.x + movX).isSolid() == false) {
-					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
-							d.getTile(this.y, this.x).getColor());
+				if (Game.getDungeon()[Game.floor].getTile(this.y + movY, this.x + movX).isSolid() == false) {
+					Game.getDungeon()[Game.floor].changeEntities(this.y, this.x, Game.getDungeon()[Game.floor].getTile(this.y, this.x).getIcon(),
+							Game.getDungeon()[Game.floor].getTile(this.y, this.x).getColor());
 					this.x += movX;
 					this.y += movY;
 					System.out.println("Ball x=" + this.x + " | Ball Y=" + this.y);
-					d.changeEntities(this.y, this.x, this.icon, this.color);
+					Game.getDungeon()[Game.floor].changeEntities(this.y, this.x, this.icon, this.color);
 					//Game.log = ("Move Freely");
 
 				}
 
 				else {
-					d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
-							d.getTile(this.y, this.x).getColor());
+					Game.getDungeon()[Game.floor].changeEntities(this.y, this.x, Game.getDungeon()[Game.floor].getTile(this.y, this.x).getIcon(),
+							Game.getDungeon()[Game.floor].getTile(this.y, this.x).getColor());
 					setDestroy = true;
 					//System.out.println("solid");
 					//Game.log = ("Cannot Move");
 				}
 			}
 			else {
-				d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
-				d.getTile(this.y, this.x).getColor());
+				Game.getDungeon()[Game.floor].changeEntities(this.y, this.x, Game.getDungeon()[Game.floor].getTile(this.y, this.x).getIcon(),
+				Game.getDungeon()[Game.floor].getTile(this.y, this.x).getColor());
 				setDestroy = true;
 			}
 			// Game.update(d);
@@ -113,8 +113,8 @@ public class Projectile {
 		else if (!setDestroy) {
 				Game.actors.get(collideActor).setCurHp(Game.actors.get(collideActor).getCurHp() + damage);
 				setDestroy = true;
-				d.changeEntities(this.y, this.x, d.getTile(this.y, this.x).getIcon(),
-						d.getTile(this.y, this.x).getColor());
+				Game.getDungeon()[Game.floor].changeEntities(this.y, this.x, Game.getDungeon()[Game.floor].getTile(this.y, this.x).getIcon(),
+						Game.getDungeon()[Game.floor].getTile(this.y, this.x).getColor());
 			}
 			//Game.log = (Game.actors.get(collideActor).getName() + ": HP: " + Game.actors.get(collideActor).getCurHp() + 
 				//	"/" + Game.actors.get(collideActor).getHp());

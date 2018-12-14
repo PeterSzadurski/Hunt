@@ -73,7 +73,7 @@ $(document).ready (function(){
 <style>
 .grid {
 	display: grid;
-	grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
+	grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
 	align-content: end;
 }
 .grid > div {

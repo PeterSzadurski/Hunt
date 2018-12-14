@@ -31,8 +31,11 @@ public class GameServlet extends HttpServlet {
     public GameServlet() {
     	
         super();
+       // Game.Game();
         Game.menu = 0; // default menu
      // player will always be actor 0
+    
+    
 		Game.addActors(player);
 		
 		Game.addActors(monster);
@@ -48,19 +51,46 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
-		
-		
-		
 		Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
 		
-        // TODO Auto-generated constructor stub
+		
+		// TODO Auto-generated constructor stub
+
     }
+    
+    
+    /*Dungeon dungeon0 = new Dungeon(0);
+    Dungeon dungeon1 = new Dungeon(1);
+    Dungeon dungeon2 = new Dungeon(2);
+    Dungeon dungeon3 = new Dungeon(3);
+    Dungeon dungeon4 = new Dungeon(4);
+    Dungeon dungeon5 = new Dungeon(5);
+    Dungeon dungeon6 = new Dungeon(6);
+    Dungeon dungeon7 = new Dungeon(7);
+    Dungeon dungeon8 = new Dungeon(8);
+    Dungeon dungeon9 = new Dungeon(9)
+    */
+	int[] location = Game.getDungeon()[Game.floor].getLocation();
+
+  //  System.out.println("");
+    
+    // int[] location = Game.getDungeon()[0].getLocation();
+    //int[] location = Game.getDungeon()[1].getLocation();
+    
+    //for (int i = 0; i < 10; i++) {
+    	//Game.dungeon[i] = new Dungeon(i);
+    //}
+    
+    
+    
+ //   int[] location = Game.getDungeon()[Game.floor].getLocation();
+    
 	int doublePress = 0;
     int counter = 0;
     boolean firstPrint = true;
-    Dungeon dungeon = new Dungeon();
+   // Dungeon dungeon = new Dungeon();
     Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
-			, 0, 1);
+			, this.location[1], location[0]);
     
 	
     
@@ -87,7 +117,7 @@ public class GameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 	//	if (firstPrint) {
 		//	dungeon.addActor(player);
 	//		firstPrint = false;
@@ -99,21 +129,30 @@ public class GameServlet extends HttpServlet {
 		
 		
 
+		// check up/down
+		int[] up = Game.getDungeon()[Game.floor].getUpFloor();
+		int[] down = Game.getDungeon()[Game.floor].getDownFloor();
 		
 		
 		//out.println("key press " + key + " Counter: " + counter);
 		//Game.display(out, dungeon);
 		
-		Game.start(dungeon);
+		
+		
+	//	if(player.getX()==up[1]&&player.getY()==up[0]) {
+		//	Game.log = "Press [Enter] to go up.";
+		//	System.out.println("go up man");
+		//}
+		
+		
 		
 		// controls
-		
 		switch (key) {
 			case 38: // up
 				switch (Game.menu) {
 				case 0: // no menu open
-					player.move(0, -1, dungeon);
-					Game.update(dungeon);
+					player.move(0, -1);
+					Game.update();
 					break;
 				case 1: // menu navigation
 					if (Game.select == 0) {
@@ -137,10 +176,10 @@ public class GameServlet extends HttpServlet {
 					break;
 				case 3: // aiming
 					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(0, -1, dungeon);
+						Game.aiming.restrictedMove(0, -1);
 					}
 					else {
-						Game.aiming.move(0, -1, dungeon);
+						Game.aiming.move(0, -1);
 					}
 					break;
 				}
@@ -149,15 +188,15 @@ public class GameServlet extends HttpServlet {
 			case 37: // left
 				switch (Game.menu) {
 				case 0: // no menu open
-					player.move(-1, 0, dungeon);
-					Game.update(dungeon);
+					player.move(-1, 0);
+					Game.update();
 					break;
 				case 3: // aiming					
 					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(-1, 0, dungeon);
+						Game.aiming.restrictedMove(-1, 0);
 					}
 					else {
-						Game.aiming.move(-1, 0, dungeon);
+						Game.aiming.move(-1, 0);
 					}
 					break;
 				}
@@ -166,15 +205,15 @@ public class GameServlet extends HttpServlet {
 			case 39: // right
 				switch (Game.menu) {
 				case 0: // no menu open
-					player.move(1, 0, dungeon);
-					Game.update(dungeon);
+					player.move(1, 0);
+					Game.update();
 					break;
 				case 3: // aiming
 					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(1, 0, dungeon);
+						Game.aiming.restrictedMove(1, 0);
 					}
 					else {
-						Game.aiming.move(1, 0, dungeon);
+						Game.aiming.move(1, 0);
 					}
 					break;
 				}
@@ -183,8 +222,8 @@ public class GameServlet extends HttpServlet {
 			case 40: // down
 				switch (Game.menu) {
 				case 0: // no menu open
-					player.move( 0, 1, dungeon);
-					Game.update(dungeon);
+					player.move( 0, 1);
+					Game.update();
 					break;
 				case 1: // menu navigation
 					if (Game.select == 3) {
@@ -210,10 +249,10 @@ public class GameServlet extends HttpServlet {
 					
 				case 3: // aiming
 					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(0, 1, dungeon);
+						Game.aiming.restrictedMove(0, 1);
 					}
 					else {
-						Game.aiming.move(0, 1, dungeon);
+						Game.aiming.move(0, 1);
 					}
 					break;
 				}
@@ -241,6 +280,17 @@ public class GameServlet extends HttpServlet {
 				
 			case 13: // enter
 				switch (Game.menu) {
+				case 0:
+					if (Game.onDown(player)) {
+						//System.out.println("Current Floor " + Game.floor);
+						Game.floor++;
+						System.out.println("Down one floor");
+						Game.log  = Game.actors.get(0).getName() + " went down to floor " + (10 - Game.getDungeon().length);
+						player.setX(up[0]);
+						player.setY(up[1]);
+					}
+					break;
+				
 				case 1: // menu open
 					Game.menu = 2;
 					break;
@@ -271,13 +321,13 @@ public class GameServlet extends HttpServlet {
 									doublePress = 0;
 									Game.menu = 0;
 									
-									dungeon.changeEntities(player.getY(), player.getX(), dungeon.getTile(player.getY(), player.getX()).getIcon(),
-											dungeon.getTile(player.getY(), player.getX()).getColor());
+									Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getIcon(),
+											Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getColor());
 									
 									player.setX(Game.aiming.x);
 									player.setY(Game.aiming.y);
-									dungeon.changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
-									Game.update(dungeon);
+									Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
+									Game.update();
 									
 									
 								}
@@ -301,7 +351,7 @@ public class GameServlet extends HttpServlet {
 								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() < player.getX()) { // if direction of aim is left
 									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), -1, 0, 20, Game.storeMagnitude));
 								}
-								dungeon.changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
+								Game.getDungeon()[Game.floor].changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
 								//Game.actors.add(projectile);
 								Game.menu = 0;
 							}
@@ -359,7 +409,7 @@ public class GameServlet extends HttpServlet {
 			//	player.getBackpack().clear();
 				break;
 		}
-		Game.display(out, dungeon);
+		Game.display(out);
 		
 		
 		//dungeon.firstPrint(out);

@@ -58,7 +58,7 @@ public class Aiming {
 		return icon;
 	}
 	
-	public void move(int x, int y, Dungeon d) {
+	public void move(int x, int y) {
 		int collideActor = -1;
 		for (int i = 0; i < Game.actors.size(); i++) {
 			if (((this.x + x) == Game.actors.get(i).getX()) && ((this.y + y) == Game.actors.get(i).getY())) {
@@ -71,9 +71,9 @@ public class Aiming {
 		if (collideActor == -1) {
 
 			// if inside the Dungeon bounds
-			if ((this.x + x) < d.getWidth() && (this.x + x > -1) && (this.y + y) < d.getHeight() && (this.y + y > -1)) {
+			if ((this.x + x) < Game.getDungeon()[Game.floor].getWidth() && (this.x + x > -1) && (this.y + y) < Game.getDungeon()[Game.floor].getHeight() && (this.y + y > -1)) {
 				// check if not solid
-				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
+				if (Game.getDungeon()[Game.floor].getTile(this.y + y, this.x + x).isSolid() == false) {
 					this.x += x;
 					this.y += y;
 					
@@ -95,7 +95,7 @@ public class Aiming {
 				//	"/" + Game.actors.get(collideActor).getHp());
 		}
 	}
-	public void restrictedMove(int x, int y, Dungeon d) {
+	public void restrictedMove(int x, int y) {
 
 		System.out.println("X: " + x);
 		// limits the aiming to one tile to from the player, not including diagonals 
@@ -105,9 +105,9 @@ public class Aiming {
 						(Game.aiming.getY() + y  == Game.actors.get(0).getY())))) {
 			System.out.println("Player X:" + Game.actors.get(0).getX() + " Move X:" + x + " Combined:" + (Game.actors.get(0).getX() + x));
 			// if inside the Dungeon bounds
-			if ((this.x + x) < d.getWidth() && (this.x + x > -1) && (this.y + y) < d.getHeight() && (this.y + y > -1)) {
+			if ((this.x + x) < Game.getDungeon()[Game.floor].getWidth() && (this.x + x > -1) && (this.y + y) < Game.getDungeon()[Game.floor].getHeight() && (this.y + y > -1)) {
 				// check if not solid
-				if (d.getTile(this.y + y, this.x + x).isSolid() == false) {
+				if (Game.getDungeon()[Game.floor].getTile(this.y + y, this.x + x).isSolid() == false) {
 					this.x += x;
 					this.y += y;
 					
