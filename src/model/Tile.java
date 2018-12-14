@@ -26,7 +26,17 @@ public class Tile {
 		this.color = color;
 	}
 
+<<<<<<< HEAD
 	public Tile (char icon, boolean solid, String color, String type) {
+=======
+	Tile (char icon, boolean solid, String color, String type) {
+		this.icon = icon;
+		this.solid = solid;
+		this.color = color;
+		this.type = type;
+	}
+	Tile (char icon, boolean solid, String color) {
+>>>>>>> menu
 		this.icon = icon;
 		this.solid = solid;
 		this.color = color;
