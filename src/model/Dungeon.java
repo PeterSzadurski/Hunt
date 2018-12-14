@@ -371,32 +371,52 @@ public class Dungeon {
 	}
 	
 	public void populate () {
-		int randMonster;
+		int rand;
+		int itemRange;
+		int[] location = Game.getDungeon()[Game.floor].getLocation();
 		switch (Game.floor) {
+		// place monsters and in the dungeon
 		case 0:
 			for (int i = 0; i < 10; i++) {
-				randMonster = (int) (Math.random() * 6) + 0;
-				switch (randMonster) {
+				rand = (int) (Math.random() * 6) + 0;
+				switch (rand) {
 				default:
-					Game.addActors(new Bat());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Bat(location[1], location[0]));
 					break;
 				case 0:
-					Game.addActors(new Goblin());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Goblin(location[1], location[0]));
 					break;
 				case 2:
-					Game.addActors(new Goblin());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Goblin(location[1], location[0]));
 					break;
 				case 3: 
-					Game.addActors(new Bat());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Bat(location[1], location[0]));
 					break;
 				case 4:
-					Game.addActors(new Bat());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Bat(location[1], location[0]));
 					break;
 				case 5:
-					Game.addActors(new Troll());
+					location = Game.getDungeon()[Game.floor].getLocation();
+					Game.addActors(new Troll(location[1], location[0]));
 					break;
 				}
 			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+			System.out.println("Setting up items");
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+				int pick = (int) (Math.random() * (Game.itemTable().length -1)) + 0;
+				location = Game.getDungeon()[Game.floor].getLocation();
+				Game.itemsFloor.add(new ItemFloor(Game.itemTable()[pick], location[1], location[0]));
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			
 			break;
 		default:
 			break;

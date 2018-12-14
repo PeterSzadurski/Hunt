@@ -53,8 +53,11 @@ public class Game {
 
 	// Generate armors
 
-	static Armor clothes = new Armor("Clothes", '+', 1);
-	static Armor steelPlate = new Armor("Steel Plate", '+', 20);
+	public static Armor clothes = new Armor("Clothes", '+', 1);
+	public static Armor lightLeather = new Armor("Light Leather", '+', 5);
+	public static Armor chainmail = new Armor("Chainmail", '+', 10);
+	public static Armor steelPlate = new Armor("Steel Plate", '+', 20);
+	public static Armor ironPlate = new Armor("Iron Plate", '+', 15);
 
 	// Generate items
 	public static Item smallPotion = new Item("Small Potion", 'i',
@@ -82,6 +85,9 @@ public class Game {
 			null);
 	public static Item scrollMasterFrozenTime = new Item("Scroll of Master Frozen Time", 'i',
 			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 50 turns", 50, Effect.STOP_TIME,
+			null);
+	public static Item potionMinorOfImprovement = new Item("Minor Potion of Improvement", 'i',
+			"<span style = \"color: " + buffColor + "\">Raises a random stat</span> by 1 point", 1, Effect.RANDOM_RAISE,
 			null);
 
 	// effects methods
@@ -120,6 +126,45 @@ public class Game {
 			System.out.println("damage");
 			ifUsed = true;
 			break;
+		case RANDOM_RAISE:
+			int rand = (int) (Math.random() * 2) + 0;
+			switch (rand) {
+			case 0: // raise vitality
+				Game.actors.get(target).setVitality(Game.actors.get(target).getVitality() + magnitude);
+				Game.actors.get(target).calcHP();
+				Game.actors.get(target).setCurHp(Game.actors.get(target).getHp()); 
+				if (magnitude > 1) {
+					Game.log= "Vitality raised by " + magnitude + " points";
+				}
+				else {
+					Game.log= "Vitality raised by " + magnitude + " point";
+				}
+				break;
+			case 1:
+				
+				Game.actors.get(target).setStrength(Game.actors.get(target).getStrength() + magnitude);
+				Game.actors.get(target).calcDamage(); 
+				if (magnitude > 1) {
+					Game.log= "Strength raised by " + magnitude + " points";
+				}
+				else {
+					Game.log= "Strength raised by " + magnitude + " point";
+				}
+				break;
+			case 2:
+				
+				Game.actors.get(target).setAgility(Game.actors.get(target).getAgility() + magnitude);
+				Game.actors.get(target).calcMoveSpeed(); 
+				if (magnitude > 1) {
+					Game.log= "Agility raised by " + magnitude + " points";
+				}
+				else {
+					Game.log= "Agility raised by " + magnitude + " point";
+				break;
+			}
+			ifUsed = true;
+			break;
+			}
 		case TELEPORT:
 			Game.aiming.setRestrict(false);
 			Game.menu = 3;
@@ -412,5 +457,27 @@ public class Game {
 	
 	public static boolean onUp(Player player) {
 		return (player.getX() == Game.getDungeon()[Game.floor].getUpFloor()[1] && player.getY() == Game.getDungeon()[Game.floor].getUpFloor()[0]);
+	}
+	
+	public static Item[] itemTable() {
+		Item[] itemTable;
+		 switch (Game.floor) {
+		 	case 0:
+			 Item[] itemTable0 = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
+					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
+			 	itemTable = itemTable0;
+			 break;
+		default:
+			Item[] itemTableDefault = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
+					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
+			itemTable = itemTableDefault;
+			break;
+		}
+		 return itemTable;
+		 
 	}
 }

@@ -5,7 +5,8 @@ public enum Effect {
 	DAMAGE_HEALTH, 
 	TELEPORT,
 	RANGED,
-	STOP_TIME
+	STOP_TIME,
+	RANDOM_RAISE
 }
 
 

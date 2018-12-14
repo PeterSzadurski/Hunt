@@ -12,6 +12,8 @@ public class Monster extends Character implements Serializable {
 	MonsterStates state = MonsterStates.IDLE;
 	
 	
+	
+	
 	public Monster() {
 		// makes it a bean
 	}
