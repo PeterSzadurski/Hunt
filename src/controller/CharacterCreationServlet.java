@@ -47,6 +47,7 @@ public class CharacterCreationServlet extends HttpServlet {
 		PlayerDAO pDAO = new PlayerDAO();
 		User user = (User)session.getAttribute("user");
 		pDAO.addPlayer(player, user.getUserID());
+		//pDAO.addPlayer(player, user.getUsername());
 		//User user = (User)session.getAttribute("user");
 		//pDAO.savePlayerAttributes(player, user);
 		System.out.println("In character creation. Player is: " + player.getName());

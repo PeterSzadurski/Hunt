@@ -21,12 +21,8 @@ public class PlayerDAO {
 	public void addPlayer(Player player, int userid) {
 		Connection conn = null;
 		try {
-			System.out.println("made it to try block of addPlayer");
 			conn = DBUtil.getConnection();
-			System.out.println("made connection");
-			PreparedStatement pStmt = conn.prepareStatement("INSERT INTO Player "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-					
+			PreparedStatement pStmt = conn.prepareStatement("INSERT INTO Player (playername, userid, playerstrength, playeragility, playervitality, playerdamage, playerspeed, playerhealthpoints, playercurrenthealthpoints, playerweapon, playerarmor, isPlayerSolid, playerposx, playerposy, playerlevel, playerexpfornextlevel, playerexp, playerhunger, playerbackpack) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");		
 			pStmt.setString(1, player.getName());
 			pStmt.setInt(2, userid);
 			pStmt.setInt(3, player.getStrength());
@@ -46,15 +42,13 @@ public class PlayerDAO {
 			pStmt.setInt(17, player.getExp());
 			pStmt.setInt(18, player.getHunger());
 			pStmt.setString(19, player.backpackStorageString());
-			System.out.println("added player data to ptmt");
 			pStmt.executeUpdate();
-			System.out.println("Stored player in database.");
+			pStmt.close();
 		} catch (SQLException ex) {
 			ex.getMessage();
 		} catch (Exception ex) {
 			ex.getMessage();
 		} finally {
-			System.out.println("addPlayer finally.");
 			DBUtil.closeConnection();
 		}
 	}

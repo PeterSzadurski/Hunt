@@ -2,6 +2,7 @@ package model;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 
@@ -34,6 +35,7 @@ public class Game {
 	public static int menu = 0;
 	public static int select = 0;
 	public static int innerSelect = 0;
+	public static int levelUpStatSelect = 0;
 	static boolean ifUsed = false;
 	static int timeFreeze = 0;
 	static final String buffColor = "#00baff";
@@ -301,7 +303,76 @@ public class Game {
 							break;
 						case TEST:
 							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+								// When the monster is within range, it moves towards the player
 								Game.log = "Within Range";
+								Player player = (Player)actors.get(0);
+								int pX = player.getX();
+								int pY = player.getY();
+								Monster m = (Monster)actors.get(n);
+								int mX = m.getX();
+								int mY = m.getY();
+								
+								boolean sameRow = (pY==mY) ? true: false;
+								boolean sameCol = (pX==mX) ? true: false;
+								
+								// check if the monster is next to the player and attack if so
+								if ((sameCol && (mY==pY+1 || mY==pY-1)) || (sameRow && (mX==pX+1|| mX==pX-1))) {
+									// attack the player
+									int damage = ((Monster)actors.get(n)).attack(player.getAgility());
+									if(damage!=0) {
+										//player.takeDamage(damage);
+										effects(0, damage, Effect.DAMAGE_HEALTH);
+										log = ((Monster)actors.get(n)).getName() + " dealt " + damage + " points of damage to you.";
+									} else {
+										System.out.println("The monster missed.");
+									}
+									// player takes damage
+									
+								} else {
+									// move closer if not adjacent
+									if (sameRow) {
+										// move horizontally
+										if(pX < mX) {
+											actors.get(n).move(-1, 0);
+										} else if (pX > mX) {
+											actors.get(n).move(1, 0);
+										} else {
+											System.out.println("Something's wrong with enemy movement");
+										}
+										
+									} else if (sameCol) {
+										// move horizontally
+										if(pY < mY) {
+											actors.get(n).move(0, -1);
+										} else if (pY > mY) {
+											actors.get(n).move(0, 1);
+										} else {
+											System.out.println("Something's wrong with enemy movement");
+										}
+									} else {
+										// not in same row or col
+										// move horizontally or vertically (random)
+										Random rand2 = new Random();
+										int axis = rand2.nextInt(2);  // 0 = x-axis, 1 = y-axis
+										
+										if(axis == 0) {
+											// move along the x-axis
+											if (pX < mX) {
+												actors.get(n).move(-1, 0);
+											} else if (pX > mX) {
+												actors.get(n).move(1, 0);
+											}
+										} else {
+											//move along the y-axis
+											if (pY < mY) {
+												actors.get(n).move(0, -1);
+											} else if (pY > mY) {
+												actors.get(n).move(0, 1);
+											}
+										}
+									}
+								}
+								
 							} else {
 								((Monster) actors.get(n)).setState(MonsterStates.IDLE);
 							}
@@ -332,6 +403,22 @@ public class Game {
 				}
 			}
 		}
+		
+		// check if player is alive
+		if(actors.get(0).getCurHp() <= 0) {
+			Game.log = "You died.";
+			// remove player from database
+			
+			// redirect to youdied.html?
+			
+		}
+		
+		// check if the player has leveled up
+	//	Player player = (Player)actors.get(0);
+	//	if(player.getExp() >= player.getExpForNextLevel()) {
+	//		Game.log = "Open the menu to level up";
+	//	}
+		
 	}
 
 	public static void start(Dungeon d) {
@@ -380,22 +467,27 @@ public class Game {
 			case 0:
 				// inventory selected
 				writer.print(
-						"<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 1:
 				// magic selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 2:
 				// Stats selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 3:
 				// sign out selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]<br>&nbsp;Level Up&nbsp;</td>");
+				break;
+			case 4:
+				// level up
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>[Level Up]</td>");
 				break;
 			}
 			break;
@@ -408,6 +500,32 @@ public class Game {
 				break;
 			case 2:
 				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");
+				break;
+			case 3:
+				// sign out
+				writer.print("<tr><td>SIGN OUT?"
+						+ "</td>");
+				break;
+			case 4:
+				// level up
+				writer.print("<tr><td>LEVEL UP</td></tr>");
+				switch (levelUpStatSelect) {
+				case 0:
+					// Strength selected
+					writer.print(
+							"<tr><td>[Strength]<br>&nbsp;Agility&nbsp;<br>&nbsp;Vitality&nbsp;</td>");
+					break;
+				case 1:
+					// Agility selected
+					writer.print(
+							"<tr><td>&nbsp;Strength&nbsp;<br>[Agility]<br>&nbsp;Vitality&nbsp;</td>");
+					break;
+				case 2:
+					// Vitality selected
+					writer.print(
+							"<tr><td>&nbsp;Strength&nbsp;<br>&nbsp;Agility&nbsp;<br>[Vitality]</td>");
+					break;
+				}
 				break;
 			default:
 				writer.print("<tr><td>PLACEHOLDER</td>");
@@ -484,5 +602,11 @@ public class Game {
 		}
 		 return itemTable;
 		 
+	}
+	
+	public static void levelUp() {
+		((Player)actors.get(0)).levelUp("strength");;
+		((Player)actors.get(0)).levelUp("agility");;
+		((Player)actors.get(0)).levelUp("vitality");;
 	}
 }

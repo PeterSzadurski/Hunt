@@ -21,6 +21,7 @@ public class UserDAO {
 			pStmt.setString(1, user.getUsername());
 			pStmt.setString(2, user.getPassword());
 			pStmt.executeUpdate();
+			pStmt.close();
 		} catch (SQLException ex) {
 			ex.getMessage();
 		} catch (Exception ex) {

@@ -18,8 +18,8 @@ import model.ItemFloor;
 import model.Monster;
 import model.Player;
 import model.Projectile;
-import model.User;
 import monsters.*;
+import util.ServletUtil;
 
 /**
  * Servlet implementation class GameServlet
@@ -37,7 +37,8 @@ public class GameServlet extends HttpServlet {
        // Game.Game();
         Game.menu = 0; // default menu
      // player will always be actor 0
-        
+    
+    
 		Game.addPlayer(player);
 		
 		//Game.addActors(monster);
@@ -59,8 +60,6 @@ public class GameServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 
     }
-    
-    
     
     
     /*Dungeon dungeon0 = new Dungeon(0);
@@ -93,7 +92,6 @@ public class GameServlet extends HttpServlet {
     int counter = 0;
     boolean firstPrint = true;
    // Dungeon dungeon = new Dungeon();
-    
     Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
 			, this.location[1], location[0]);
     
@@ -120,13 +118,11 @@ public class GameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		// To do: find a better place for this code
-		// get player from session
-	    HttpSession session = request.getSession();
-	    Player pUpdate = (Player)session.getAttribute("player");
-	    if (counter == 0) {
-	    	player.setX(this.location[1]);
+		HttpSession session = request.getSession();
+		if(counter == 0) {
+			// set the player's attributes
+			Player pUpdate = (Player)session.getAttribute("player");
+			player.setX(this.location[1]);
 	    	player.setY(this.location[0]);
 	    	player.setName(pUpdate.getName());
 	   	    player.setStrength(pUpdate.getStrength());
@@ -139,11 +135,21 @@ public class GameServlet extends HttpServlet {
 	   	    player.setLevel(pUpdate.getLevel());
 	   	    player.setExp(pUpdate.getExp());
 	   	    player.setExpForNextLevel(pUpdate.getExpForNextLevel());
+	   	    player.setHunger(pUpdate.getHunger());
+	   	    player.setBackpack(pUpdate.getBackpack());
 	   	    player.calcDamage();
 	   	    player.calcHP();
 	   	    player.calcMoveSpeed();
-	   	    System.out.println("In game servlet. Player is: " + player.getName());
-	    }
+		}
+		
+		int dead = Game.actors.get(0).getCurHp();
+		if (dead <= 0) {
+			System.out.println("You dead. You like, soooooo dead.");
+			PlayerDAO pDAO = new PlayerDAO();
+			pDAO.deletePlayer(player);
+			session.setAttribute("player", null);
+			ServletUtil.redirect("youdied.html", response);
+		}
 
 	//	if (firstPrint) {
 		//	dungeon.addActor(player);
@@ -253,7 +259,7 @@ public class GameServlet extends HttpServlet {
 					Game.update();
 					break;
 				case 1: // menu navigation
-					if (Game.select == 3) {
+					if (Game.select == 4) {
 						Game.select = 0;
 					}
 					else {
@@ -280,6 +286,15 @@ public class GameServlet extends HttpServlet {
 					}
 					else {
 						Game.aiming.move(0, 1);
+					}
+					break;
+					
+				case 4: // level up
+					if (Game.levelUpStatSelect == 3) {
+						Game.levelUpStatSelect = 0;
+					}
+					else {
+						Game.levelUpStatSelect++;
 					}
 					break;
 				}
@@ -388,7 +403,12 @@ public class GameServlet extends HttpServlet {
 						
 							
 					}
+					
 					break; 
+					
+				case 4:  // level up
+					
+					break;
 				}
 				break;
 			case 80: // p
@@ -436,9 +456,6 @@ public class GameServlet extends HttpServlet {
 			//	player.getBackpack().clear();
 				break;
 		}
-		
-		// store player in session
-		session.setAttribute("player", player);
 		Game.display(out);
 		
 		
