@@ -9,8 +9,12 @@ public class Monster extends Character implements Serializable {
 	private int expOnKill;
 	private double turnCount = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private int id;
 	private int currentDungeonLevel;
+=======
+	private int floor;
+>>>>>>> origin/another_test
 =======
 	private int floor;
 >>>>>>> origin/another_test

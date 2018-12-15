@@ -273,6 +273,7 @@ public class Dungeon {
 		}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	} // end of no param constructor
 	
 	// constructor for using layout from database
@@ -340,13 +341,19 @@ public class Dungeon {
 =======
 		populate (index);
 >>>>>>> origin/another_test
+=======
+		populate (index);
+>>>>>>> origin/another_test
 		
 	}
 	
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> menu
 =======
+=======
+>>>>>>> origin/another_test
 	public ArrayList<Character> getActors() {
 		return actors;
 	}
@@ -357,6 +364,9 @@ public class Dungeon {
 	}
 
 
+<<<<<<< HEAD
+>>>>>>> origin/another_test
+=======
 >>>>>>> origin/another_test
 	public int getWidth() {
 		return layout[0].length;
@@ -538,6 +548,8 @@ public class Dungeon {
 					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball};
 					
 			//System.out.println("Length: " + itemTable.length);
+<<<<<<< HEAD
+=======
 			for (int i = 0; i < itemRange; i++) {
 				System.out.println("Placing itemes");
 
@@ -593,6 +605,67 @@ public class Dungeon {
 					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball};
 					
 			//System.out.println("Length: " + itemTable.length);
+>>>>>>> origin/another_test
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				//int pick = (int) (Math.random() * (itemTable.length -1)) + 0;
+				int pick = 0;
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+<<<<<<< HEAD
+				dungeonItems.add(new ItemFloor(itemTable[pick], location[1], location[0]));
+=======
+				dungeonItems.add(new ItemFloor(itemTable1[pick], location[1], location[0]));
+>>>>>>> origin/another_test
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			
+			
+			
+			break;
+<<<<<<< HEAD
+		case 1:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 6) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable1 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball};
+					
+			//System.out.println("Length: " + itemTable.length);
 			for (int i = 0; i < itemRange; i++) {
 				System.out.println("Placing itemes");
 
@@ -609,6 +682,8 @@ public class Dungeon {
 			
 			
 			break;
+=======
+>>>>>>> origin/another_test
 			
 			
 		default:
