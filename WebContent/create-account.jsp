@@ -27,4 +27,3 @@
 		</form>
 	</c:if>
 </body>
-</html>

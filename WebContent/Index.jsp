@@ -4,13 +4,11 @@
 <html>
 <head>
 <style>
-
 	body {
 		background-color: black;
 		color: white;
 		font-family: "Courier New", Courier, monospace;
 	}
-
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -19,7 +17,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
-
 $(document).keydown(function(e){
 	console.log("test");
 	//switch (e.keyCode) {
@@ -59,7 +56,6 @@ $(document).ready (function(){
 		//		});
 	
 		//document.getElementById("key").value = e.keyCode;
-
 		$.get('GameServlet', {
 			key : keys
 		
@@ -73,14 +69,13 @@ $(document).ready (function(){
 <style>
 .grid {
 	display: grid;
-	grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
+	grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
 	align-content: end;
 }
 .grid > div {
 	text-align: center;
 	font-size: 12px;
 }
-
 </style>
 
 </head>
