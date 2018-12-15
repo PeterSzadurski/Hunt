@@ -63,7 +63,6 @@ public class UserDAO {
 		}
 	}
 	
-	
 	/*
 	 * 
 	 * If we want to create a scoreboard with all users who have signed up and played
