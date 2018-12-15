@@ -8,19 +8,55 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Armor;
+import model.Effect;
+import model.Item;
 import model.Player;
 import model.User;
+import model.Weapon;
 import util.DBUtil;
 
 public class PlayerDAO {
 	
-	public void addPlayer(Player player) {
+	public void addPlayer(Player player, int userid) {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement(
-					"insert into Player (PlayerName) values (?)");
+					"insert into Player ("
+							+ "PlayerName," // 1
+							+ "UserId," // 2 
+							+ "PlayerStrength," // 3 
+							+ "PlayerAgility," // 4
+							+ "PlayerVitality," // 5
+							+ "PlayerDamage," // 6
+							+ "PlayerSpeed," // 7
+							+ "PlayerHealthPoints," // 8
+							+ "PlayerCurrentHealth," // 9
+							+ "PlayerWeapon," // 10
+							+ "PlayerArmor," // 11
+							+ "PlayerLevel," // 12
+							+ "PlayerExpForNextLevel," // 13
+							+ "PlayerExp," // 14
+							+ "PlayerHunger," //15
+							+ "PlayerBackpack" // 16
+							+ ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			pStmt.setString(1, player.getName());
+			pStmt.setInt(2, userid);
+			pStmt.setInt(3, player.getStrength());
+			pStmt.setInt(4, player.getAgility());
+			pStmt.setInt(5, player.getVitality());
+			pStmt.setInt(6, player.getDamage());
+			pStmt.setInt(7, player.getMoveSpeed());
+			pStmt.setInt(8, player.getHp());
+			pStmt.setInt(9, player.getCurHp());
+			pStmt.setString(10, player.getWeapon().getStorageString());
+			pStmt.setString(11, player.getArmor().getStorageString());
+			pStmt.setInt(12, player.getLevel());
+			pStmt.setInt(13, player.getExpForNextLevel());
+			pStmt.setInt(14, player.getExp());
+			pStmt.setInt(15, player.getHunger());
+			pStmt.setString(16, player.backpackStorageString());
 			pStmt.executeUpdate();
 		} catch (SQLException ex) {
 			ex.getMessage();
@@ -124,6 +160,57 @@ public class PlayerDAO {
 			
 			while(result.next()) {
 				player.setName(result.getString("playerName"));
+				player.setPlayerID(result.getInt("playerId"));
+				player.setCurrentDungeonID(result.getInt("currentDungeonLevelID"));
+				player.setStrength(result.getInt("playerStrength"));
+				player.setAgility(result.getInt("playerAgility"));
+				player.setVitality(result.getInt("playerVitality"));
+				Armor armor = new Armor(result.getString("PlayerArmor"));
+				player.setArmor(armor);
+				Weapon weapon = new Weapon(result.getString("WeaponArmor"));
+				player.setArmor(armor);
+				player.calcDamage();
+				player.calcHP();
+				player.calcMoveSpeed();
+				player.setCurHp(result.getInt("PlayerCurrentHealthPoints"));
+				player.setLevel(result.getInt("playerLevel"));
+				player.setExpForNextLevel(result.getInt("PlayerExpForNextLevel"));
+				player.setExp(result.getInt("PlayerExp"));
+				player.setHunger(result.getInt("PlayerHunger"));
+				String[] packString = result.getString("PlayerBackpack").split(",");
+				Item item;
+				ArrayList<Item> pack = new ArrayList<>();
+				for (int i = 0; i < packString.length; i++) {
+					String[] itemString = packString[i].split("|");
+					item = new Item();
+					item.setName(itemString[0]);
+					item.setEffectText(itemString[1]);
+					item.setCount(Integer.parseInt(itemString[4]));
+					
+					pack.add(item);
+				}
+				player.setBackpack(pack);
+			}
+		} catch (SQLException ex) {
+			ex.getMessage();
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		return player;
+	}
+	
+	public Player getPlayerByUserID(int userId) {
+		Player player = new Player();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			PreparedStatement pStmt = conn.prepareStatement(
+					"select * from Player where UserId = ?");
+			pStmt.setInt(1, userId);
+			ResultSet result = pStmt.executeQuery();
+			
+			while(result.next()) {
+				player.setName(result.getString("playerName"));
 			}
 		} catch (SQLException ex) {
 			ex.getMessage();
@@ -161,7 +248,7 @@ public class PlayerDAO {
 			PreparedStatement pStmt = conn.prepareStatement("insert into "
 					+ "Player ("
 					+ "CurrentDungeonLevelID," // 1
-					+ "PlayerStrenth," // 2 
+					+ "PlayerStrength," // 2 
 					+ "PlayerAgility," // 3
 					+ "PlayerVitality," // 4
 					+ "PlayerDamage," // 5
@@ -204,6 +291,32 @@ public class PlayerDAO {
 		} catch (Exception ex) {
 			ex.getMessage();
 		}	
+	}
+	
+	public boolean playerExists(int userId) {
+		boolean playerExists = false;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			
+			PreparedStatement pStmt = conn.prepareStatement("select * from Player where userid = ?");
+			pStmt.setInt(1, userId);
+			
+			ResultSet result = pStmt.executeQuery();
+			
+			if (result.next()) {
+				if(userId == result.getInt("userid")) {
+					playerExists = true;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.getMessage();
+		} catch (Exception ex) {
+			ex.getMessage();
+		} finally {
+			DBUtil.closeConnection();
+		}
+		return playerExists;
 	}
 
 }

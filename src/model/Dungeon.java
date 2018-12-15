@@ -9,7 +9,7 @@ public class Dungeon {
 	
 //<<<<<<< HEAD
 	private int dungeonID;
-	
+/*	
 	Tile wall = new Tile(' ', true, "#878787", "wall");
 	Tile floor = new Tile('.', false, "#878787", "floor");
 	Tile path = new Tile('#', false, "#878787", "path");
@@ -25,30 +25,26 @@ public class Dungeon {
 			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
 			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor}
 	};
+*/	
+	//Entity entities[][] = new Entity [10][10];
 	
-	Entity entities[][] = new Entity [10][10];
-	
-	//public Dungeon() {
+	public Dungeon() {
+	}
 //=======
 	//Dungeon[] dungeon = new Dungeon[10];// array of dungeons
 	
 	
-		
-//>>>>>>> menu
-	//Tile path = new Tile('#', false, "#878787", "path");
-	//Tile floor = new Tile('.', false, "#878787", "floor");
-	//Tile wall = new Tile(' ',true, "#878787", "wall");
+	Tile path = new Tile('#', false, "#878787", "path");
+	Tile floor = new Tile('.', false, "#878787", "floor");
+	Tile wall = new Tile(' ',true, "#878787", "wall");
 	Tile upFloor = new Tile('%',false, "#009900", "upFloor");//green
 	Tile downFloor = new Tile('%',false, "#000099", "downFloor");//blue
-	//Tile layout[][] = new Tile[50][50];
-	
-	//Entity entities[][] = new Entity [50][50];
-		
-	
+	Tile layout[][] = new Tile[50][50];
+//>>>>>>> menu
+
+	Entity entities[][] = new Entity [50][50];
 	
 	public Dungeon(int index) {
-		
-		
 	
 		for(int i = 0; i < layout[0].length; i++) {
 			for (int n = 0; n < layout[1].length; n++) {
@@ -266,7 +262,7 @@ public class Dungeon {
 //<<<<<<< HEAD
 				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor(), layout[i][n].getType()); 				
 //=======
-			//	entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor()); 				
+				//entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor()); 				
 //>>>>>>> menu
 				//entities[i][n].setColor(layout[i][n].getColor());
 				//entities[i][n].setSolid(false);
@@ -338,7 +334,7 @@ public class Dungeon {
 
 //=======
 		
-	//}
+//	}
 	
 	
 //>>>>>>> menu

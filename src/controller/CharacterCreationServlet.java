@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.PlayerDAO;
 import model.Player;
+import model.User;
+import util.ServletUtil;
 
 /**
  * Servlet implementation class CharacterCreationServlet
@@ -33,12 +36,22 @@ public class CharacterCreationServlet extends HttpServlet {
 		
 		Player player = new Player(name, str, agi, vit, '@', "#FFFF00", 0, 1);
 		
+		// Store player in data
+		
+		
 		// Store player in session
 		HttpSession session = request.getSession();
 		session.setAttribute("player", player);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("GameServlet");
-		rd.forward(request, response);
+		// Add player to database
+		PlayerDAO pDAO = new PlayerDAO();
+		User user = (User)session.getAttribute("user");
+		pDAO.addPlayer(player, user.getUserID());
+		//User user = (User)session.getAttribute("user");
+		//pDAO.savePlayerAttributes(player, user);
+		System.out.println("In character creation. Player is: " + player.getName());
+		
+		ServletUtil.forward("Index.jsp", request, response);
 	}
 
 }

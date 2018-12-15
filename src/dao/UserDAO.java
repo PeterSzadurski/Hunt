@@ -169,5 +169,34 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	public int getUserId(String username) {
+		int id = -1;
+		Connection conn = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			PreparedStatement pStmt = conn.prepareStatement("select * from User where username = ?");
+			pStmt.setString(1, username);
+			
+			ResultSet result = pStmt.executeQuery();
+			
+			while(result.next()) {
+				id = result.getInt("userid");
+			}
+			
+		} catch(SQLException ex) {
+			ex.getMessage();
+			
+		} catch(Exception ex) {
+			ex.getMessage();
+			
+		} finally {
+			DBUtil.closeConnection();
+			
+		}
+		return id;
+	}
 
 }

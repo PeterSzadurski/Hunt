@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.PlayerDAO;
 import dao.UserDAO;
 import model.User;
 import util.ServletUtil;
@@ -43,18 +44,22 @@ public class AccountServlet extends HttpServlet {
 					// add user to database
 					userDAO.addUser(user);
 					
+					// store user in session
+					user = userDAO.getUserById(userDAO.getUserId(username));
+					session.setAttribute("user", user);
+					
 					// put username in a session attribute
 					session.setAttribute("username", username);
+					//int id = userDAO.getUserId(username);
+					//session.setAttribute("userid", id);	
 					
-					// redirect to game 
-					ServletUtil.redirect("Index.jsp", response);
 				} else if (userDAO.userExists(username)){ // if user does exist
 					
 					// create a user exists session attribute
 					request.setAttribute("userExists", "User already exists.");
 					
-					// redirect to create an account 
-					ServletUtil.forward("create-account.jsp", request, response);
+					// redirect to login
+					ServletUtil.forward("login.jsp", request, response);
 				}	
 			} catch(SQLException ex) {
 				ex.getMessage();
@@ -73,7 +78,36 @@ public class AccountServlet extends HttpServlet {
 						
 						// put username in a session attribute
 						request.setAttribute("username", username);
-						ServletUtil.forward("Index.jsp", request, response);
+						
+						// create a new user with form params 
+						User user = new User(username, password);
+						
+						// store user in session
+						user = userDAO.getUserById(userDAO.getUserId(username));
+						session.setAttribute("user", user);
+						
+						// put username in a session attribute
+						session.setAttribute("username", username);
+						//int id = userDAO.getUserId(username);
+						//session.setAttribute("userid", id);	
+						
+						// check if the user has a player
+						PlayerDAO pDAO = new PlayerDAO();
+						boolean hasPlayer = pDAO.playerExists(user.getUserID());
+						
+						if(hasPlayer) {
+							System.out.println("The user has a player");
+							
+							// redirect to index.jsp
+							ServletUtil.redirect("Index.jsp", response);
+							
+						} else {
+							System.out.println("The user does not have a player");
+							// redirect to character creation 
+							ServletUtil.redirect("characterCreation.html", response);
+						}
+						
+						ServletUtil.forward("characterCreation.html", request, response);
 					} else {
 						// password doesnt match
 						request.setAttribute("passwordWrong", "Password is wrong.");
@@ -83,7 +117,7 @@ public class AccountServlet extends HttpServlet {
 					
 					// create a user exists session attribute
 					request.setAttribute("userExists", "User does not exist.");
-					ServletUtil.forward("login.jsp", request, response);
+					ServletUtil.forward("create-account.jsp", request, response);
 				}
 			} catch (Exception ex) {
 				ex.getMessage();

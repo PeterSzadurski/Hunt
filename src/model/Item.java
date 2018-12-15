@@ -51,6 +51,9 @@ public class Item implements Serializable {
 	public int getCount () {
 		return count;
 	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	
 	public void addCount (int add) {
 		this.count += count;
@@ -62,6 +65,10 @@ public class Item implements Serializable {
 	
 	public String getEffectText () {
 		return effectText;
+	}
+	
+	public void setEffectText(String text) {
+		effectText = text;
 	}
 	
 	/*
@@ -79,6 +86,8 @@ public class Item implements Serializable {
 		return getName() + " | " + getEffectText() + " (" + getCount() + ")";
 	}
 	
-	
+	public String getStorageString() {
+		return getName() + "|" + getEffectText() + "|" + this.magnitude + "|" + this.effect + "|" + getCount();
+	}
 
 }

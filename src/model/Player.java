@@ -190,6 +190,15 @@ public class Player extends Character implements Serializable {
 
 		return pack.toString();
 	}
+	
+	public String backpackStorageString() {
+		StringBuilder pack = new StringBuilder(200);
+		for(int i = 0; i < backpack.size(); i ++) {
+			pack.append(backpack.get(i).toString() + ",");
+		}
+		
+		return pack.toString();
+	}
 
 	/**
 	 * Removes an Item from the backpack (can be used to drop, pick an item to

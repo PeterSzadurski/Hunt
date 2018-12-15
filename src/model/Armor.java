@@ -15,6 +15,16 @@ public class Armor extends Item implements Serializable {
 		
 		this.hpBonus = hpBonus;
 	}
+	
+	public Armor(String armor) {
+		super();
+		String[] delim = armor.split(",");
+		String name = delim[0];
+		char icon = delim[1].charAt(0);
+		super.setName(name);
+		super.setIcon(icon);
+		this.hpBonus = Integer.parseInt(delim[2]);
+	}
 
 	public int getHpBonus() {
 		return hpBonus;
@@ -25,7 +35,7 @@ public class Armor extends Item implements Serializable {
 	}
 	
 	public String toString() {
-		return this.getName();
+		return this.getName() + "," + this.getIcon() + "," + this.getHpBonus();
 	}
 	
 

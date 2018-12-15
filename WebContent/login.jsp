@@ -6,6 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hunt Login</title>
+<style>
+	body {
+		background-color: black;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
+	}
+	input {
+		background-color: black;
+		border-color: white;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
+	}
+	td {
+		padding: 5px;
+	}
+</style>
 </head>
 <body>
 	<h1>Login Page</h1>

@@ -9,13 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.PlayerDAO;
 import model.Dungeon;
 import model.Game;
 import model.ItemFloor;
 import model.Monster;
 import model.Player;
 import model.Projectile;
+import model.User;
 import monsters.*;
 
 /**
@@ -34,8 +37,7 @@ public class GameServlet extends HttpServlet {
        // Game.Game();
         Game.menu = 0; // default menu
      // player will always be actor 0
-    
-    
+        
 		Game.addPlayer(player);
 		
 		//Game.addActors(monster);
@@ -57,6 +59,8 @@ public class GameServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 
     }
+    
+    
     
     
     /*Dungeon dungeon0 = new Dungeon(0);
@@ -89,6 +93,7 @@ public class GameServlet extends HttpServlet {
     int counter = 0;
     boolean firstPrint = true;
    // Dungeon dungeon = new Dungeon();
+    
     Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
 			, this.location[1], location[0]);
     
@@ -115,6 +120,13 @@ public class GameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		// To do: find a better place for this code
+		// get player from session
+	    HttpSession session = request.getSession();
+	    player = (Player)session.getAttribute("player");
+	    Game.addPlayer(player);
+	    System.out.println("In game servlet. Player is: " + player.getName());
 
 	//	if (firstPrint) {
 		//	dungeon.addActor(player);
@@ -407,6 +419,10 @@ public class GameServlet extends HttpServlet {
 			//	player.getBackpack().clear();
 				break;
 		}
+		
+		// store player in session
+		session.setAttribute("player", player);
+		
 		Game.display(out);
 		
 		

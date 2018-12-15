@@ -14,6 +14,16 @@ public class Weapon extends Item implements Serializable{
 		this.damage = damage;
 	}
 	
+	public Weapon(String weapon) {
+		super();
+		String[] delim = weapon.split(",");
+		String name = delim[0];
+		char icon = delim[1].charAt(0);
+		super.setName(name);
+		super.setIcon(icon);
+		this.damage = Integer.parseInt(delim[2]);
+	}
+	
 	public int getDamage() {
 		return damage;
 	}
