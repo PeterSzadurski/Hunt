@@ -4,6 +4,7 @@ import model.Armor;
 import model.Game;
 import model.Monster;
 import model.Weapon;
+import model.Items;
 
 public class Goblin  extends Monster{
 
@@ -16,15 +17,15 @@ public class Goblin  extends Monster{
 	private static int str = 2;
 	private static int agi = 2;
 	private static int vit = 2;
-	private static Weapon weapon = Game.club;
+	private static Weapon weapon = Items.club;
 	private static Armor armor = null;
 	private static char icon = 'G';
 	private static String color ="#006400";
 
 
 
-	public Goblin(int x, int y) {
-		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
+	public Goblin(int x, int y, int floor) {
+		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y, floor);
 		
 		//this.name = name;
 		
