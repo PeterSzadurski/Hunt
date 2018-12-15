@@ -31,10 +31,12 @@ public class ItemFloor {
 	
 	public char getIcon () {
 		return item.getIcon();
+		//return 'x';
 	}
 	
 	public String getColor () {
 		return item.getColor();
+		//return "blue";
 	}
 	
 	

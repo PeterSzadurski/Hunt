@@ -34,16 +34,19 @@ public class GameServlet extends HttpServlet {
        // Game.Game();
         Game.menu = 0; // default menu
      // player will always be actor 0
-    
-    
+        
+        Game.setItemsFloor(Game.getDungeon()[0].getDungeonItems());
+		Game.setActors(Game.getDungeon()[0].getActors());
 		Game.addPlayer(player);
-		
 		//Game.addActors(monster);
 		//Game.addActors(monster2);
 		//Game.addActors(monster3);
-		player.pickUp(Game.smallPotion);
+		/*player.pickUp(Game.smallPotion);
 		player.pickUp(Game.smallPotion);
 		player.pickUp(Game.largePotion);
+		player.pickUp(Game.smallPoison);
+		player.pickUp(Game.smallPoison);
+		player.pickUp(Game.smallPoison);
 		player.pickUp(Game.smallPoison);
 		player.pickUp(Game.largePotion);
 		player.pickUp(Game.scrollTeleportation);
@@ -51,8 +54,10 @@ public class GameServlet extends HttpServlet {
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
 		player.pickUp(Game.scrollGreaterFireball);
-		Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
-		Game.getDungeon()[0].populate();
+		System.out.println("Item 2: " + Game.smallPotion.getName());
+		*/
+		//Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
+		
 		
 		// TODO Auto-generated constructor stub
 
@@ -141,7 +146,7 @@ public class GameServlet extends HttpServlet {
 		//	Game.log = "Press [Enter] to go up.";
 		//	System.out.println("go up man");
 		//}
-		
+		Game.start();
 		
 		
 		// controls
@@ -273,6 +278,8 @@ public class GameServlet extends HttpServlet {
 					break;
 				default:
 					Game.menu = 1;
+					break;
+				case 3:
 				}
 				break;
 				
@@ -282,10 +289,26 @@ public class GameServlet extends HttpServlet {
 					if (Game.onDown(player)) {
 						//System.out.println("Current Floor " + Game.floor);
 						Game.floor++;
-						System.out.println("Down one floor");
-						Game.log  = Game.actors.get(0).getName() + " went down to floor " + (10 - Game.getDungeon().length);
+						System.out.println("You descended a floor");
+						Game.log  = Game.actors.get(0).getName() + " descended to floor " + (Game.getDungeon().length - Game.floor);
 						player.setX(up[0]);
 						player.setY(up[1]);
+						Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+						Game.setActors(Game.getDungeon()[Game.floor].getActors());
+						Game.addPlayer(player);
+						Game.update();						//Game.display(out);
+					}
+					else if (Game.onUp(player)) {
+						Game.floor--;
+						System.out.println("You descended a floor");
+						Game.log  = Game.actors.get(0).getName() + " ascended to floor " + (Game.getDungeon().length - Game.floor);
+						player.setX(down[0]);
+						player.setY(down[1]);
+				        Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+						Game.setActors(Game.getDungeon()[Game.floor].getActors());
+						Game.addPlayer(player);
+						out.print("");
+						Game.update();
 					}
 					break;
 				
@@ -306,6 +329,7 @@ public class GameServlet extends HttpServlet {
 							}
 							break;
 					}
+					break;
 					
 				case 3: // aiming menu
 					switch (Game.aiming.getEffect()) {
@@ -314,8 +338,26 @@ public class GameServlet extends HttpServlet {
 							// used to prevent the effect from triggering right when it is selected
 							doublePress++;
 								if (doublePress == 2) {
+									int collideActor = -1;
+									for (int i = 0; i < Game.actors.size(); i++) {
+										if (((Game.aiming.x) == Game.actors.get(i).getX()) && ((Game.aiming.y)) == Game.actors.get(i).getY()) {
+											collideActor = i;
+										}
+
+									}
+									
 									Game.aiming.setShow(false);
-									Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									if (Game.getDungeon()[Game.floor].getTile(Game.aiming.getY(), Game.aiming.getX()).isSolid()) {
+										Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>.. inside a wall";
+										Game.actors.get(0).setCurHp(0);
+									}
+									else if (collideActor != -1) {
+										((Player)Game.actors.get(0)).fuseWithMonster(Game.actors.get(collideActor));
+										Game.actors.remove(collideActor);
+									}
+									else {
+										Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									}
 									doublePress = 0;
 									Game.menu = 0;
 									
@@ -375,10 +417,10 @@ public class GameServlet extends HttpServlet {
 				break;
 			// these are for debugging, will be removed
 			 case 220:
-				Game.smallPoison.use(0);;
+			//	Game.smallPoison.use(0);;
 				break;
 			case 221:
-				Game.largePotion.use(0);
+			//	Game.largePotion.use(0);
 				break;
 			case 192:
 				if (player.getBackpack().isEmpty()) {

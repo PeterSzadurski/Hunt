@@ -225,22 +225,22 @@ public class Character implements Serializable {
 	}
 
 	public void calcDamage() {
-		damage = strength;
+		this.damage = strength;
 
 		if (weapon != null) {
-			damage += weapon.getDamage();
+			this.damage += weapon.getDamage();
 		}
 	}
 
 	public void calcMoveSpeed() {
-		moveSpeed = agility * 3;
+		this.moveSpeed = agility * 3;
 	}
 
 	public void calcHP() {
-		hp = 10 + (vitality * 5);
+		this.hp = 10 + (vitality * 5);
 
 		if (armor != null) {
-			hp += armor.getHpBonus();
+			this.hp += armor.getHpBonus();
 		}
 	}
 

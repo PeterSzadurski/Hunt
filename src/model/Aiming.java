@@ -60,12 +60,12 @@ public class Aiming {
 	
 	public void move(int x, int y) {
 		int collideActor = -1;
-		for (int i = 0; i < Game.actors.size(); i++) {
-			if (((this.x + x) == Game.actors.get(i).getX()) && ((this.y + y) == Game.actors.get(i).getY())) {
-				collideActor = i;
-			}
+		//for (int i = 0; i < Game.actors.size(); i++) {
+			//if (((this.x + x) == Game.actors.get(i).getX()) && ((this.y + y) == Game.actors.get(i).getY())) {
+				//collideActor = i;
+			//}
 
-		}
+		//}
 		
 		// if there isn't an actor in the way
 		if (collideActor == -1) {
@@ -73,18 +73,15 @@ public class Aiming {
 			// if inside the Dungeon bounds
 			if ((this.x + x) < Game.getDungeon()[Game.floor].getWidth() && (this.x + x > -1) && (this.y + y) < Game.getDungeon()[Game.floor].getHeight() && (this.y + y > -1)) {
 				// check if not solid
-				if (Game.getDungeon()[Game.floor].getTile(this.y + y, this.x + x).isSolid() == false) {
+
 					this.x += x;
 					this.y += y;
 					
 					//Game.log = ("Move Freely");
 
-				}
+				
 
-				else {
-					//System.out.println("solid");
-					//Game.log = ("Cannot Move");
-				}
+
 			}
 			// Game.update(d);
 			//System.out.println("X: " + this.x + " Y: " + this.y);

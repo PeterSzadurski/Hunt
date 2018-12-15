@@ -21,11 +21,12 @@ public class Bat  extends Monster{
 	private static Armor armor = null;
 	private static char icon = 'B';
 	private static String color ="#ffffff";
-	private static int y;
+	//private static int y;
+	//private static int floor;
 
 
-	public Bat(int x, int y) {
-		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
+	public Bat(int x, int y, int floor) {
+		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y, floor);
 
 		//this.name = name;
 		

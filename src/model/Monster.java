@@ -8,6 +8,7 @@ public class Monster extends Character implements Serializable {
 	//private String type;
 	private int expOnKill;
 	private double turnCount = 0;
+	private int floor;
 	
 	MonsterStates state = MonsterStates.IDLE;
 	
@@ -19,13 +20,13 @@ public class Monster extends Character implements Serializable {
 	}
 	
 	public Monster(String name, int expOnKill, int str, int agi, int vit, Weapon weapon, 
-			Armor armor, char icon, String color, int x, int y) {
+			Armor armor, char icon, String color, int x, int y, int floor) {
 		
 		super(name, str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		//this.name = name;
 		this.expOnKill = expOnKill;
-		
+		this.floor =floor;
 		super.calcDamage();
 		super.calcHP();
 		super.calcMoveSpeed();

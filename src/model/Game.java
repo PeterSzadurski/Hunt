@@ -17,6 +17,7 @@ public class Game {
 
 
 
+
 	public  Game() {
 		  //  for (int i = 0; i < 10; i++) {
     	//dungeon[i] = new Dungeon(i);
@@ -36,65 +37,30 @@ public class Game {
 	public static int innerSelect = 0;
 	static boolean ifUsed = false;
 	static int timeFreeze = 0;
+	
+	public static ArrayList<ItemFloor> getItemsFloor() {
+		return itemsFloor;
+	}
+
+	public static void setItemsFloor(ArrayList<ItemFloor> itemsFloor) {
+		Game.itemsFloor = itemsFloor;
+	}
+
+
 	static final String buffColor = "#00baff";
 	static final String debuffColor = "#ff0000";
 	public static final String magicEffectColor = "#9e00d8";
 	public static int floor;
-
-    
-	// Generate weapons
-
-	public static Weapon club = new Weapon("club", '!', 5);
-	static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
-	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
-
-
 	public static Aiming aiming = new Aiming(0, 0);
+    
 
-	// Generate armors
-
-	public static Armor clothes = new Armor("Clothes", '+', 1);
-	public static Armor lightLeather = new Armor("Light Leather", '+', 5);
-	public static Armor chainmail = new Armor("Chainmail", '+', 10);
-	public static Armor steelPlate = new Armor("Steel Plate", '+', 20);
-	public static Armor ironPlate = new Armor("Iron Plate", '+', 15);
-
-	// Generate items
-	public static Item smallPotion = new Item("Small Potion", 'i',
-			"<span style = \"color:" + buffColor + "\">Restores</span> 10HP", 10, Effect.RESTORE_HEALTH, null);
-	public static Item largePotion = new Item("Large Potion", 'i',
-			"<span style = \"color:" + buffColor + "\">Restores</span> 50HP", 50, Effect.RESTORE_HEALTH, null);
-	public static Item smallPoison = new Item("Small Poison", 'i',
-			"<span style = \"color:" + debuffColor + "\">Damages</span> 15HP", 15, Effect.DAMAGE_HEALTH, null);
-	public static Item scrollTeleportation = new Item("Scroll of Teleportation", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Teleports</span> the user", 0, Effect.TELEPORT, null);
-	public static Item scrollFireball = new Item("Scroll of Fireball", 'i',
-			"Scorches the enemy for <span style=\"color:" + debuffColor + "\">25 damage</span>", -25, Effect.RANGED,
-			Effect.DAMAGE_HEALTH);
-	public static Item scrollGreaterFireball = new Item("Scroll of Greater Fireball", 'i',
-			"Scorches the enemy for <span style=\"color:" + debuffColor + "\">100 damage</span>", -100, Effect.RANGED,
-			Effect.DAMAGE_HEALTH);
-	public static Item scrollMinorFrozenTime = new Item("Scroll of Minor Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 5 turns", 5, Effect.STOP_TIME,
-			null);
-	public static Item scrollFrozenTime = new Item("Scroll of Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 8 turns", 8, Effect.STOP_TIME,
-			null);
-	public static Item scrollGreaterFrozenTime = new Item("Scroll of Greater Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 14 turns", 14, Effect.STOP_TIME,
-			null);
-	public static Item scrollMasterFrozenTime = new Item("Scroll of Master Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 50 turns", 50, Effect.STOP_TIME,
-			null);
-	public static Item potionMinorOfImprovement = new Item("Minor Potion of Improvement", 'i',
-			"<span style = \"color: " + buffColor + "\">Raises a random stat</span> by 1 point", 1, Effect.RANDOM_RAISE,
-			null);
 
 	// effects methods
 	public static void effects(int target, int magnitude, Effect effect) {
 		// boolean ifUsed = false;
 		switch (effect) {
 		case RESTORE_HEALTH:
+			Game.menu = 2;
 			if (Game.actors.get(target).getHp() == Game.actors.get(target).getCurHp()) {
 
 				// show log if player
@@ -121,12 +87,17 @@ public class Game {
 			}
 			break;
 		case DAMAGE_HEALTH:
+			Game.menu = 2;
+
+			//Game.menu = 1;
 			Game.actors.get(target).setCurHp(Game.actors.get(target).getCurHp() - magnitude);
 			System.out.println("Cur hp " + actors.get(target).getCurHp());
 			System.out.println("damage");
+			Game.log = "You poison yourself for " + magnitude + "HP";
 			ifUsed = true;
 			break;
 		case RANDOM_RAISE:
+			Game.menu = 2;
 			int rand = (int) (Math.random() * 2) + 0;
 			switch (rand) {
 			case 0: // raise vitality
@@ -165,6 +136,7 @@ public class Game {
 			ifUsed = true;
 			break;
 			}
+			break;
 		case TELEPORT:
 			Game.aiming.setRestrict(false);
 			Game.menu = 3;
@@ -188,6 +160,7 @@ public class Game {
 			ifUsed = true;
 			break;
 		case STOP_TIME:
+			Game.menu = 2;
 			if (timeFreeze == 0) {
 				Game.log = "Time has stopped!";
 				timeFreeze = magnitude;
@@ -203,6 +176,10 @@ public class Game {
 			System.out.println("PLACEHOLDER");
 			break;
 		}
+	}
+
+	public static void setActors(ArrayList<Character> actors) {
+		Game.actors = actors;
 	}
 
 	public void createPlayer() {
@@ -329,19 +306,24 @@ public class Game {
 				if (itemsFloor.get(i).getX() == actors.get(0).getX()
 						&& itemsFloor.get(i).getY() == actors.get(0).getY()) {
 					log = "Item: " + itemsFloor.get(i).getItem().getName();
+					System.out.println("Item: " + i);
+					System.out.println("Item Name " + itemsFloor.get(i).getItem());
+					System.out.println("Item Name2 " + itemsFloor.get(i).getItem().getName());
+					
+
 				}
 			}
 		}
 	}
 
-	public static void start(Dungeon d) {
+	public static void start() {
 
 		for (int i = 0; i < itemsFloor.size(); i++) {
-			d.changeEntities(itemsFloor.get(i).getY(), itemsFloor.get(i).getX(), itemsFloor.get(i).getIcon(),
+			dungeon[floor].changeEntities(itemsFloor.get(i).getY(), itemsFloor.get(i).getX(), itemsFloor.get(i).getIcon(),
 					itemsFloor.get(i).getColor());
 		}
 		for (int i = 0; i < actors.size(); i++) {
-			d.changeEntities(actors.get(i).getY(), actors.get(i).getX(), actors.get(i).geticon(),
+			dungeon[floor].changeEntities(actors.get(i).getY(), actors.get(i).getX(), actors.get(i).geticon(),
 					actors.get(i).getColor());
 		}
 		// }
@@ -361,6 +343,72 @@ public class Game {
 	}
 
 	public static void display(PrintWriter writer) {
+
+		String insert = "";
+
+		switch (menu) {
+		case 0: // no menu
+			writer.print("<tr>");
+			insert = "";
+			break;
+		case 1:
+			insert = "<td></td>";
+			switch (select) {
+			case 0:
+				// inventory selected
+				writer.print(
+						"<tr><td>[Inventory]<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 1:
+				// save selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>[Save]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 2:
+				// Stats selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
+				break;
+			case 3:
+				// sign out selected
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
+				break;
+			}
+			break;
+		case 2:
+			insert = "<td></td>";
+			switch (select) {
+
+			case 0: // inventory screen
+				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
+				break;
+			case 1: /// ADD SAVE HERE ---
+				break;
+			case 2:
+				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");
+				break;
+			default:
+				writer.print("<tr><td>PLACEHOLDER</td>");
+				break;
+			}
+			break;
+		default:
+			writer.print("<tr>");
+			insert = "";
+			break;
+		}
+		Game.getDungeon()[Game.floor].firstPrint(writer);
+		// draw game hud
+		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: "
+				+ ((Player) actors.get(0)).getLevel() + " | HP: " + actors.get(0).getCurHp() + "/"
+				+ actors.get(0).getHp() + " | EXP: " + ((Player) actors.get(0)).getExp() + "/"
+				+ ((Player) actors.get(0)).getExpForNextLevel() + " | Floor: " + (Game.getDungeon().length - Game.floor) + "</td></tr>");
+		// draw game log
+		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + log + "</td></tr>");
+	}
+	
+	public static void clear(PrintWriter writer) {
 
 		String insert = "";
 
@@ -414,15 +462,19 @@ public class Game {
 			insert = "";
 			break;
 		}
-		Game.getDungeon()[Game.floor].firstPrint(writer);
+		//Game.getDungeon()[Game.floor].firstPrint(writer);
+		writer.print("<td>");
+		writer.println("</div>");
+		writer.print("</td></tr>");
 		// draw game hud
 		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: "
 				+ ((Player) actors.get(0)).getLevel() + " | HP: " + actors.get(0).getCurHp() + "/"
 				+ actors.get(0).getHp() + " | EXP: " + ((Player) actors.get(0)).getExp() + "/"
-				+ ((Player) actors.get(0)).getExpForNextLevel() + "</td></tr>");
+				+ ((Player) actors.get(0)).getExpForNextLevel() + " | Floor: " + (Game.getDungeon().length - Game.floor) + "</td></tr>");
 		// draw game log
 		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}
+	
 	
 	//public static void makeDungeons () {
   /*  Dungeon dungeon1 = new Dungeon();
@@ -459,25 +511,36 @@ public class Game {
 		return (player.getX() == Game.getDungeon()[Game.floor].getUpFloor()[1] && player.getY() == Game.getDungeon()[Game.floor].getUpFloor()[0]);
 	}
 	
-	public static Item[] itemTable() {
-		Item[] itemTable;
-		 switch (Game.floor) {
+	public static Item[] itemTable(int index) {
+		Item[] itemTable = null;
+		//itemTable[0] = Game.largePotion;
+		 switch (index) {
 		 	case 0:
-			 Item[] itemTable0 = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+			/* Item[] itemTable0 = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
 					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
 					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
 					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
-			 	itemTable = itemTable0;
-			 break;
+			 	*/
+		 	Item[] itemTable0 = {Items.smallPoison};
+		 		itemTable0[0] = Items.smallPoison;
+			 	System.out.println("another item test " + itemTable0[0].getName());
+			// return  itemTable0;
+			 	break;
+			 
 		default:
-			Item[] itemTableDefault = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
+		/*	Item[] itemTableDefault = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
 					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
 					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
 					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
-			itemTable = itemTableDefault;
+			*/
 			break;
+			//return  itemTableDefault;
+			
 		}
+		 //Item[] test = {Game.scrollFrozenTime};
+		 //itemTable = test;
 		 return itemTable;
 		 
 	}
+
 }
