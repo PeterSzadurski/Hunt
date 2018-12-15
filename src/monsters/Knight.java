@@ -5,23 +5,25 @@ import model.Game;
 import model.Monster;
 import model.Weapon;
 
-public class Troll  extends Monster{
+public class Knight  extends Monster{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static String name = "Troll";
-	private static int expOnKill = 15;
-	private static int str = 3;
-	private static int agi = 1;
-	private static int vit = 4;
-	private static Weapon weapon = Game.club;
+	private static String name = "Knight";
+	private static int expOnKill = 20;
+	private static int str = 7;
+	private static int agi = 2;
+	private static int vit = 10;
+	private static Weapon weapon = Game.ironLongblade;
 	private static Armor armor = null;
-	private static char icon = 'T';
-	private static String color ="#006400";
+	private static char icon = 'K';
+	private static String color ="#FFFAF0";
 
-	public Troll(int x, int y) {
+
+
+	public Knight(int x, int y) {
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
 
 		//this.name = name;

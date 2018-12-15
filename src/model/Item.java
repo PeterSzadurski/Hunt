@@ -10,7 +10,7 @@ public class Item implements Serializable {
 	private String effectText;
 	private int magnitude = 0;
 	private Effect effect;
-	
+	private String color = "#C5B358";
 	public Item() {
 		
 	}
@@ -34,6 +34,10 @@ public class Item implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getColor() {
+		return color;
 	}
 
 	public char getIcon() {

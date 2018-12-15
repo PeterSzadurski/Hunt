@@ -73,7 +73,7 @@ public class AccountServlet extends HttpServlet {
 						
 						// put username in a session attribute
 						request.setAttribute("username", username);
-						ServletUtil.forward("characterCreation.html", request, response);
+						ServletUtil.forward("Index.jsp", request, response);
 					} else {
 						// password doesnt match
 						request.setAttribute("passwordWrong", "Password is wrong.");

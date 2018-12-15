@@ -20,12 +20,10 @@ public class Goblin  extends Monster{
 	private static Armor armor = null;
 	private static char icon = 'G';
 	private static String color ="#006400";
-	private static int x =5;
-	private static int y = 5;
-	
 
 
-	public Goblin() {
+
+	public Goblin(int x, int y) {
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		//this.name = name;

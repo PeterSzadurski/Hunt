@@ -5,11 +5,15 @@ import java.util.Random;
 public class Monster extends Character implements Serializable {
 	private static final long serialVersionUID = 6331686211289256850L;
 	
-	//private String type;
+	private String type;
 	private int expOnKill;
 	private double turnCount = 0;
+	private int id;
+	private int currentDungeonLevel;
 	
 	MonsterStates state = MonsterStates.IDLE;
+	
+	
 	
 	
 	public Monster() {
@@ -29,12 +33,14 @@ public class Monster extends Character implements Serializable {
 		super.calcMoveSpeed();
 	}
 
-/*	public String getName() {
-		return name;
-	} */
-	//public void setType(String type) {
-		//this.type = type;
-	//}
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 	public MonsterStates getState() {
@@ -47,6 +53,22 @@ public class Monster extends Character implements Serializable {
 
 	public int getExpOnKill() {
 		return expOnKill;
+	}
+
+	public int getCurrentLevel() {
+		return currentDungeonLevel;
+	}
+
+	public void setCurrentLevel(int currentLevel) {
+		this.currentDungeonLevel = currentLevel;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int monsterId) {
+		this.id = monsterId;
 	}
 
 	public void setExpOnKill(int expOnKill) {

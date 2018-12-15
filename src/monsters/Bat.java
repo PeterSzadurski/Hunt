@@ -10,6 +10,7 @@ public class Bat  extends Monster{
 	/**
 	 * 
 	 */
+	 
 	private static final long serialVersionUID = 1L;
 	private static String name = "Bat";
 	private static int expOnKill = 5;
@@ -20,7 +21,7 @@ public class Bat  extends Monster{
 	private static Armor armor = null;
 	private static char icon = 'B';
 	private static String color ="#ffffff";
-
+	private static int y;
 
 
 	public Bat(int x, int y) {

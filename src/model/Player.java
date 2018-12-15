@@ -1,4 +1,5 @@
 package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ public class Player extends Character implements Serializable {
 
 	private int playerID;
 	private int currentDungeonID;
-	
+
 	private String name;
 	private int level;
 	private int exp;
@@ -36,24 +37,6 @@ public class Player extends Character implements Serializable {
 	public Player(String name, int str, int agi, int vit, char icon, String color, int x, int y) {
 
 		super(name, str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1), icon, color, x, y);
-
-		this.name = name;
-		level = 1;
-		exp = 0;
-		expForNextLevel = 10;
-		hunger = 100;
-		backpack = new ArrayList<Item>();
-
-		// Calculate other stats
-		super.calcDamage();
-		super.calcMoveSpeed();
-		super.calcHP();
-
-	}
-	
-	public Player(String name, int str, int agi, int vit, int x, int y) {
-
-		super(name, str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1), '@', "#FFFF00", x, y);
 
 		this.name = name;
 		level = 1;
@@ -98,15 +81,15 @@ public class Player extends Character implements Serializable {
 		expForNextLevel = 10 + (level - 1) * 5;
 
 	}
-	
+
 	public int getPlayerID() {
 		return this.playerID;
 	}
-	
+
 	public void setPlayerID(int id) {
 		this.playerID = id;
 	}
-	
+
 	public int getCurrentDungeonID() {
 		return currentDungeonID;
 	}
@@ -319,7 +302,7 @@ public class Player extends Character implements Serializable {
 	}
 
 	@Override
-	public void move(int x, int y, Dungeon d) {
+	public void move(int x, int y) {
 		int collideActor = -1;
 		for (int i = 0; i < Game.actors.size(); i++) {
 			if (((this.getX() + x) == Game.actors.get(i).getX()) && ((this.getY() + y) == Game.actors.get(i).getY())) {
@@ -332,16 +315,34 @@ public class Player extends Character implements Serializable {
 		if (collideActor == -1) {
 
 			// if inside the Dungeon bounds
-			if ((this.getX() + x) < d.getWidth() && (this.getX() + x > -1) && (this.getY() + y) < d.getHeight()
+			if ((this.getX() + x) < Game.getDungeon()[Game.floor].getWidth() && (this.getX() + x > -1) && (this.getY() + y) < Game.getDungeon()[Game.floor].getHeight()
 					&& (this.getY() + y > -1)) {
 				// check if not solid
-				if (d.getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
-					d.changeEntities(this.getY(), this.getX(), d.getTile(this.getY(), this.getX()).getIcon(),
-							d.getTile(this.getY(), this.getX()).getColor());
+				if (Game.getDungeon()[Game.floor].getTile(this.getY() + y, this.getX() + x).isSolid() == false) {
+					Game.getDungeon()[Game.floor].changeEntities(this.getY(), this.getX(), Game.getDungeon()[Game.floor].getTile(this.getY(), this.getX()).getIcon(),
+							Game.getDungeon()[Game.floor].getTile(this.getY(), this.getX()).getColor());
+					// check for floor items
+					if (!Game.itemsFloor.isEmpty()) {
+						for (int o = 0; o < Game.itemsFloor.size(); o++) {
+							if (Game.itemsFloor.get(o).getX() == this.getX() && Game.itemsFloor.get(o).getY() == this.getY()) {
+								Game.getDungeon()[Game.floor].changeEntities(Game.itemsFloor.get(o).getY(), Game.itemsFloor.get(o).getX(),
+									Game.itemsFloor.get(o).getIcon(), Game.itemsFloor.get(o).getColor());
+							}
+						}
+					}
+					// check if on downtile
+					
 					this.setX(this.getX() + x);
 					this.setY(this.getY() + y);
-					d.changeEntities(this.getY(), this.getX(), this.icon, this.color);
+					Game.getDungeon()[Game.floor].changeEntities(this.getY(), this.getX(), this.icon, this.color);
 					Game.log = ("Move Freely");
+					if (Game.onDown(this)) {
+						Game.log = "Press [Enter] to go down";
+					}
+					else if (Game.onUp(this)) {
+						Game.log = "Press [Enter] to go up";
+					}
+
 
 				}
 
