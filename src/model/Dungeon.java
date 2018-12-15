@@ -505,7 +505,10 @@ public class Dungeon {
 			
 			break;
 			
-			
+		case 9:
+			location = getLocation();
+			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
+			break;
 		default:
 			break;
 		}

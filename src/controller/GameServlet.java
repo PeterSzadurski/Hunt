@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Dungeon;
 import model.Game;
 import model.ItemFloor;
+import model.Items;
 import model.Monster;
 import model.Player;
 import model.Projectile;
@@ -24,97 +24,96 @@ import monsters.*;
 @WebServlet("/GameServlet")
 public class GameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GameServlet() {
-    	
-        super();
-       // Game.Game();
-        Game.menu = 0; // default menu
-     // player will always be actor 0
-        
-        Game.setItemsFloor(Game.getDungeon()[0].getDungeonItems());
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GameServlet() {
+
+		super();
+		// Game.Game();
+		Game.menu = 0; // default menu
+		// player will always be actor 0
+
+		Game.setItemsFloor(Game.getDungeon()[0].getDungeonItems());
 		Game.setActors(Game.getDungeon()[0].getActors());
 		Game.addPlayer(player);
-		//Game.addActors(monster);
-		//Game.addActors(monster2);
-		//Game.addActors(monster3);
-		/*player.pickUp(Game.smallPotion);
-		player.pickUp(Game.smallPotion);
-		player.pickUp(Game.largePotion);
-		player.pickUp(Game.smallPoison);
-		player.pickUp(Game.smallPoison);
-		player.pickUp(Game.smallPoison);
-		player.pickUp(Game.smallPoison);
-		player.pickUp(Game.largePotion);
-		player.pickUp(Game.scrollTeleportation);
-		player.pickUp(Game.scrollFireball);
-		player.pickUp(Game.scrollGreaterFireball);
-		player.pickUp(Game.scrollGreaterFireball);
-		player.pickUp(Game.scrollGreaterFireball);
-		System.out.println("Item 2: " + Game.smallPotion.getName());
-		*/
-		//Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
-		
-		
+		// Game.addActors(monster);
+		// Game.addActors(monster2);
+		// Game.addActors(monster3);
+		/*
+		 * player.pickUp(Game.smallPotion); player.pickUp(Game.smallPotion);
+		 * player.pickUp(Game.largePotion); player.pickUp(Game.smallPoison);
+		 * player.pickUp(Game.smallPoison); player.pickUp(Game.smallPoison);
+		 * player.pickUp(Game.smallPoison); player.pickUp(Game.largePotion);
+		 * player.pickUp(Game.scrollTeleportation); player.pickUp(Game.scrollFireball);
+		 * player.pickUp(Game.scrollGreaterFireball);
+		 * player.pickUp(Game.scrollGreaterFireball);
+		 * player.pickUp(Game.scrollGreaterFireball);
+		 * 
+		 * System.out.println("Item 2: " + Game.smallPotion.getName());
+		 */
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollTeleportation);
+
+		// Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
+
 		// TODO Auto-generated constructor stub
 
-    }
-    
-    
-    /*Dungeon dungeon0 = new Dungeon(0);
-    Dungeon dungeon1 = new Dungeon(1);
-    Dungeon dungeon2 = new Dungeon(2);
-    Dungeon dungeon3 = new Dungeon(3);
-    Dungeon dungeon4 = new Dungeon(4);
-    Dungeon dungeon5 = new Dungeon(5);
-    Dungeon dungeon6 = new Dungeon(6);
-    Dungeon dungeon7 = new Dungeon(7);
-    Dungeon dungeon8 = new Dungeon(8);
-    Dungeon dungeon9 = new Dungeon(9)
-    */
+	}
+
+	/*
+	 * Dungeon dungeon0 = new Dungeon(0); Dungeon dungeon1 = new Dungeon(1); Dungeon
+	 * dungeon2 = new Dungeon(2); Dungeon dungeon3 = new Dungeon(3); Dungeon
+	 * dungeon4 = new Dungeon(4); Dungeon dungeon5 = new Dungeon(5); Dungeon
+	 * dungeon6 = new Dungeon(6); Dungeon dungeon7 = new Dungeon(7); Dungeon
+	 * dungeon8 = new Dungeon(8); Dungeon dungeon9 = new Dungeon(9)
+	 */
 	int[] location = Game.getDungeon()[Game.floor].getLocation();
 
-  //  System.out.println("");
-    
-    // int[] location = Game.getDungeon()[0].getLocation();
-    //int[] location = Game.getDungeon()[1].getLocation();
-    
-    //for (int i = 0; i < 10; i++) {
-    	//Game.dungeon[i] = new Dungeon(i);
-    //}
-    
-    
-    
- //   int[] location = Game.getDungeon()[Game.floor].getLocation();
-    
+	// System.out.println("");
+
+	// int[] location = Game.getDungeon()[0].getLocation();
+	// int[] location = Game.getDungeon()[1].getLocation();
+
+	// for (int i = 0; i < 10; i++) {
+	// Game.dungeon[i] = new Dungeon(i);
+	// }
+
+	// int[] location = Game.getDungeon()[Game.floor].getLocation();
+
 	int doublePress = 0;
-    int counter = 0;
-    boolean firstPrint = true;
-   // Dungeon dungeon = new Dungeon();
-    Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00"
-			, this.location[1], location[0]);
-    
-	
-    
-	//Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G', "#006400"
-		//	, 0, 2);
+	int counter = 0;
+	boolean firstPrint = true;
+	// Dungeon dungeon = new Dungeon();
+	Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00", this.location[1], location[0]);
 
-	
-	//Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B', "#ffffff "
-		//	, 1, 2);
+	// Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G',
+	// "#006400"
+	// , 0, 2);
 
-	
-//	Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T', "#006400 "
-	//		, 5, 5);
-	
-    
-	
-   // dungeon.firstPrint(out);
-   //dungeon.addActor(player);
-    
+	// Monster monster2 = new Monster("Bat", 5, 1, 3, 1, Game.club, null, 'B',
+	// "#ffffff "
+	// , 1, 2);
+
+	// Monster monster3 = new Monster("Troll", 15, 3, 1, 4, Game.club, null, 'T',
+	// "#006400 "
+	// , 5, 5);
+
+	// dungeon.firstPrint(out);
+	// dungeon.addActor(player);
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -291,24 +290,34 @@ public class GameServlet extends HttpServlet {
 						Game.floor++;
 						System.out.println("You descended a floor");
 						Game.log  = Game.actors.get(0).getName() + " descended to floor " + (Game.getDungeon().length - Game.floor);
-						player.setX(up[0]);
-						player.setY(up[1]);
+						up = Game.getDungeon()[Game.floor].getUpFloor();
+						player.setX(up[1]);	
+						player.setY(up[0]);
 						Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
 						Game.setActors(Game.getDungeon()[Game.floor].getActors());
 						Game.addPlayer(player);
 						Game.update();						//Game.display(out);
 					}
 					else if (Game.onUp(player)) {
-						Game.floor--;
-						System.out.println("You descended a floor");
-						Game.log  = Game.actors.get(0).getName() + " ascended to floor " + (Game.getDungeon().length - Game.floor);
-						player.setX(down[0]);
-						player.setY(down[1]);
-				        Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
-						Game.setActors(Game.getDungeon()[Game.floor].getActors());
-						Game.addPlayer(player);
-						out.print("");
-						Game.update();
+						if (Game.floor == 0) {
+							if (player.getBackpack().contains(Items.winItem)) {
+								Game.log = "Dave wins!";
+							}
+							else Game.log = "You compel yourself to search for treasure before giving up";
+						}
+						else {
+							Game.floor--;
+							System.out.println("You descended a floor");
+							Game.log  = Game.actors.get(0).getName() + " ascended to floor " + (Game.getDungeon().length - Game.floor);
+							down = Game.getDungeon()[Game.floor].getDownFloor();
+							player.setX(down[1]);
+							player.setY(down[0]);
+							Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+							Game.setActors(Game.getDungeon()[Game.floor].getActors());
+						}
+						
+						//Game.addPlayer(player);
+						//Game.update();
 					}
 					break;
 				
@@ -471,10 +480,13 @@ public class GameServlet extends HttpServlet {
 		out.close();
 		*/
 	}
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

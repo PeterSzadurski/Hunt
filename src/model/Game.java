@@ -175,6 +175,8 @@ public class Game {
 			ifUsed = false;
 			System.out.println("PLACEHOLDER");
 			break;
+			
+			
 		}
 	}
 

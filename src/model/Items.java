@@ -51,5 +51,6 @@ public class Items {
 			"<span style = \"color: " + Game.buffColor + "\">Raises a random stat</span> by 1 point", 1, Effect.RANDOM_RAISE,
 			null);
 	
+	public static Item winItem = new Item("Patriots Game Ticket",'$',"A <span style = \"color:yellow\">Prized Treasure</span>", 0, null, null);
 }
 
