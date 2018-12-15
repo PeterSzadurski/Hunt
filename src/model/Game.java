@@ -379,6 +379,7 @@ public class Game {
 		case 2:
 			insert = "<td></td>";
 			switch (select) {
+			// test
 
 			case 0: // inventory screen
 				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
