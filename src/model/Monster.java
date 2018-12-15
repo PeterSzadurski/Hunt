@@ -8,16 +8,9 @@ public class Monster extends Character implements Serializable {
 	private String type;
 	private int expOnKill;
 	private double turnCount = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	private int id;
-	private int currentDungeonLevel;
-=======
+
 	private int floor;
->>>>>>> origin/another_test
-=======
-	private int floor;
->>>>>>> origin/another_test
+
 	
 	MonsterStates state = MonsterStates.IDLE;
 	
@@ -63,7 +56,7 @@ public class Monster extends Character implements Serializable {
 		return expOnKill;
 	}
 
-	public int getCurrentLevel() {
+	/*public int getCurrentLevel() {
 		return currentDungeonLevel;
 	}
 
@@ -77,7 +70,7 @@ public class Monster extends Character implements Serializable {
 
 	public void setId(int monsterId) {
 		this.id = monsterId;
-	}
+	}*/
 
 	public void setExpOnKill(int expOnKill) {
 		this.expOnKill = expOnKill;
