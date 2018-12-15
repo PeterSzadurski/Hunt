@@ -215,6 +215,9 @@ public class Character implements Serializable {
 	public boolean isSolid() {
 		return solid;
 	}
+	public void setIsSolid(boolean s) {
+		solid = s;
+	}
 
 	public char geticon() {
 		return icon;

@@ -20,10 +20,9 @@ public class Armor extends Item implements Serializable {
 		super();
 		String[] delim = armor.split(",");
 		String name = delim[0];
-		char icon = delim[1].charAt(0);
 		super.setName(name);
-		super.setIcon(icon);
-		this.hpBonus = Integer.parseInt(delim[2]);
+		super.setIcon('#');
+		this.hpBonus = Integer.parseInt(delim[1]);
 	}
 
 	public int getHpBonus() {
@@ -38,5 +37,8 @@ public class Armor extends Item implements Serializable {
 		return this.getName() + "," + this.getIcon() + "," + this.getHpBonus();
 	}
 	
+	public String getArmorStorageString() {
+		return getName() + "," + getHpBonus();
+	}
 
 }

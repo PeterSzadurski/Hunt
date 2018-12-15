@@ -21,26 +21,12 @@ public class PlayerDAO {
 	public void addPlayer(Player player, int userid) {
 		Connection conn = null;
 		try {
+			System.out.println("made it to try block of addPlayer");
 			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement(
-					"insert into Player ("
-							+ "PlayerName," // 1
-							+ "UserId," // 2 
-							+ "PlayerStrength," // 3 
-							+ "PlayerAgility," // 4
-							+ "PlayerVitality," // 5
-							+ "PlayerDamage," // 6
-							+ "PlayerSpeed," // 7
-							+ "PlayerHealthPoints," // 8
-							+ "PlayerCurrentHealth," // 9
-							+ "PlayerWeapon," // 10
-							+ "PlayerArmor," // 11
-							+ "PlayerLevel," // 12
-							+ "PlayerExpForNextLevel," // 13
-							+ "PlayerExp," // 14
-							+ "PlayerHunger," //15
-							+ "PlayerBackpack" // 16
-							+ ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			System.out.println("made connection");
+			PreparedStatement pStmt = conn.prepareStatement("INSERT INTO Player "
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					
 			pStmt.setString(1, player.getName());
 			pStmt.setInt(2, userid);
 			pStmt.setInt(3, player.getStrength());
@@ -50,19 +36,25 @@ public class PlayerDAO {
 			pStmt.setInt(7, player.getMoveSpeed());
 			pStmt.setInt(8, player.getHp());
 			pStmt.setInt(9, player.getCurHp());
-			pStmt.setString(10, player.getWeapon().getStorageString());
-			pStmt.setString(11, player.getArmor().getStorageString());
-			pStmt.setInt(12, player.getLevel());
-			pStmt.setInt(13, player.getExpForNextLevel());
-			pStmt.setInt(14, player.getExp());
-			pStmt.setInt(15, player.getHunger());
-			pStmt.setString(16, player.backpackStorageString());
+			pStmt.setString(10, player.getWeapon().getWeaponStorageString());
+			pStmt.setString(11, player.getArmor().getArmorStorageString());
+			pStmt.setInt(12, 1); // isSolid
+			pStmt.setInt(13, 1); // x
+			pStmt.setInt(14, 1); // y
+			pStmt.setInt(15, player.getLevel());
+			pStmt.setInt(16, player.getExpForNextLevel());
+			pStmt.setInt(17, player.getExp());
+			pStmt.setInt(18, player.getHunger());
+			pStmt.setString(19, player.backpackStorageString());
+			System.out.println("added player data to ptmt");
 			pStmt.executeUpdate();
+			System.out.println("Stored player in database.");
 		} catch (SQLException ex) {
 			ex.getMessage();
 		} catch (Exception ex) {
 			ex.getMessage();
 		} finally {
+			System.out.println("addPlayer finally.");
 			DBUtil.closeConnection();
 		}
 	}

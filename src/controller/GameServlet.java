@@ -124,9 +124,26 @@ public class GameServlet extends HttpServlet {
 		// To do: find a better place for this code
 		// get player from session
 	    HttpSession session = request.getSession();
-	    player = (Player)session.getAttribute("player");
-	    Game.addPlayer(player);
-	    System.out.println("In game servlet. Player is: " + player.getName());
+	    Player pUpdate = (Player)session.getAttribute("player");
+	    if (counter == 0) {
+	    	player.setX(this.location[1]);
+	    	player.setY(this.location[0]);
+	    	player.setName(pUpdate.getName());
+	   	    player.setStrength(pUpdate.getStrength());
+	   	    player.setAgility(pUpdate.getAgility());
+	   	    player.setVitality(pUpdate.getVitality());
+	   	    player.setArmor(pUpdate.getArmor());
+	   	    player.setWeapon(pUpdate.getWeapon());
+	   	    player.setHp(pUpdate.getHp());
+	   	    player.setCurHp(pUpdate.getCurHp());
+	   	    player.setLevel(pUpdate.getLevel());
+	   	    player.setExp(pUpdate.getExp());
+	   	    player.setExpForNextLevel(pUpdate.getExpForNextLevel());
+	   	    player.calcDamage();
+	   	    player.calcHP();
+	   	    player.calcMoveSpeed();
+	   	    System.out.println("In game servlet. Player is: " + player.getName());
+	    }
 
 	//	if (firstPrint) {
 		//	dungeon.addActor(player);
@@ -422,7 +439,6 @@ public class GameServlet extends HttpServlet {
 		
 		// store player in session
 		session.setAttribute("player", player);
-		
 		Game.display(out);
 		
 		

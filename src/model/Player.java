@@ -49,7 +49,6 @@ public class Player extends Character implements Serializable {
 		super.calcDamage();
 		super.calcMoveSpeed();
 		super.calcHP();
-
 	}
 
 	/**

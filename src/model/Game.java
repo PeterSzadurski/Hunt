@@ -357,7 +357,12 @@ public class Game {
 	}
 	
 	public static void addPlayer(Player p) {
-		actors.add(0,p);
+		if (actors.isEmpty()) {
+			actors.add(0,p);
+		} else {
+			actors.remove(0);
+			actors.add(0,p);
+		}
 	}
 
 	public static void display(PrintWriter writer) {

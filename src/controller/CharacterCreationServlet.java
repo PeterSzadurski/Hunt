@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.PlayerDAO;
+import model.Item;
 import model.Player;
 import model.User;
 import util.ServletUtil;
@@ -34,10 +36,8 @@ public class CharacterCreationServlet extends HttpServlet {
 		int agi = Integer.parseInt(request.getParameter("agi"));
 		int vit = Integer.parseInt(request.getParameter("vit"));
 		
-		Player player = new Player(name, str, agi, vit, '@', "#FFFF00", 0, 1);
-		
-		// Store player in data
-		
+		Player player = new Player(name, str, agi, vit, '@', "#FFFF00", 0, 0);
+		player.setIsSolid(true);
 		
 		// Store player in session
 		HttpSession session = request.getSession();
