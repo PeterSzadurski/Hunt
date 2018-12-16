@@ -499,27 +499,27 @@ public class Game {
 			case 0:
 				// inventory selected
 				writer.print(
-						"<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
+						"<tr><td>[Inventory]<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 1:
-				// magic selected
+				// Save selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>[Save]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 2:
 				// Stats selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 3:
 				// sign out selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]<br>&nbsp;Level Up&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 4:
 				// level up
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>[Level Up]</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>[Level Up]</td>");
 				break;
 			
 			}
@@ -532,7 +532,7 @@ public class Game {
 			case 0: // inventory screen
 				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
 				break;
-			case 1: /// ADD SAVE HERE ---
+			case 1: /// ADD Save HERE ---
 				break;
 			case 2:
 				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");
