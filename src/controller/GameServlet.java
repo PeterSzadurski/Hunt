@@ -140,11 +140,13 @@ public class GameServlet extends HttpServlet {
 	   	    player.calcDamage();
 	   	    player.calcHP();
 	   	    player.calcMoveSpeed();
+	   	    
+	   	    // code for debugging level up
+	   	    player.setExp(12);
 		}
 		
 		int dead = Game.actors.get(0).getCurHp();
 		if (dead <= 0) {
-			System.out.println("You dead. You like, soooooo dead.");
 			PlayerDAO pDAO = new PlayerDAO();
 			pDAO.deletePlayer(player);
 			session.setAttribute("player", null);
@@ -183,56 +185,64 @@ public class GameServlet extends HttpServlet {
 		switch (key) {
 			case 38: // up
 				switch (Game.menu) {
-				case 0: // no menu open
-					player.move(0, -1);
-					Game.update();
-					break;
-				case 1: // menu navigation
-					if (Game.select == 0) {
-						Game.select = 3;
-					}
-					else {
-						Game.select--;
-					}
-					break;
-				case 2: // inner menu
-					switch (Game.select) {
-					case 0: // inventory navigation
-						if (Game.innerSelect == 0) {
-							Game.innerSelect = player.getBackpack().size() - 1;
+					case 0: // no menu open
+						player.move(0, -1);
+						Game.update();
+						break;
+					case 1: // menu navigation
+						if (Game.select == 0) {
+							Game.select = 4;
 						}
 						else {
-							Game.innerSelect--;
+							Game.select--;
+						}
+						break;
+					case 2: // inner menu
+						switch (Game.select) {
+							case 0: // inventory navigation
+								if (Game.innerSelect == 0) {
+									Game.innerSelect = player.getBackpack().size() - 1;
+								}
+								else {
+									Game.innerSelect--;
+								}
+								break;
+							case 4: // level up navigation
+								if (Game.levelUpStatSelect == 0) {
+									Game.levelUpStatSelect = 3;
+								}
+								else {
+									Game.levelUpStatSelect--;
+								}
+								break;	
+						}
+						break;
+					case 3: // aiming
+						if (Game.aiming.isRestrict()) {
+							Game.aiming.restrictedMove(0, -1);
+						}
+						else {
+							Game.aiming.move(0, -1);
 						}
 						break;
 					}
+	
 					break;
-				case 3: // aiming
-					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(0, -1);
-					}
-					else {
-						Game.aiming.move(0, -1);
-					}
-					break;
-				}
-
-				break;
 			case 37: // left
 				switch (Game.menu) {
-				case 0: // no menu open
-					player.move(-1, 0);
-					Game.update();
-					break;
-				case 3: // aiming					
-					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(-1, 0);
+					case 0: // no menu open
+						player.move(-1, 0);
+						Game.update();
+						break;
+					case 3: // aiming					
+						if (Game.aiming.isRestrict()) {
+							Game.aiming.restrictedMove(-1, 0);
+						}
+						else {
+							Game.aiming.move(-1, 0);
+						}
+						break;
 					}
-					else {
-						Game.aiming.move(-1, 0);
-					}
-					break;
-				}
 
 				break;
 			case 39: // right
@@ -254,161 +264,164 @@ public class GameServlet extends HttpServlet {
 				break;
 			case 40: // down
 				switch (Game.menu) {
-				case 0: // no menu open
-					player.move( 0, 1);
-					Game.update();
-					break;
-				case 1: // menu navigation
-					if (Game.select == 4) {
-						Game.select = 0;
-					}
-					else {
-						Game.select++;
-					}
-					break;
-					
-				case 2: // inner menu
-					switch (Game.select) {
-					case 0: //inventory controls
-						if (Game.innerSelect == player.getBackpack().size() - 1) {
-							Game.innerSelect = 0;
+					case 0: // no menu open
+						player.move( 0, 1);
+						Game.update();
+						break;
+					case 1: // menu navigation
+						if (Game.select == 4) {
+							Game.select = 0;
 						}
 						else {
-							Game.innerSelect++;
+							Game.select++;
 						}
 						break;
-					}
-					break;
 					
-				case 3: // aiming
-					if (Game.aiming.isRestrict()) {
-						Game.aiming.restrictedMove(0, 1);
-					}
-					else {
-						Game.aiming.move(0, 1);
-					}
-					break;
+					case 2: // inner menu
+						switch (Game.select) {
+							case 0: //inventory controls
+								if (Game.innerSelect == player.getBackpack().size() - 1) {
+									Game.innerSelect = 0;
+								}
+								else {
+									Game.innerSelect++;
+								}
+								break;
+							case 4: // level up
+								if (Game.levelUpStatSelect == 3) {
+									Game.levelUpStatSelect = 0;
+								}
+								else {
+									Game.levelUpStatSelect++;
+								}
+								break;
+						}
+						break;
 					
-				case 4: // level up
-					if (Game.levelUpStatSelect == 3) {
-						Game.levelUpStatSelect = 0;
+					case 3: // aiming
+						if (Game.aiming.isRestrict()) {
+							Game.aiming.restrictedMove(0, 1);
+						}
+						else {
+							Game.aiming.move(0, 1);
+						}
+						break;
+						
 					}
-					else {
-						Game.levelUpStatSelect++;
-					}
-					break;
-				}
 
 				break;
 			case 73: // i
 				
 				switch (Game.menu) {
 				
-				case 0:
-					// open menu
-					Game.innerSelect = 0;
-					Game.menu = 1;
-					break;
-				case 1:
-					// close menu
-					Game.menu = 0;
-					Game.select = 0;
-					Game.innerSelect = 0;
-					break;
-				default:
-					Game.menu = 1;
-				}
+					case 0:
+						// open menu
+						Game.innerSelect = 0;
+						Game.menu = 1;
+						break;
+					case 1:
+						// close menu
+						Game.menu = 0;
+						Game.select = 0;
+						Game.innerSelect = 0;
+						break;
+					default:
+						Game.menu = 1;
+					}
 				break;
 				
 			case 13: // enter
 				switch (Game.menu) {
-				case 0:
-					if (Game.onDown(player)) {
-						//System.out.println("Current Floor " + Game.floor);
-						Game.floor++;
-						System.out.println("Down one floor");
-						Game.log  = Game.actors.get(0).getName() + " went down to floor " + (10 - Game.getDungeon().length);
-						player.setX(up[0]);
-						player.setY(up[1]);
-					}
-					break;
+					case 0:
+						if (Game.onDown(player)) {
+							//System.out.println("Current Floor " + Game.floor);
+							Game.floor++;
+							System.out.println("Down one floor");
+							Game.log  = Game.actors.get(0).getName() + " went down to floor " + (10 - Game.getDungeon().length);
+							player.setX(up[0]);
+							player.setY(up[1]);
+						}
+						break;
 				
-				case 1: // menu open
-					Game.menu = 2;
-					break;
-				case 2:
-					switch (Game.select) {
-						default:
-							Game.menu = 1;
-							break;
-						case 0:
-							if (player.getBackpack().isEmpty()){
-								
-							}
-							else {
-							player.useFromBackpack(Game.innerSelect);
-							}
-							break;
-					}
-					
-				case 3: // aiming menu
-					switch (Game.aiming.getEffect()) {
-						// effect on aiming teleportation
-						case TELEPORT:
-							// used to prevent the effect from triggering right when it is selected
-							doublePress++;
+					case 1: // menu open
+						Game.menu = 2;
+						break;
+					case 2:
+						switch (Game.select) {
+							default:
+								Game.menu = 1;
+								break;
+							case 0:
+								if (player.getBackpack().isEmpty()){
+									
+								}
+								else {
+								player.useFromBackpack(Game.innerSelect);
+								}
+								break;
+							case 4:
+								Game.levelUp();
+								break;
+						}
+						break;
+					case 3: // aiming menu
+						switch (Game.aiming.getEffect()) {
+							// effect on aiming teleportation
+							case TELEPORT:
+								// used to prevent the effect from triggering right when it is selected
+								doublePress++;
+									if (doublePress == 2) {
+										Game.aiming.setShow(false);
+										Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+										doublePress = 0;
+										Game.menu = 0;
+										
+										Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getIcon(),
+												Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getColor());
+										
+										player.setX(Game.aiming.x);
+										player.setY(Game.aiming.y);
+										Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
+										Game.update();
+										
+										
+									}
+								break;
+							case RANGED:
+								doublePress++;
 								if (doublePress == 2) {
 									Game.aiming.setShow(false);
-									Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
+									Game.log = "BURN!";
 									doublePress = 0;
 									Game.menu = 0;
-									
-									Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getIcon(),
-											Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getColor());
-									
-									player.setX(Game.aiming.x);
-									player.setY(Game.aiming.y);
-									Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), player.geticon(), player.getColor());
-									Game.update();
-									
-									
+									if ((Game.aiming.getY() > player.getY()) && Game.aiming.getX() == player.getX()) { // if direction of aim is down
+										Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, 1, 20, Game.storeMagnitude));
+									}
+									else if ((Game.aiming.getY() < player.getY()) && (Game.aiming.getX() == Game.aiming.getX())) { // is direction of aim is up 
+										Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, -1, 20, Game.storeMagnitude));
+									}
+									else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() > player.getX()) { // if direction of aim is right
+										Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 1, 0, 20, Game.storeMagnitude));
+									}
+									else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() < player.getX()) { // if direction of aim is left
+										Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), -1, 0, 20, Game.storeMagnitude));
+									}
+									Game.getDungeon()[Game.floor].changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
+									//Game.actors.add(projectile);
+									Game.menu = 0;
 								}
+								break;
+						default:
 							break;
-						case RANGED:
-							doublePress++;
-							if (doublePress == 2) {
-								Game.aiming.setShow(false);
-								Game.log = "BURN!";
-								doublePress = 0;
-								Game.menu = 0;
-								if ((Game.aiming.getY() > player.getY()) && Game.aiming.getX() == player.getX()) { // if direction of aim is down
-									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, 1, 20, Game.storeMagnitude));
-								}
-								else if ((Game.aiming.getY() < player.getY()) && (Game.aiming.getX() == Game.aiming.getX())) { // is direction of aim is up 
-									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, -1, 20, Game.storeMagnitude));
-								}
-								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() > player.getX()) { // if direction of aim is right
-									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 1, 0, 20, Game.storeMagnitude));
-								}
-								else if ((Game.aiming.getY() == player.getY()) && Game.aiming.getX() < player.getX()) { // if direction of aim is left
-									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), -1, 0, 20, Game.storeMagnitude));
-								}
-								Game.getDungeon()[Game.floor].changeEntities(Game.projectiles.get(Game.projectiles.size() - 1).getY(), Game.projectiles.get(Game.projectiles.size() - 1).getX(), Game.projectiles.get(Game.projectiles.size() - 1).getIcon(), Game.projectiles.get(Game.projectiles.size() - 1).getColor());
-								//Game.actors.add(projectile);
-								Game.menu = 0;
-							}
-							break;
-					default:
-						break;
-						
 							
-					}
+								
+						}
 					
 					break; 
 					
-				case 4:  // level up
-					
-					break;
+				/*	case 4:  // level up
+						Game.levelUp();
+						break;*/
 				}
 				break;
 			case 80: // p

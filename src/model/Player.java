@@ -264,8 +264,9 @@ public class Player extends Character implements Serializable {
 	 *            The stat the player wants to increase
 	 */
 	public void levelUp(String stat) {
+		System.out.println("Level up " + stat);
 		if (exp >= expForNextLevel) {
-
+			System.out.println("Level up");
 			level++;
 
 			// Calculate overflow exp
@@ -286,7 +287,6 @@ public class Player extends Character implements Serializable {
 				break;
 			case "vitality":
 				setVitality(1 + getVitality());
-				;
 				calcHP();
 				break;
 			}

@@ -414,10 +414,10 @@ public class Game {
 		}
 		
 		// check if the player has leveled up
-	//	Player player = (Player)actors.get(0);
-	//	if(player.getExp() >= player.getExpForNextLevel()) {
-	//		Game.log = "Open the menu to level up";
-	//	}
+		Player player = (Player)actors.get(0);
+		if(player.getExp() >= player.getExpForNextLevel()) {
+			Game.log = "Open the menu to level up";
+		}
 		
 	}
 
@@ -507,24 +507,24 @@ public class Game {
 						+ "</td>");
 				break;
 			case 4:
-				// level up
+				// level up display
 				writer.print("<tr><td>LEVEL UP</td></tr>");
 				switch (levelUpStatSelect) {
-				case 0:
-					// Strength selected
-					writer.print(
-							"<tr><td>[Strength]<br>&nbsp;Agility&nbsp;<br>&nbsp;Vitality&nbsp;</td>");
-					break;
-				case 1:
-					// Agility selected
-					writer.print(
-							"<tr><td>&nbsp;Strength&nbsp;<br>[Agility]<br>&nbsp;Vitality&nbsp;</td>");
-					break;
-				case 2:
-					// Vitality selected
-					writer.print(
-							"<tr><td>&nbsp;Strength&nbsp;<br>&nbsp;Agility&nbsp;<br>[Vitality]</td>");
-					break;
+					case 0:
+						// Strength selected
+						writer.print(
+								"<tr><td>[Strength]<br>&nbsp;Agility&nbsp;<br>&nbsp;Vitality&nbsp;</td>");
+						break;
+					case 1:
+						// Agility selected
+						writer.print(
+								"<tr><td>&nbsp;Strength&nbsp;<br>[Agility]<br>&nbsp;Vitality&nbsp;</td>");
+						break;
+					case 2:
+						// Vitality selected
+						writer.print(
+								"<tr><td>&nbsp;Strength&nbsp;<br>&nbsp;Agility&nbsp;<br>[Vitality]</td>");
+						break;
 				}
 				break;
 			default:
@@ -605,8 +605,13 @@ public class Game {
 	}
 	
 	public static void levelUp() {
-		((Player)actors.get(0)).levelUp("strength");;
-		((Player)actors.get(0)).levelUp("agility");;
-		((Player)actors.get(0)).levelUp("vitality");;
+		switch(levelUpStatSelect) {
+			case 0: ((Player)actors.get(0)).levelUp("strength");
+				break;
+			case 1: ((Player)actors.get(0)).levelUp("agility");
+				break;
+			case 2:  ((Player)actors.get(0)).levelUp("vitality");
+				break;
+		}
 	}
 }
