@@ -368,7 +368,7 @@ public class Game {
 										//player.takeDamage(damage);
 										//effects(0, damage, Effect.DAMAGE_HEALTH);
 										actors.get(0).setCurHp(actors.get(0).getCurHp() - damage);
-										log = "The " + actors.get(n).getName() + " strikes " + Game.actors.get(0).getName() + " for " + damage + "damage!";
+										log = "The " + actors.get(n).getName() + " strikes " + Game.actors.get(0).getName() + " for " + damage + " damage!";
 										System.out.println("Now thats a lot of damage!");
 									} else {
 										System.out.println("The monster missed.");

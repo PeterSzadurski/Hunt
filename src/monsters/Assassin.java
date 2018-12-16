@@ -22,7 +22,7 @@ public class Assassin  extends Monster{
 
 	private static int expOnKill = 20;
 	private static int str = 3;
-	private static int agi = 13;
+	private static int agi = 12;
 	private static int vit = 2;
 
 
