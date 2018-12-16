@@ -411,7 +411,7 @@ public class Player extends Character implements Serializable {
 		else {
 			int test = this.attack(Game.actors.get(collideActor));
 			if (test != 0) {
-			Game.log = this.name + " strikes the " + Game.actors.get(collideActor).getName() + " for " + test + "damage! | " + Game.actors.get(collideActor).getCurHp() + "/" + Game.actors.get(collideActor).getHp();
+			Game.log = this.name + " strikes the " + Game.actors.get(collideActor).getName() + " for " + test + " damage! | " + Game.actors.get(collideActor).getCurHp() + "/" + Game.actors.get(collideActor).getHp();
 			}
 			else {
 				Game.log = this.name + " misses the " + Game.actors.get(collideActor).getName() + "! | " + Game.actors.get(collideActor).getCurHp() + "/" + Game.actors.get(collideActor).getHp();
