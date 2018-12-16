@@ -2,6 +2,7 @@ package monsters;
 
 import model.Armor;
 import model.Game;
+import model.Item;
 import model.Monster;
 import model.Weapon;
 import model.Items;
@@ -12,6 +13,7 @@ public class Troll  extends Monster{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static String name = "Troll";
+	private static Item[] loot = {Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.scrollMinorFrozenTime, Items.smallPotion, Items.largePotion};
 	private static int expOnKill = 15;
 	private static int str = 3;
 	private static int agi = 1;
@@ -25,7 +27,7 @@ public class Troll  extends Monster{
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y, floor);
 
 		//this.name = name;
-		
+		super.setLoot(loot);
 		super.calcDamage();
 		super.calcHP();
 		super.calcMoveSpeed();

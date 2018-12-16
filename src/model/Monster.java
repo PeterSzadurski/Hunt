@@ -11,6 +11,8 @@ public class Monster extends Character implements Serializable {
 	int id;
 
 	private int floor;
+	
+	private Item[] loot;
 
 	
 	MonsterStates state = MonsterStates.IDLE;
@@ -45,6 +47,15 @@ public class Monster extends Character implements Serializable {
 	
 	
 	
+	
+	public Item[] getLoot() {
+		return loot;
+	}
+
+	public void setLoot(Item[] loot) {
+		this.loot = loot;
+	}
+
 	public MonsterStates getState() {
 		return state;
 	}
@@ -55,6 +66,12 @@ public class Monster extends Character implements Serializable {
 
 	public int getExpOnKill() {
 		return expOnKill;
+	}
+	
+	public Item getLootItem() {
+		// will only drop items half the time
+			int choose = (int) (Math.random() * loot.length) + 0;
+			return loot[choose];
 	}
 
 	/*public int getCurrentLevel() {

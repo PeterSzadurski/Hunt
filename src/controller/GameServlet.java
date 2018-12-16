@@ -53,19 +53,12 @@ public class GameServlet extends HttpServlet {
 		 * 
 		 * System.out.println("Item 2: " + Game.smallPotion.getName());
 		 */
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
-		player.pickUp(Items.scrollTeleportation);
+		player.pickUp(Items.scrollGreaterFireball);
+		player.pickUp(Items.scrollGreaterFireball);
+		player.pickUp(Items.scrollGreaterFireball);
+		player.pickUp(Items.scrollGreaterFireball);
+		player.pickUp(Items.scrollGreaterFireball);
+
 
 		// Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
 
@@ -93,7 +86,7 @@ public class GameServlet extends HttpServlet {
 
 	// int[] location = Game.getDungeon()[Game.floor].getLocation();
 
-	int doublePress = 0;
+	int doublePress = 1;
 	int counter = 0;
 	boolean firstPrint = true;
 	// Dungeon dungeon = new Dungeon();
@@ -367,7 +360,7 @@ public class GameServlet extends HttpServlet {
 									else {
 										Game.log = "You have <span style=\"color:" + Game.magicEffectColor + "\">teleported</span>!";
 									}
-									doublePress = 0;
+									doublePress = 1;
 									Game.menu = 0;
 									
 									Game.getDungeon()[Game.floor].changeEntities(player.getY(), player.getX(), Game.getDungeon()[Game.floor].getTile(player.getY(), player.getX()).getIcon(),
@@ -386,7 +379,7 @@ public class GameServlet extends HttpServlet {
 							if (doublePress == 2) {
 								Game.aiming.setShow(false);
 								Game.log = "BURN!";
-								doublePress = 0;
+								doublePress = 1;
 								Game.menu = 0;
 								if ((Game.aiming.getY() > player.getY()) && Game.aiming.getX() == player.getX()) { // if direction of aim is down
 									Game.projectiles.add(new Projectile("red", Game.aiming.getX(), Game.aiming.getY(), 0, 1, 20, Game.storeMagnitude));

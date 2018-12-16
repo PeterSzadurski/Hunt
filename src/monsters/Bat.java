@@ -2,6 +2,8 @@ package monsters;
 
 import model.Armor;
 import model.Game;
+import model.Item;
+import model.Items;
 import model.Monster;
 import model.Weapon;
 
@@ -10,8 +12,8 @@ public class Bat  extends Monster{
 	/**
 	 * 
 	 */
-	 
 	private static final long serialVersionUID = 1L;
+	private static  Item[] loot = {Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.largePotion};
 	private static String name = "Bat";
 	private static int expOnKill = 5;
 	private static int str = 1;
@@ -29,7 +31,8 @@ public class Bat  extends Monster{
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y, floor);
 
 		//this.name = name;
-		
+		super.setLoot(loot);
+
 		super.calcDamage();
 		super.calcHP();
 		super.calcMoveSpeed();

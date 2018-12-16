@@ -195,6 +195,11 @@ public class Game {
 		return (double) agi / (double) actors.get(0).getAgility();
 	}
 
+	public static boolean coinFlip () {
+		int coinflip = (int) (Math.random() * 2) + 0;
+		return (coinflip == 0);
+	}
+	
 	public static void update() {
 
 		int turn = 1;
@@ -212,6 +217,10 @@ public class Game {
 						Game.getDungeon()[Game.floor].getTile(actors.get(n).getY(), actors.get(n).getX()).getIcon(),
 						Game.getDungeon()[Game.floor].getTile(actors.get(n).getY(), actors.get(n).getX()).getColor());
 				((Player) actors.get(0)).gainExp(((Monster) actors.get(n)).getExpOnKill());
+				if (coinFlip()) {
+					Game.itemsFloor.add(new ItemFloor (((Monster) actors.get(n)).getLootItem(), actors.get(n).getX(), actors.get(n).getY()));
+					System.out.println("Loot");
+				}
 				actors.remove(n);
 			}
 

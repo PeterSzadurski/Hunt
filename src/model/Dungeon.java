@@ -436,8 +436,7 @@ public class Dungeon {
 			for (int i = 0; i < itemRange; i++) {
 				System.out.println("Placing itemes");
 
-				//int pick = (int) (Math.random() * (itemTable.length -1)) + 0;
-				int pick = 0;
+				int pick = (int) (Math.random() * (itemTable.length -1)) + 0;
 				System.out.println("Pick: " + pick);
 				location = getLocation();
 				//System.out.println(Game.itemTable(0)[0].getName());
@@ -491,8 +490,8 @@ public class Dungeon {
 			for (int i = 0; i < itemRange; i++) {
 				System.out.println("Placing itemes");
 
-				//int pick = (int) (Math.random() * (itemTable.length -1)) + 0;
-				int pick = 0;
+				int pick = (int) (Math.random() * (itemTable1.length )) + 0;
+				
 				System.out.println("Pick: " + pick);
 				location = getLocation();
 				//System.out.println(Game.itemTable(0)[0].getName());
