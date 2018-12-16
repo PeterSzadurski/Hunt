@@ -13,7 +13,8 @@ public class Emperor  extends Monster{
 
 	
 	  
-	private static Item[] loot = {Items.scrollTeleportation, Items.scrollGreaterFireball, Items.scrollMasterFrozenTime};
+	private static Item[] loot = {Items.scrollTeleportation, Items.scrollGreaterFireball, Items.scrollMasterFrozenTime, Items.scrollTeleportation, Items.scrollGreaterFireball, Items.scrollMasterFrozenTime
+			,Items.immortalArmor, Items.holyLance};
 
 	private static final long serialVersionUID = 1L;
 	private static String name = "Emperor";
@@ -22,9 +23,9 @@ public class Emperor  extends Monster{
 	private static int agi = 25;
 	private static int vit = 15;
 
-	private static Weapon weapon = Items.royalLance;
+	private static Weapon weapon = Items.holyLance;
 
-	private static Armor armor = Items.blessedArmor;
+	private static Armor armor = Items.immortalArmor;
 	private static char icon = 'E';
 	private static String color = Game.magicEffectColor;
 

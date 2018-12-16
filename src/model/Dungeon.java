@@ -1047,7 +1047,7 @@ public class Dungeon {
 		//	System.out.println("Setting up items");
 			Item[] itemTable9 = {Items.smallPotion, Items.scrollTeleportation, Items.scrollTeleportation, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
 					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.potionMinorOfImprovement, Items.smallPotion, Items.smallPotion,
-					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.royalLance, Items.royalLance, Items.blessedArmor, Items.blessedArmor, Items.chainmail,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.royalLance, Items.royalLance, Items.blessedArmor, Items.blessedArmor, Items.chainmail, Items.immortalArmor, Items.holyLance,
 					 Items.blessedArmor, Items.scrollTeleportation, Items.blessedArmor, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
 					
 			//System.out.println("Length: " + itemTable.length);

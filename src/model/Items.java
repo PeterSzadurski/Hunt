@@ -10,6 +10,8 @@ public class Items {
 	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
 	public static Weapon steelLongblade = new Weapon("Steel Longblade", '!', 10);
 	public static Weapon royalLance = new Weapon("Royal Lance", '!', 15);
+	public static Weapon holyLance = new Weapon("Holy Lance", '!', 25);
+
 
 
 
@@ -22,6 +24,7 @@ public class Items {
 	public static Armor steelPlate = new Armor("Steel Plate", '+', 20, -1, 0);
 	public static Armor ironPlate = new Armor("Iron Plate", '+', 15, -1, 0);
 	public static Armor blessedArmor = new Armor("Blessed Armor", '+', 25, -2, 3);
+	public static Armor immortalArmor = new Armor("Immortal", '+', 50, -1, 6);
 
 	// Generate items
 	public static Item smallPotion = new Item("Small Potion", 'i',
