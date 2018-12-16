@@ -209,6 +209,14 @@ public class GameServlet extends HttpServlet {
 						Game.select--;
 					}
 					break;
+		        case 4: 
+		            if (Game.levelUpStatSelect == 0) {
+		              Game.levelUpStatSelect = 3;
+		            }
+		            else {
+		              Game.levelUpStatSelect -= 1;
+		            }
+		            break;
 				case 2: // inner menu
 					switch (Game.select) {
 					case 0: // inventory navigation
@@ -291,6 +299,14 @@ public class GameServlet extends HttpServlet {
 							Game.innerSelect++;
 						}
 						break;
+			        case 4: 
+			            if (Game.levelUpStatSelect == 3) {
+			              Game.levelUpStatSelect = 0;
+			            }
+			            else {
+			              Game.levelUpStatSelect += 1;
+			            }
+			            break;
 					}
 					break;
 					
