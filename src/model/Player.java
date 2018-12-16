@@ -154,6 +154,36 @@ public class Player extends Character implements Serializable {
 			}
 		}
 	}
+	
+	/**
+	 * For equipping things
+	 * @param index
+	 * @param type
+	 */
+	public void useFromBackpack(int index, String type) {
+		if (type.equals("armor")) {
+			Armor newArmor = (Armor)backpack.get(index);
+			Armor oldArmor = this.getArmor();
+			this.setArmor(newArmor);
+			backpack.set(index, oldArmor);
+		} else if (type.equals("weapon")) {
+			Weapon newWeapon = (Weapon)backpack.get(index);
+			Weapon oldWeapon = this.getWeapon();
+			this.setWeapon(newWeapon);
+			backpack.set(index, oldWeapon);
+		}
+
+		// this code doesn't make sense for equipping an item
+		/*if (backpack.get(index).getCount() == 1) {
+			backpack.remove(index);
+			if (Game.innerSelect >= backpack.size()) {
+				Game.innerSelect--;
+			}
+		} else {
+			backpack.get(index).subCount();
+		}*/
+		
+	}
 
 	public void setBackpack(ArrayList<Item> backpack) {
 		this.backpack = backpack;
@@ -264,9 +294,7 @@ public class Player extends Character implements Serializable {
 	 *            The stat the player wants to increase
 	 */
 	public void levelUp(String stat) {
-		System.out.println("Level up " + stat);
 		if (exp >= expForNextLevel) {
-			System.out.println("Level up");
 			level++;
 
 			// Calculate overflow exp
@@ -288,6 +316,7 @@ public class Player extends Character implements Serializable {
 			case "vitality":
 				setVitality(1 + getVitality());
 				calcHP();
+				this.setCurHp(this.getHp());
 				break;
 			}
 

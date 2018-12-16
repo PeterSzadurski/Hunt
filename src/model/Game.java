@@ -614,4 +614,19 @@ public class Game {
 				break;
 		}
 	}
+	
+	public static void equipArmor() {
+		int oldArmorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
+		((Player)actors.get(0)).useFromBackpack(innerSelect, "armor");
+		((Player)actors.get(0)).calcHP();
+		int curHp = ((Player)actors.get(0)).getCurHp();
+		int armorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
+		((Player)actors.get(0)).setCurHp(curHp - oldArmorRating + armorRating);
+		
+	}
+	
+	public static void equipWeapon() {
+		((Player)actors.get(0)).useFromBackpack(innerSelect, "weapon");
+		((Player)actors.get(0)).calcDamage();
+	}
 }

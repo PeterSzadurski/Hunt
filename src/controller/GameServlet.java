@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,13 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.net.Acceptor.AcceptorState;
+
 import dao.PlayerDAO;
+import model.Armor;
 import model.Dungeon;
 import model.Game;
+import model.Item;
 import model.ItemFloor;
 import model.Monster;
 import model.Player;
 import model.Projectile;
+import model.Weapon;
 import monsters.*;
 import util.ServletUtil;
 
@@ -141,8 +147,13 @@ public class GameServlet extends HttpServlet {
 	   	    player.calcHP();
 	   	    player.calcMoveSpeed();
 	   	    
-	   	    // code for debugging level up
-	   	    player.setExp(12);
+	   	    // code for debugging equip
+	   	    ArrayList<Item> pack = new ArrayList<>();
+	   	    Weapon sword = new Weapon("sword", '!', 10);
+	   	    Armor armor = new Armor("chainmail", '#', 40);
+	   	    pack.add(sword);
+	   	    pack.add(armor);
+	   	    player.setBackpack(pack);
 		}
 		
 		int dead = Game.actors.get(0).getCurHp();
@@ -356,7 +367,17 @@ public class GameServlet extends HttpServlet {
 									
 								}
 								else {
-								player.useFromBackpack(Game.innerSelect);
+									if (player.getBackpack().get(Game.innerSelect) instanceof Armor) {
+										// equip armor
+										System.out.println("equip armor");
+										Game.equipArmor();
+									} else if (player.getBackpack().get(Game.innerSelect) instanceof Weapon) {
+										// equip weapon
+										System.out.println("equip weapon");
+										Game.equipWeapon();
+									} else {
+										player.useFromBackpack(Game.innerSelect);									
+									}
 								}
 								break;
 							case 4:
