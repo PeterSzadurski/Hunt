@@ -369,7 +369,7 @@ public class GameServlet extends HttpServlet {
 					else if (Game.onUp(player)) {
 						if (Game.floor == 0) {
 							if (player.getBackpack().contains(Items.winItem)) {
-								Game.log = "Dave wins!";
+								Game.log = player.getName() + " wins!";
 							}
 							else Game.log = "You compel yourself to search for treasure before giving up";
 						}

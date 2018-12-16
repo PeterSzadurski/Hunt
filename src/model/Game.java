@@ -182,6 +182,7 @@ public class Game {
 			break;
 		case WIN_ITEM:
 			Game.log = "There's a time and place for everything, but not now";
+			ifUsed = false;
 			break;
 			
 		default:
@@ -220,12 +221,15 @@ public class Game {
 	
 	public static void update() {
 		
-		if (Game.actors.size() < 5 && coinFlip()) {
+		
+		// reinforcements
+		if (Game.actors.size() < 10 && coinFlip()) {
 			int[] spawn;
 			if (((Player)actors.get(0)).getBackpack().contains(Items.winItem)) {
 				spawn = dungeon[floor].getLocation();
 				actors.add(new RoyalGuard(spawn[1], spawn[0], floor));
 			}
+			else {
 			switch (floor) {
 			// spawn fodder monsters
 			case 0:
@@ -269,6 +273,7 @@ public class Game {
 				actors.add(new RoyalGuard(spawn[1], spawn[0], floor));
 				break;
 			}
+		}
 		}
 
 		int turn = 1;

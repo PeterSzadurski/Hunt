@@ -30,7 +30,7 @@ public class Ninja  extends Monster{
 	private static Weapon weapon = Items.ironLongblade;
 	private static Armor armor = null;
 	private static char icon = 'N';
-	private static String color ="#ffffff";
+	private static String color ="##C0C0C0";
 
 
 

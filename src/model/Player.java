@@ -183,7 +183,12 @@ public class Player extends Character implements Serializable {
 			this.setWeapon(newWeapon);
 			backpack.remove(index);
 			if (oldWeapon.getName().equals("No Weapon")) {
+				if (backpack.get(0).getName().equals("No Armor")) {
 				backpack.add(1, oldWeapon);
+				}
+				else {
+					backpack.add(0, oldWeapon);
+				}
 			}
 			else {
 				backpack.add(index, oldWeapon);

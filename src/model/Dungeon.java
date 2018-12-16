@@ -984,16 +984,16 @@ public class Dungeon {
 			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
 			location = getLocation();
 			actors.add(new Emperor(location[1], location[0], index));
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 19; i++) {
 				rand = (int) (Math.random() * 13) + 0;
 				switch (rand) {
 				default:
 					location = getLocation();
-					actors.add(new Assassin(location[1], location[0], index));
+					actors.add(new RoyalGuard(location[1], location[0], index));
 					break;
 				case 0:
 					location = getLocation();
-					actors.add(new Vampire(location[1], location[0], index));
+					actors.add(new RoyalGuard(location[1], location[0], index));
 					break;
 				case 2:
 					location = getLocation();
@@ -1006,7 +1006,7 @@ public class Dungeon {
 					
 				case 4:
 					location = getLocation();
-					actors.add(new Assassin(location[1], location[0], index));
+					actors.add(new RoyalGuard(location[1], location[0], index));
 					break;
 				case 5:
 					location = getLocation();

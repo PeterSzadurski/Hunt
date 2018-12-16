@@ -30,7 +30,7 @@ public class RoyalGuard  extends Monster{
 	private static Weapon weapon = Items.royalLance;
 	private static Armor armor = Items.blessedArmor;
 	private static char icon = 'R';
-	private static String color = Game.magicEffectColor;
+	private static String color = "#FF00FF";
 
 
 
@@ -41,6 +41,8 @@ public class RoyalGuard  extends Monster{
 		
 		//this.name = name;
 		super.setLoot(loot);
+		super.calcStrength();
+		super.calcAgility();
 		super.calcDamage();
 		super.calcHP();
 		super.calcMoveSpeed();

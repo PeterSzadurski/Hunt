@@ -5,7 +5,7 @@ public class Items {
 
 	// Generate weapons
 
-	public static Weapon club = new Weapon("club", '!', 5);
+	public static Weapon club = new Weapon("Club", '!', 5);
 	public static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
 	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
 	public static Weapon steelLongblade = new Weapon("Steel Longblade", '!', 10);
@@ -19,12 +19,12 @@ public class Items {
 	// Generate armors
 
 	public static Armor clothes = new Armor("Clothes", '+', 1, 0, 0);
-	public static Armor lightLeather = new Armor("Light Leather", '+', 5, 0, 0);
+	public static Armor lightLeather = new Armor("Light Leather", '+', 5, 1, 0);
 	public static Armor chainmail = new Armor("Chainmail", '+', 10, 0, 0);
 	public static Armor steelPlate = new Armor("Steel Plate", '+', 20, -1, 0);
 	public static Armor ironPlate = new Armor("Iron Plate", '+', 15, -1, 0);
 	public static Armor blessedArmor = new Armor("Blessed Armor", '+', 25, -2, 3);
-	public static Armor immortalArmor = new Armor("Immortal", '+', 50, -1, 6);
+	public static Armor immortalArmor = new Armor("Immortal Armor", '+', 50, -1, 6);
 
 	// Generate items
 	public static Item smallPotion = new Item("Small Potion", 'i',
