@@ -504,7 +504,7 @@ public class GameServlet extends HttpServlet {
 				}
 				break;
 			// these are for debugging, will be removed
-			 case 220:
+		/*	 case 220:
 			//	Game.smallPoison.use(0);;
 				break;
 			case 221:
@@ -536,7 +536,7 @@ public class GameServlet extends HttpServlet {
 			case 17:
 			//	player.getBackpack().clear();
 				break;
-		}
+		*/}
 		Game.display(out);
 		
 		
