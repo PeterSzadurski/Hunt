@@ -17,7 +17,7 @@ function updatePoints() {
 	var str = document.getElementById("str").value;
 	var agi = document.getElementById("agi").value;
 	var vit = document.getElementById("vit").value;
-	numPoints = numPoints - str - agi - vit;
+	numPoints = numPoints - str - agi - vit + 3;
 	
 	// prevent player from making the character if they used too many (or too few) points
 	if (numPoints != 0) {
@@ -79,13 +79,13 @@ function finish() {
 		<td>Points Remaining:</td><td id="pointsLeft">5</td>
 	</tr>
 	<tr>
-		<td>Strength:</td><td><input type="number" id="str" name="str" value=0 onchange="updatePoints()"></td>
+		<td>Strength:</td><td><input type="number" id="str" name="str" value=1 onchange="updatePoints()"></td>
 	</tr>
 	<tr>
-		<td>Agility:</td><td><input type="number" id="agi" name="agi" value=0 onchange="updatePoints()"></td>
+		<td>Agility:</td><td><input type="number" id="agi" name="agi" value=1 onchange="updatePoints()"></td>
 	</tr>
 	<tr>
-		<td>Vitality:</td><td><input type="number" id="vit" name="vit" value=0 onchange="updatePoints()"></td>
+		<td>Vitality:</td><td><input type="number" id="vit" name="vit" value=1 onchange="updatePoints()"></td>
 	</tr>
 	<tr>
 		<td></td><td><input type="button" value="Finish" onclick="finish()"></td>

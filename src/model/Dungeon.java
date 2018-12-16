@@ -4,40 +4,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import monsters.*;
-<<<<<<< HEAD
-
-public class Dungeon {
-	
-//<<<<<<< HEAD
-	private int dungeonID;
-/*	
-	Tile wall = new Tile(' ', true, "#878787", "wall");
-	Tile floor = new Tile('.', false, "#878787", "floor");
-	Tile path = new Tile('#', false, "#878787", "path");
-	Tile layout[][] = {
-			{wall, floor, floor, floor, floor, wall, floor, floor, floor, wall},
-			{floor, floor, floor, floor, wall, wall, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{wall, wall, wall, wall, path, path, wall, wall, wall, wall},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor},
-			{floor, floor, floor, floor, floor, floor, floor, floor, floor, floor}
-	};
-*/	
-	//Entity entities[][] = new Entity [10][10];
-	
-	public Dungeon() {
-	}
-//=======
-=======
 import model.Game;
 
 public class Dungeon {
 	
->>>>>>> test_branch
 	//Dungeon[] dungeon = new Dungeon[10];// array of dungeons
 	
 	
@@ -47,19 +17,12 @@ public class Dungeon {
 	Tile upFloor = new Tile('%',false, "#009900", "upFloor");//green
 	Tile downFloor = new Tile('%',false, "#000099", "downFloor");//blue
 	Tile layout[][] = new Tile[50][50];
-<<<<<<< HEAD
-//>>>>>>> menu
-
-	Entity entities[][] = new Entity [50][50];
-	
-=======
 
 	Entity entities[][] = new Entity [50][50];
 	
 	ArrayList<Character> actors = new ArrayList<Character>();
 	ArrayList <ItemFloor> dungeonItems = new ArrayList<ItemFloor>();
 	
->>>>>>> test_branch
 	public Dungeon(int index) {
 	
 		for(int i = 0; i < layout[0].length; i++) {
@@ -275,96 +238,15 @@ public class Dungeon {
 			for (int n = 0; n < entities[1].length; n++) {
 				//entities[i][n].setIcon(layout[i][n].getIcon());
 				
-<<<<<<< HEAD
-//<<<<<<< HEAD
-				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor(), layout[i][n].getType()); 				
-//=======
-				//entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor()); 				
-//>>>>>>> menu
-=======
 				entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor(), null); 				
->>>>>>> test_branch
 				//entities[i][n].setColor(layout[i][n].getColor());
 				//entities[i][n].setSolid(false);
 			}
 		}
-<<<<<<< HEAD
-//<<<<<<< HEAD
-	} // end of no param constructor
-	
-	// constructor for using layout from database
-	public Dungeon(ArrayList<String> layout) {
-		
-		ArrayList<ArrayList<Tile>> dungeon = new ArrayList<ArrayList<Tile>>();
-		
-		// loop through layout
-		for(int i = 0; i < layout.size(); i++) {
-			// get row from passed arraylist
-			String row = (String) layout.get(i);
-			
-			// split row into array on ","
-			String[] array = row.split(",");
-			
-			// tile arraylist to hold row values changed to respective tile type (wall or floor)
-			ArrayList<Tile> rowTiles = new ArrayList<Tile>();
-			
-			// loop through strings in array
-			for(String str: array) {
-				
-				// check if string equals wall
-				if (str.equals("wall")) {
-					
-					// create a wall tile
-					Tile wall = new Tile('#', true, "#878787", "wall");
-					
-					// add wall tile to tile arraylist
-					rowTiles.add(wall);
-					
-				// check if string equals floor 
-				} else if(str.equals("floor")) {
-					
-					// create a floor tile
-					Tile floor = new Tile('.', false, "#878787", "floor");
-					
-					// add floor tile to tile arraylist
-					rowTiles.add(floor);
-					
-				}
-			}
-			
-			dungeon.add(rowTiles);
-		}
-		
-		for(int i = 0; i < dungeon.size(); i++) {
-			System.out.println("");
-			for(int j = 0; j < dungeon.get(i).size(); j++) {
-				System.out.print(dungeon.get(i).get(j).toString());
-			}
-		}
-		
-	} // end of dungeon(ArrayList layout) constructor
-	
-	
-	public int getDungeonID() {
-		return dungeonID;
-=======
 		populate (index);
 		
->>>>>>> test_branch
 	}
-
-	public void setDungeonID(int dungeonID) {
-		this.dungeonID = dungeonID;
-	}
-
-//=======
-		
-//	}
 	
-	
-<<<<<<< HEAD
-//>>>>>>> menu
-=======
 	
 	public ArrayList<Character> getActors() {
 		return actors;
@@ -376,7 +258,6 @@ public class Dungeon {
 	}
 
 
->>>>>>> test_branch
 	public int getWidth() {
 		return layout[0].length;
 	}
@@ -421,7 +302,7 @@ public class Dungeon {
 	}
 	
 	public void firstPrint(PrintWriter writer) {
-		writer.print("<tr><td>");
+		writer.print("<td>");
 		writer.print("<div id =\"screen\" class=\"grid\">");
 		for (int row = 0; row < entities[0].length; row++) {
 			for (int column = 0; column < entities[1].length; column++) {
@@ -432,7 +313,7 @@ public class Dungeon {
 					writer.print("<div style=\"color:"  + 
 						entities[row][column].getColor() + "\">" + entities[row][column].getIcon() + "</div>");
 					}
-				//System.out.print(entities[row][column]);
+					//System.out.print(entities[row][column]);
 
 					
 
@@ -451,11 +332,6 @@ public class Dungeon {
 		//System.out.println("x: " + actors.get(0).getX() + "y: " + actors.get(0).getY());
 		writer.println("</div>");
 		writer.print("</td></tr>");
-	}
-
-	public String getLayoutAsStr() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 
@@ -509,49 +385,17 @@ public class Dungeon {
 		return down;
 	}
 	
-<<<<<<< HEAD
-	public void populate () {
-		int rand;
-		int itemRange;
-		int[] location = Game.getDungeon()[Game.floor].getLocation();
-		switch (Game.floor) {
-=======
 	public void populate (int index) {
 		int rand;
 		int itemRange;
 		int[] location = getLocation();
 		switch (index) {
->>>>>>> test_branch
 		// place monsters and in the dungeon
 		case 0:
 			for (int i = 0; i < 10; i++) {
 				rand = (int) (Math.random() * 6) + 0;
 				switch (rand) {
 				default:
-<<<<<<< HEAD
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Bat(location[1], location[0]));
-					break;
-				case 0:
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Goblin(location[1], location[0]));
-					break;
-				case 2:
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Goblin(location[1], location[0]));
-					break;
-				case 3: 
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Bat(location[1], location[0]));
-					break;
-				case 4:
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Bat(location[1], location[0]));
-					break;
-				case 5:
-					location = Game.getDungeon()[Game.floor].getLocation();
-					Game.addActors(new Troll(location[1], location[0]));
-=======
 					location = getLocation();
 					actors.add(new Bat(location[1], location[0], index));
 					break;
@@ -574,23 +418,12 @@ public class Dungeon {
 				case 5:
 					location = getLocation();
 					actors.add(new Troll(location[1], location[0], index));
->>>>>>> test_branch
 					break;
 				}
 			}
 			
 			itemRange = (int) (Math.random() * 5) + 2;
 			System.out.println("Setting up items");
-<<<<<<< HEAD
-			for (int i = 0; i < itemRange; i++) {
-				System.out.println("Placing itemes");
-				int pick = (int) (Math.random() * (Game.itemTable().length -1)) + 0;
-				location = Game.getDungeon()[Game.floor].getLocation();
-				Game.itemsFloor.add(new ItemFloor(Game.itemTable()[pick], location[1], location[0]));
-				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
-			}
-			
-=======
 			//System.out.println("Item: " +
 			//Items.smallPotion.getName());
 			//Item[] itemTable = Game.itemTable(0);
@@ -674,15 +507,11 @@ public class Dungeon {
 		case 9:
 			location = getLocation();
 			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
->>>>>>> test_branch
 			break;
 		default:
 			break;
 		}
 	}
-<<<<<<< HEAD
-}
-=======
 
 
 	public ArrayList<ItemFloor> getDungeonItems() {
@@ -694,4 +523,3 @@ public class Dungeon {
 		this.dungeonItems = dungeonItems;
 	}
 }
->>>>>>> test_branch

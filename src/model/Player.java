@@ -70,7 +70,7 @@ public class Player extends Character implements Serializable {
 			int hunger, ArrayList<Item> backpack, char icon, String color, int x, int y) {
 
 		super(name, str, agi, vit, weapon, armor, icon, color, x, y);
-
+		
 		this.name = name;
 		this.level = level;
 		this.hunger = hunger;
@@ -393,8 +393,13 @@ public class Player extends Character implements Serializable {
 		}
 
 		else {
-			Game.log = (Game.actors.get(collideActor).getName() + ": HP: " + Game.actors.get(collideActor).getCurHp()
-					+ "/" + Game.actors.get(collideActor).getHp());
+			int test = this.attack(Game.actors.get(collideActor));
+			if (test != 0) {
+			Game.log = this.name + " strikes the " + Game.actors.get(collideActor).getName() + " for " + test + "damage! | " + Game.actors.get(collideActor).getCurHp() + "/" + Game.actors.get(collideActor).getHp();
+			}
+			else {
+				Game.log = this.name + " misses the " + Game.actors.get(collideActor).getName() + "! | " + Game.actors.get(collideActor).getCurHp() + "/" + Game.actors.get(collideActor).getHp();
+			}
 		}
 	}
 	

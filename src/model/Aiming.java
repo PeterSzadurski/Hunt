@@ -73,28 +73,15 @@ public class Aiming {
 			// if inside the Dungeon bounds
 			if ((this.x + x) < Game.getDungeon()[Game.floor].getWidth() && (this.x + x > -1) && (this.y + y) < Game.getDungeon()[Game.floor].getHeight() && (this.y + y > -1)) {
 				// check if not solid
-<<<<<<< HEAD
-				if (Game.getDungeon()[Game.floor].getTile(this.y + y, this.x + x).isSolid() == false) {
-=======
 
->>>>>>> test_branch
 					this.x += x;
 					this.y += y;
 					
 					//Game.log = ("Move Freely");
 
-<<<<<<< HEAD
-				}
-
-				else {
-					//System.out.println("solid");
-					//Game.log = ("Cannot Move");
-				}
-=======
 				
 
 
->>>>>>> test_branch
 			}
 			// Game.update(d);
 			//System.out.println("X: " + this.x + " Y: " + this.y);

@@ -4,10 +4,9 @@ import model.Armor;
 import model.Game;
 import model.Monster;
 import model.Weapon;
-<<<<<<< HEAD
-=======
+
 import model.Items;
->>>>>>> test_branch
+
 
 public class Knight  extends Monster{
 
@@ -20,24 +19,19 @@ public class Knight  extends Monster{
 	private static int str = 7;
 	private static int agi = 2;
 	private static int vit = 10;
-<<<<<<< HEAD
-	private static Weapon weapon = Game.ironLongblade;
-=======
+
 	private static Weapon weapon = Items.ironLongblade;
->>>>>>> test_branch
+
 	private static Armor armor = null;
 	private static char icon = 'K';
 	private static String color ="#FFFAF0";
 
 
 
-<<<<<<< HEAD
-	public Knight(int x, int y) {
-		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y);
-=======
+
 	public Knight(int x, int y, int floor) {
 		super(name, expOnKill, str, agi, vit, weapon, armor, icon, color, x, y, floor);
->>>>>>> test_branch
+
 
 		//this.name = name;
 		

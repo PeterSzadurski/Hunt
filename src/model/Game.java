@@ -2,7 +2,6 @@ package model;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
 
@@ -17,10 +16,7 @@ public class Game {
 	//dungeon[0] = new Dungeon(0);
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> test_branch
 
 	public  Game() {
 		  //  for (int i = 0; i < 10; i++) {
@@ -39,73 +35,18 @@ public class Game {
 	public static int menu = 0;
 	public static int select = 0;
 	public static int innerSelect = 0;
-	public static int levelUpStatSelect = 0;
 	static boolean ifUsed = false;
 	static int timeFreeze = 0;
-<<<<<<< HEAD
-	static final String buffColor = "#00baff";
-	static final String debuffColor = "#ff0000";
-	public static final String magicEffectColor = "#9e00d8";
-	public static int floor;
-
-    
-	// Generate weapons
-
-	public static Weapon club = new Weapon("club", '!', 5);
-	static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
-	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
-
-
-	public static Aiming aiming = new Aiming(0, 0);
-=======
+	public static int levelUpStatSelect = 0;
 	
 	public static ArrayList<ItemFloor> getItemsFloor() {
 		return itemsFloor;
 	}
->>>>>>> test_branch
 
 	public static void setItemsFloor(ArrayList<ItemFloor> itemsFloor) {
 		Game.itemsFloor = itemsFloor;
 	}
 
-<<<<<<< HEAD
-	public static Armor clothes = new Armor("Clothes", '+', 1);
-	public static Armor lightLeather = new Armor("Light Leather", '+', 5);
-	public static Armor chainmail = new Armor("Chainmail", '+', 10);
-	public static Armor steelPlate = new Armor("Steel Plate", '+', 20);
-	public static Armor ironPlate = new Armor("Iron Plate", '+', 15);
-
-	// Generate items
-	public static Item smallPotion = new Item("Small Potion", 'i',
-			"<span style = \"color:" + buffColor + "\">Restores</span> 10HP", 10, Effect.RESTORE_HEALTH, null);
-	public static Item largePotion = new Item("Large Potion", 'i',
-			"<span style = \"color:" + buffColor + "\">Restores</span> 50HP", 50, Effect.RESTORE_HEALTH, null);
-	public static Item smallPoison = new Item("Small Poison", 'i',
-			"<span style = \"color:" + debuffColor + "\">Damages</span> 15HP", 15, Effect.DAMAGE_HEALTH, null);
-	public static Item scrollTeleportation = new Item("Scroll of Teleportation", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Teleports</span> the user", 0, Effect.TELEPORT, null);
-	public static Item scrollFireball = new Item("Scroll of Fireball", 'i',
-			"Scorches the enemy for <span style=\"color:" + debuffColor + "\">25 damage</span>", -25, Effect.RANGED,
-			Effect.DAMAGE_HEALTH);
-	public static Item scrollGreaterFireball = new Item("Scroll of Greater Fireball", 'i',
-			"Scorches the enemy for <span style=\"color:" + debuffColor + "\">100 damage</span>", -100, Effect.RANGED,
-			Effect.DAMAGE_HEALTH);
-	public static Item scrollMinorFrozenTime = new Item("Scroll of Minor Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 5 turns", 5, Effect.STOP_TIME,
-			null);
-	public static Item scrollFrozenTime = new Item("Scroll of Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 8 turns", 8, Effect.STOP_TIME,
-			null);
-	public static Item scrollGreaterFrozenTime = new Item("Scroll of Greater Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 14 turns", 14, Effect.STOP_TIME,
-			null);
-	public static Item scrollMasterFrozenTime = new Item("Scroll of Master Frozen Time", 'i',
-			"<span style = \"color: " + magicEffectColor + "\">Freezes time</span> for 50 turns", 50, Effect.STOP_TIME,
-			null);
-	public static Item potionMinorOfImprovement = new Item("Minor Potion of Improvement", 'i',
-			"<span style = \"color: " + buffColor + "\">Raises a random stat</span> by 1 point", 1, Effect.RANDOM_RAISE,
-			null);
-=======
 
 	static final String buffColor = "#00baff";
 	static final String debuffColor = "#ff0000";
@@ -114,7 +55,6 @@ public class Game {
 	public static Aiming aiming = new Aiming(0, 0);
     
 
->>>>>>> test_branch
 
 	// effects methods
 	public static void effects(int target, int magnitude, Effect effect) {
@@ -158,10 +98,7 @@ public class Game {
 			ifUsed = true;
 			break;
 		case RANDOM_RAISE:
-<<<<<<< HEAD
-=======
 			Game.menu = 2;
->>>>>>> test_branch
 			int rand = (int) (Math.random() * 2) + 0;
 			switch (rand) {
 			case 0: // raise vitality
@@ -200,10 +137,7 @@ public class Game {
 			ifUsed = true;
 			break;
 			}
-<<<<<<< HEAD
-=======
 			break;
->>>>>>> test_branch
 		case TELEPORT:
 			Game.aiming.setRestrict(false);
 			Game.menu = 3;
@@ -227,10 +161,7 @@ public class Game {
 			ifUsed = true;
 			break;
 		case STOP_TIME:
-<<<<<<< HEAD
-=======
 			Game.menu = 2;
->>>>>>> test_branch
 			if (timeFreeze == 0) {
 				Game.log = "Time has stopped!";
 				timeFreeze = magnitude;
@@ -265,14 +196,11 @@ public class Game {
 		return (double) agi / (double) actors.get(0).getAgility();
 	}
 
-<<<<<<< HEAD
-=======
 	public static boolean coinFlip () {
 		int coinflip = (int) (Math.random() * 2) + 0;
 		return (coinflip == 0);
 	}
 	
->>>>>>> test_branch
 	public static void update() {
 
 		int turn = 1;
@@ -290,13 +218,10 @@ public class Game {
 						Game.getDungeon()[Game.floor].getTile(actors.get(n).getY(), actors.get(n).getX()).getIcon(),
 						Game.getDungeon()[Game.floor].getTile(actors.get(n).getY(), actors.get(n).getX()).getColor());
 				((Player) actors.get(0)).gainExp(((Monster) actors.get(n)).getExpOnKill());
-<<<<<<< HEAD
-=======
 				if (coinFlip()) {
 					Game.itemsFloor.add(new ItemFloor (((Monster) actors.get(n)).getLootItem(), actors.get(n).getX(), actors.get(n).getY()));
 					System.out.println("Loot");
 				}
->>>>>>> test_branch
 				actors.remove(n);
 			}
 
@@ -318,7 +243,6 @@ public class Game {
 					}
 					if (projectiles.get(p).isSetDestroy()) {
 						projectiles.remove(p);
-<<<<<<< HEAD
 					}
 
 				}
@@ -366,76 +290,7 @@ public class Game {
 							break;
 						case TEST:
 							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-								// When the monster is within range, it moves towards the player
-								Game.log = "Within Range";
-								Player player = (Player)actors.get(0);
-								int pX = player.getX();
-								int pY = player.getY();
-								Monster m = (Monster)actors.get(n);
-								int mX = m.getX();
-								int mY = m.getY();
-								
-								boolean sameRow = (pY==mY) ? true: false;
-								boolean sameCol = (pX==mX) ? true: false;
-								
-								// check if the monster is next to the player and attack if so
-								if ((sameCol && (mY==pY+1 || mY==pY-1)) || (sameRow && (mX==pX+1|| mX==pX-1))) {
-									// attack the player
-									int damage = ((Monster)actors.get(n)).attack(player.getAgility());
-									if(damage!=0) {
-										//player.takeDamage(damage);
-										effects(0, damage, Effect.DAMAGE_HEALTH);
-										log = ((Monster)actors.get(n)).getName() + " dealt " + damage + " points of damage to you.";
-									} else {
-										System.out.println("The monster missed.");
-									}
-									// player takes damage
-									
-								} else {
-									// move closer if not adjacent
-									if (sameRow) {
-										// move horizontally
-										if(pX < mX) {
-											actors.get(n).move(-1, 0);
-										} else if (pX > mX) {
-											actors.get(n).move(1, 0);
-										} else {
-											System.out.println("Something's wrong with enemy movement");
-										}
-										
-									} else if (sameCol) {
-										// move horizontally
-										if(pY < mY) {
-											actors.get(n).move(0, -1);
-										} else if (pY > mY) {
-											actors.get(n).move(0, 1);
-										} else {
-											System.out.println("Something's wrong with enemy movement");
-										}
-									} else {
-										// not in same row or col
-										// move horizontally or vertically (random)
-										Random rand2 = new Random();
-										int axis = rand2.nextInt(2);  // 0 = x-axis, 1 = y-axis
-										
-										if(axis == 0) {
-											// move along the x-axis
-											if (pX < mX) {
-												actors.get(n).move(-1, 0);
-											} else if (pX > mX) {
-												actors.get(n).move(1, 0);
-											}
-										} else {
-											//move along the y-axis
-											if (pY < mY) {
-												actors.get(n).move(0, -1);
-											} else if (pY > mY) {
-												actors.get(n).move(0, 1);
-											}
-										}
-									}
-								}
-								
+								//Game.log = "Within Range";
 							} else {
 								((Monster) actors.get(n)).setState(MonsterStates.IDLE);
 							}
@@ -455,75 +310,6 @@ public class Game {
 				Game.log = "Time has begun to move again!";
 			}
 		}
-=======
-					}
-
-				}
-			}
-
-			for (int n = 1; n < actors.size(); n++) {
-				// System.out.println("First: " + turnRate(n) + " " + actors.get(n).getName());
-				// System.out.println(actors.get(n).getName() + " AGI = " +
-				// actors.get(n).getAgility());
-
-				// find how close the monster is to move in a turn
-				((Monster) actors.get(n))
-						.setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(actors.get(n).getAgility()));
-
-				if (((Monster) actors.get(n)).getTurnCount() >= turn) {
-					for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
-
-						switch (((Monster) actors.get(n)).getState()) {
-						default:
-							break;
-						case IDLE:
-							int rand = (int) (Math.random() * 4) + 0;
-							// System.out.println("choice: " + rand );
-
-							switch (rand) {
-							case 0:
-								actors.get(n).move(0, 1);
-								break;
-							case 1:
-								actors.get(n).move(0, -1);
-								break;
-							case 2:
-								actors.get(n).move(1, 0);
-								break;
-							case 3:
-								actors.get(n).move(-1, 0);
-								break;
-							default:
-								// stand still
-								break;
-							}
-							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-								((Monster) actors.get(n)).setState(MonsterStates.TEST);
-							}
-							break;
-						case TEST:
-							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-								Game.log = "Within Range";
-							} else {
-								((Monster) actors.get(n)).setState(MonsterStates.IDLE);
-							}
-							break;
-						}
-						// System.out.println(turnRate(n) + " " + actors.get(n).getName());
-
-					}
-					((Monster) actors.get(n)).setTurnCount(0);
-				}
-
-			}
-		}
-		else {
-			timeFreeze--;
-			if (timeFreeze == 0) {
-				Game.log = "Time has begun to move again!";
-			}
-		}
->>>>>>> test_branch
 		
 		// }
 
@@ -532,27 +318,6 @@ public class Game {
 				if (itemsFloor.get(i).getX() == actors.get(0).getX()
 						&& itemsFloor.get(i).getY() == actors.get(0).getY()) {
 					log = "Item: " + itemsFloor.get(i).getItem().getName();
-<<<<<<< HEAD
-				}
-			}
-		}
-		
-		// check if player is alive
-		if(actors.get(0).getCurHp() <= 0) {
-			Game.log = "You died.";
-			// remove player from database
-			
-			// redirect to youdied.html?
-			
-		}
-		
-		// check if the player has leveled up
-		Player player = (Player)actors.get(0);
-		if(player.getExp() >= player.getExpForNextLevel()) {
-			Game.log = "Open the menu to level up";
-		}
-		
-=======
 					System.out.println("Item: " + i);
 					System.out.println("Item Name " + itemsFloor.get(i).getItem());
 					System.out.println("Item Name2 " + itemsFloor.get(i).getItem().getName());
@@ -561,17 +326,12 @@ public class Game {
 				}
 			}
 		}
->>>>>>> test_branch
 	}
 
 	public static void start() {
 
 		for (int i = 0; i < itemsFloor.size(); i++) {
-<<<<<<< HEAD
-			d.changeEntities(itemsFloor.get(i).getY(), itemsFloor.get(i).getX(), itemsFloor.get(i).getIcon(),
-=======
 			dungeon[floor].changeEntities(itemsFloor.get(i).getY(), itemsFloor.get(i).getX(), itemsFloor.get(i).getIcon(),
->>>>>>> test_branch
 					itemsFloor.get(i).getColor());
 		}
 		for (int i = 0; i < actors.size(); i++) {
@@ -591,17 +351,6 @@ public class Game {
 	}
 	
 	public static void addPlayer(Player p) {
-<<<<<<< HEAD
-		if (actors.isEmpty()) {
-			actors.add(0,p);
-		} else {
-			actors.remove(0);
-			actors.add(0,p);
-		}
-	}
-
-	public static void display(PrintWriter writer) {
-=======
 		actors.add(0,p);
 	}
 
@@ -620,23 +369,29 @@ public class Game {
 			case 0:
 				// inventory selected
 				writer.print(
-						"<tr><td>[Inventory]<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>[Inventory]<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 1:
-				// save selected
+				// magic selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>[Save]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>[Magic]<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 2:
 				// Stats selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>[Stats]<br>&nbsp;Sign Out&nbsp;<br>&nbsp;Level Up&nbsp;</td>");
 				break;
 			case 3:
 				// sign out selected
 				writer.print(
-						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Save&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]</td>");
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>[Sign Out]<br>&nbsp;Level Up&nbsp;</td>");
 				break;
+			case 4:
+				// level up
+				writer.print(
+						"<tr><td>&nbsp;Inventory&nbsp;<br>&nbsp;Magic&nbsp;<br>&nbsp;Stats&nbsp;<br>&nbsp;Sign Out&nbsp;<br>[Level Up]</td>");
+				break;
+			
 			}
 			break;
 		case 2:
@@ -651,6 +406,28 @@ public class Game {
 				break;
 			case 2:
 				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");
+				break;
+			
+			case 4: // level up
+				writer.print("<tr><td>LEVEL UP</td></tr>");
+				switch (levelUpStatSelect) {
+					case 0:
+						// Strength selected
+						writer.print(
+								"<tr><td>[Strength]<br>&nbsp;Agility&nbsp;<br>&nbsp;Vitality&nbsp;</td>");
+						break;
+					case 1:
+						// Agility selected
+						writer.print(
+								"<tr><td>&nbsp;Strength&nbsp;<br>[Agility]<br>&nbsp;Vitality&nbsp;</td>");
+						break;
+					case 2:
+						// Vitality selected
+						writer.print(
+								"<tr><td>&nbsp;Strength&nbsp;<br>&nbsp;Agility&nbsp;<br>[Vitality]</td>");
+						break;
+				}
+				
 				break;
 			default:
 				writer.print("<tr><td>PLACEHOLDER</td>");
@@ -673,7 +450,6 @@ public class Game {
 	}
 	
 	public static void clear(PrintWriter writer) {
->>>>>>> test_branch
 
 		String insert = "";
 
@@ -758,14 +534,10 @@ public class Game {
 			insert = "";
 			break;
 		}
-<<<<<<< HEAD
-		Game.getDungeon()[Game.floor].firstPrint(writer);
-=======
 		//Game.getDungeon()[Game.floor].firstPrint(writer);
 		writer.print("<td>");
 		writer.println("</div>");
 		writer.print("</td></tr>");
->>>>>>> test_branch
 		// draw game hud
 		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + actors.get(0).getName() + " | LV: "
 				+ ((Player) actors.get(0)).getLevel() + " | HP: " + actors.get(0).getCurHp() + "/"
@@ -775,10 +547,7 @@ public class Game {
 		writer.println("<tr>" + insert + "<td>&thinsp;&thinsp;" + log + "</td></tr>");
 	}
 	
-<<<<<<< HEAD
-=======
 	
->>>>>>> test_branch
 	//public static void makeDungeons () {
   /*  Dungeon dungeon1 = new Dungeon();
     Dungeon dungeon2 = new Dungeon();
@@ -814,55 +583,6 @@ public class Game {
 		return (player.getX() == Game.getDungeon()[Game.floor].getUpFloor()[1] && player.getY() == Game.getDungeon()[Game.floor].getUpFloor()[0]);
 	}
 	
-<<<<<<< HEAD
-	public static Item[] itemTable() {
-		Item[] itemTable;
-		 switch (Game.floor) {
-		 	case 0:
-			 Item[] itemTable0 = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
-					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
-					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
-					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
-			 	itemTable = itemTable0;
-			 break;
-		default:
-			Item[] itemTableDefault = {Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
-					Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion, Game.smallPotion,
-					Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.scrollFireball, Game.club, Game.club, Game.lightLeather, Game.lightLeather, Game.lightLeather,
-					Game.smallPoison, Game.chainmail, Game.chainmail, Game.ironPlate, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.scrollFrozenTime, Game.potionMinorOfImprovement, Game.scrollGreaterFireball, Game.scrollGreaterFireball};
-			itemTable = itemTableDefault;
-			break;
-		}
-		 return itemTable;
-		 
-	}
-	
-	public static void levelUp() {
-		switch(levelUpStatSelect) {
-			case 0: ((Player)actors.get(0)).levelUp("strength");
-				break;
-			case 1: ((Player)actors.get(0)).levelUp("agility");
-				break;
-			case 2:  ((Player)actors.get(0)).levelUp("vitality");
-				break;
-		}
-	}
-	
-	public static void equipArmor() {
-		int oldArmorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
-		((Player)actors.get(0)).useFromBackpack(innerSelect, "armor");
-		((Player)actors.get(0)).calcHP();
-		int curHp = ((Player)actors.get(0)).getCurHp();
-		int armorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
-		((Player)actors.get(0)).setCurHp(curHp - oldArmorRating + armorRating);
-		
-	}
-	
-	public static void equipWeapon() {
-		((Player)actors.get(0)).useFromBackpack(innerSelect, "weapon");
-		((Player)actors.get(0)).calcDamage();
-	}
-=======
 	public static Item[] itemTable(int index) {
 		Item[] itemTable = null;
 		//itemTable[0] = Game.largePotion;
@@ -894,6 +614,31 @@ public class Game {
 		 return itemTable;
 		 
 	}
+	
+	public static void levelUp() {
+		switch(levelUpStatSelect) {
+			case 0: ((Player)actors.get(0)).levelUp("strength");
+				break;
+			case 1: ((Player)actors.get(0)).levelUp("agility");
+				break;
+			case 2:  ((Player)actors.get(0)).levelUp("vitality");
+				break;
+		}
+	}
+	
+	public static void equipArmor() {
+		int oldArmorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
+		((Player)actors.get(0)).useFromBackpack(innerSelect, "armor");
+		((Player)actors.get(0)).calcHP();
+		int curHp = ((Player)actors.get(0)).getCurHp();
+		int armorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
+		((Player)actors.get(0)).setCurHp(curHp - oldArmorRating + armorRating);
+		
+	}
+	
+	public static void equipWeapon() {
+		((Player)actors.get(0)).useFromBackpack(innerSelect, "weapon");
+		((Player)actors.get(0)).calcDamage();
+	}
 
->>>>>>> test_branch
 }

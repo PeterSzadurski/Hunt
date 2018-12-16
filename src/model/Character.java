@@ -88,6 +88,29 @@ public class Character implements Serializable {
 	public String getName() {
 		return name;
 	}
+	
+	public int attack(Character c) {
+		// Calculate the hit chance
+		int hitChance = 0;
+		if (agility < c.getAgility()) {
+			hitChance = 50;
+		} else if (agility == c.getAgility()) {
+			hitChance = 75;
+		} else {
+			hitChance = 90;
+		}
+
+		// Calculate if the attack hits
+		Random rand = new Random();
+		int hit = rand.nextInt(100);
+
+		if (hit <= hitChance) {
+			c.setCurHp(c.getCurHp() - damage);
+			return damage;
+		} else {
+			return 0;
+		}
+	}
 
 	public void move(int x, int y, Dungeon d) {
 		int collideActor = -1;
