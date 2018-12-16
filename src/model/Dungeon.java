@@ -982,6 +982,8 @@ public class Dungeon {
 		case 9:
 			location = getLocation();
 			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
+			location = getLocation();
+			actors.add(new Emperor(location[1], location[0], index));
 			for (int i = 0; i < 10; i++) {
 				rand = (int) (Math.random() * 13) + 0;
 				switch (rand) {

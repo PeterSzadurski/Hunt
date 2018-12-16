@@ -23,14 +23,14 @@ public class RoyalGuard  extends Monster{
 	private static int expOnKill = 30;
 	private static int str = 4;
 	private static int agi = 15;
-	private static int vit = 2;
+	private static int vit = 8;
 
 
 
 	private static Weapon weapon = Items.royalLance;
 	private static Armor armor = Items.blessedArmor;
-	private static char icon = 'A';
-	private static String color ="#ffffff";
+	private static char icon = 'R';
+	private static String color = Game.magicEffectColor;
 
 
 

@@ -18,13 +18,13 @@ public class Emperor  extends Monster{
 	private static final long serialVersionUID = 1L;
 	private static String name = "Emperor";
 	private static int expOnKill = 50;
-	private static int str = 15;
-	private static int agi = 15;
+	private static int str = 8;
+	private static int agi = 25;
 	private static int vit = 15;
 
-	private static Weapon weapon = Items.steelLongblade;
+	private static Weapon weapon = Items.royalLance;
 
-	private static Armor armor = Items.steelPlate;
+	private static Armor armor = Items.blessedArmor;
 	private static char icon = 'E';
 	private static String color = Game.magicEffectColor;
 
