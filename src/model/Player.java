@@ -222,7 +222,7 @@ public class Player extends Character implements Serializable {
 	public String displayBackpack() {
 
 		StringBuilder pack = new StringBuilder();
-		pack.append("<i>&nbsp;" + getWeapon().toString() +"&nbsp;</i>");
+		pack.append("<i>&nbsp;" + getWeapon().toString() +"&nbsp;</i><br>");
 		pack.append("<i>&nbsp;" + getArmor().toString()  +"&nbsp;</i><br>");
 		for (int i = 0; i < backpack.size(); i++) {
 			if (Game.innerSelect == i) {

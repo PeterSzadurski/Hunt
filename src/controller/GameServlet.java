@@ -42,9 +42,9 @@ public class GameServlet extends HttpServlet {
 		Game.menu = 0; // default menu
 		// player will always be actor 0
 
-		Game.setItemsFloor(Game.getDungeon()[0].getDungeonItems());
-		Game.setActors(Game.getDungeon()[0].getActors());
-		Game.addPlayer(player);
+		Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+		Game.setActorsandPlayer(Game.getDungeon()[Game.floor].getActors(), player);
+
 		// Game.addActors(monster);
 		// Game.addActors(monster2);
 		// Game.addActors(monster3);
@@ -351,16 +351,20 @@ public class GameServlet extends HttpServlet {
 				case 0:
 					if (Game.onDown(player)) {
 						//System.out.println("Current Floor " + Game.floor);
+						//Game.getDungeon()[Game.floor].getActors().remove(0);
 						Game.floor++;
 						System.out.println("You descended a floor");
+						Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+						Game.setActorsandPlayer(Game.getDungeon()[Game.floor].getActors(), player);
+						//Game.setActors(Game.getDungeon()[Game.floor].getActors());
+						//Game.addPlayer(player);
+						System.out.println("Going down: " + Game.actors.toString());
 						Game.log  = Game.actors.get(0).getName() + " descended to floor " + (Game.getDungeon().length - Game.floor);
 						up = Game.getDungeon()[Game.floor].getUpFloor();
 						player.setX(up[1]);	
 						player.setY(up[0]);
-						Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
-						Game.setActors(Game.getDungeon()[Game.floor].getActors());
-						Game.addPlayer(player);
-						Game.update();						//Game.display(out);
+
+						//Game.update();						//Game.display(out);
 					}
 					else if (Game.onUp(player)) {
 						if (Game.floor == 0) {
@@ -370,14 +374,20 @@ public class GameServlet extends HttpServlet {
 							else Game.log = "You compel yourself to search for treasure before giving up";
 						}
 						else {
+						
 							Game.floor--;
 							System.out.println("You descended a floor");
+							Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+							//Game.actors.add(0 , player);
+							Game.setActorsandPlayer(Game.getDungeon()[Game.floor].getActors(), player);
+							//Game.setActors(Game.getDungeon()[Game.floor].getActors());
+							//Game.addPlayer(player);
 							Game.log  = Game.actors.get(0).getName() + " ascended to floor " + (Game.getDungeon().length - Game.floor);
+							System.out.println("Going up: " + Game.actors.toString());
+							System.out.println("Player index :" + Game.actors.indexOf(player));
 							down = Game.getDungeon()[Game.floor].getDownFloor();
 							player.setX(down[1]);
 							player.setY(down[0]);
-							Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
-							Game.setActors(Game.getDungeon()[Game.floor].getActors());
 						}
 						
 						//Game.addPlayer(player);
@@ -537,7 +547,7 @@ public class GameServlet extends HttpServlet {
 			//	player.getBackpack().clear();
 				break;
 		*/}
-		Game.display(out);
+	Game.display(out);
 		
 		
 		//dungeon.firstPrint(out);

@@ -6,7 +6,8 @@ public enum Effect {
 	TELEPORT,
 	RANGED,
 	STOP_TIME,
-	RANDOM_RAISE
+	RANDOM_RAISE,
+	WIN_ITEM
 }
 
 

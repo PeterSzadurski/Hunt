@@ -27,9 +27,11 @@ public class Game {
 	public  Game() {
 		  //  for (int i = 0; i < 10; i++) {
     	//dungeon[i] = new Dungeon(i);
-   // }
+		// }
 		// this.player = player;
 		// actors.add(player);
+		Game.setItemsFloor(Game.getDungeon()[Game.floor].getDungeonItems());
+		Game.setActors(Game.getDungeon()[Game.floor].getActors());
 	}
 	
 	
@@ -140,9 +142,9 @@ public class Game {
 					Game.log= "Agility raised by " + magnitude + " point";
 				break;
 			}
-			ifUsed = true;
 			break;
 			}
+			ifUsed = true;
 			break;
 		case TELEPORT:
 			Game.aiming.setRestrict(false);
@@ -178,6 +180,10 @@ public class Game {
 				ifUsed = false;
 			}
 			break;
+		case WIN_ITEM:
+			Game.log = "There's a time and place for everything, but not now";
+			break;
+			
 		default:
 			ifUsed = false;
 			System.out.println("PLACEHOLDER");
@@ -189,6 +195,11 @@ public class Game {
 
 	public static void setActors(ArrayList<Character> actors) {
 		Game.actors = actors;
+	}
+	
+	public static void setActorsandPlayer(ArrayList<Character> actors, Player p) {
+		Game.actors = actors;
+		Game.actors.add(0, p);
 	}
 
 	public void createPlayer() {
@@ -311,6 +322,8 @@ public class Game {
 				// actors.get(n).getAgility());
 
 				// find how close the monster is to move in a turn
+				
+			if (Game.actors.get(n) instanceof Monster) {	
 				((Monster) actors.get(n))
 						.setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(actors.get(n).getAgility()));
 
@@ -431,6 +444,7 @@ public class Game {
 					}
 					((Monster) actors.get(n)).setTurnCount(0);
 				}
+			}
 
 			}
 		}
