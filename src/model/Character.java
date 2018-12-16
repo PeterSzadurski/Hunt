@@ -253,8 +253,8 @@ public class Character implements Serializable {
 	public void calcDamage() {
 		this.damage = strength;
 
-		if (weapon != null) {
-			this.damage += weapon.getDamage();
+		if (weapon != null && !(weapon.getDamage() ==0)) {
+			this.damage *= weapon.getDamage();
 		}
 	}
 

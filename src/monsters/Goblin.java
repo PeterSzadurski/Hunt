@@ -18,11 +18,11 @@ public class Goblin  extends Monster{
 	private static final long serialVersionUID = 1L;
 	private static String name = "Goblin";
 
-	private static Item[] loot = {Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.club, Items.lightLeather};
+	private static Item[] loot = {Items.smallPoison, Items.smallPotion, Items.club, Items.smallPotion, Items.club, Items.lightLeather};
 
-	private static int expOnKill = 10;
-	private static int str = 2;
-	private static int agi = 2;
+	private static int expOnKill = 5;
+	private static int str = 3;
+	private static int agi = 1;
 	private static int vit = 2;
 
 

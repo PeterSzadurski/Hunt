@@ -17,9 +17,9 @@ public class Bat  extends Monster{
 	private static final long serialVersionUID = 1L;
 	private static  Item[] loot = {Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.largePotion};
 	private static String name = "Bat";
-	private static int expOnKill = 5;
+	private static int expOnKill = 3;
 	private static int str = 1;
-	private static int agi = 3;
+	private static int agi = 2;
 	private static int vit = 1;
 	private static Weapon weapon = null;
 	private static Armor armor = null;

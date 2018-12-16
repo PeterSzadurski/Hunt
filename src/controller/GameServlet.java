@@ -147,12 +147,13 @@ public class GameServlet extends HttpServlet {
 	   	    player.calcMoveSpeed();
 	   	    
 	   	    // code for debugging equip
-	   	    ArrayList<Item> pack = new ArrayList<>();
-	   	    Weapon sword = new Weapon("sword", '!', 10);
-	   	    Armor armor = new Armor("chainmail", '#', 40);
-	   	    pack.add(sword);
-	   	    pack.add(armor);
-	   	    player.setBackpack(pack);
+	   	    //ArrayList<Item> pack = new ArrayList<>();
+	   	   // Weapon sword = new Weapon("sword", '!', 10);
+	   	   // Armor armor = new Armor("chainmail", '#', 40);
+	   	   // pack.add(sword);
+	   	   // pack.add(armor);
+	   	   // player.setBackpack(pack);
+	   	    player.pickUp(Items.scrollTeleportation);
 		}
 		
 		int dead = Game.actors.get(0).getCurHp();
@@ -209,14 +210,7 @@ public class GameServlet extends HttpServlet {
 						Game.select--;
 					}
 					break;
-		        case 4: 
-		            if (Game.levelUpStatSelect == 0) {
-		              Game.levelUpStatSelect = 3;
-		            }
-		            else {
-		              Game.levelUpStatSelect -= 1;
-		            }
-		            break;
+
 				case 2: // inner menu
 					switch (Game.select) {
 					case 0: // inventory navigation
@@ -227,6 +221,14 @@ public class GameServlet extends HttpServlet {
 							Game.innerSelect--;
 						}
 						break;
+			        case 4: 
+			            if (Game.levelUpStatSelect == 0) {
+			              Game.levelUpStatSelect = 2;
+			            }
+			            else {
+			              Game.levelUpStatSelect -= 1;
+			            }
+			            break;
 					}
 					break;
 				case 3: // aiming
@@ -300,7 +302,7 @@ public class GameServlet extends HttpServlet {
 						}
 						break;
 			        case 4: 
-			            if (Game.levelUpStatSelect == 3) {
+			            if (Game.levelUpStatSelect == 2) {
 			              Game.levelUpStatSelect = 0;
 			            }
 			            else {

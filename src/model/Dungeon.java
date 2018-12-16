@@ -430,7 +430,8 @@ public class Dungeon {
 			Item[] itemTable = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
 					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
 					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
-					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball};
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball,
+					Items.rustyDagger, Items.rustyDagger, Items.rustyDagger, Items.rustyDagger, Items.rustyDagger, Items.scrollTeleportation};
 					
 			//System.out.println("Length: " + itemTable.length);
 			for (int i = 0; i < itemRange; i++) {
@@ -484,7 +485,7 @@ public class Dungeon {
 			Item[] itemTable1 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
 					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
 					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
-					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement};
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.rustyDagger, Items.rustyDagger, Items.scrollTeleportation};
 					
 			//System.out.println("Length: " + itemTable.length);
 			for (int i = 0; i < itemRange; i++) {
@@ -502,6 +503,316 @@ public class Dungeon {
 			
 			
 			
+			break;
+			
+		case 2:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 6) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable2 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable2.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable2[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			
+			
+			
+			break;
+			
+		case 3:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 7) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable3 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.ironLongblade, Items.lightLeather, Items.lightLeather, Items.lightLeather,
+					 Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable3.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable3[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			break;
+			
+		case 4:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 7) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable4 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.ironLongblade, Items.ironLongblade, Items.lightLeather, Items.chainmail, Items.chainmail,
+					 Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable4.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable4[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			break;
+			
+		case 5:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 9) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+					
+				case 4:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 7: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 8: 
+					location = getLocation();
+					actors.add(new Knight(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable5 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.ironLongblade, Items.ironLongblade, Items.lightLeather, Items.chainmail, Items.chainmail,
+					 Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable5.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable5[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			break;
+			
+		case 6:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 11) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+					
+				case 4:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 7: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 8: 
+					location = getLocation();
+					actors.add(new Knight(location[1], location[0], index));
+					break;
+				case 9: 
+					location = getLocation();
+					actors.add(new Knight(location[1], location[0], index));
+					break;
+				case 10: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable6 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.ironLongblade, Items.ironLongblade, Items.lightLeather, Items.chainmail, Items.chainmail,
+					 Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable6.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable6[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
 			break;
 			
 		case 9:

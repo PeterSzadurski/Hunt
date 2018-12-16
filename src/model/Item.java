@@ -56,7 +56,7 @@ public class Item implements Serializable {
 	}
 	
 	public void addCount (int add) {
-		this.count += count;
+		this.count += add;
 	}
 	
 	public void subCount () {

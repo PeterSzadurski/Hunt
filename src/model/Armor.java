@@ -34,7 +34,8 @@ public class Armor extends Item implements Serializable {
 	}
 	
 	public String toString() {
-		return this.getName() + "," + this.getIcon() + "," + this.getHpBonus();
+		return this.getName() + " |<span style=\"color:" + Game.buffColor + "\"> Rating: "
+				+ this.getHpBonus() + "</span>";
 	}
 	
 	public String getArmorStorageString() {

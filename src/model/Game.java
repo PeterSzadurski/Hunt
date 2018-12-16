@@ -2,6 +2,7 @@ package model;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
 
@@ -209,7 +210,7 @@ public class Game {
 			Game.getDungeon()[Game.floor].changeEntities(actors.get(i).getY(), actors.get(i).getX(), actors.get(i).geticon(),
 					actors.get(i).getColor());
 		}
-		System.out.println("UPDATE! " + actors.size());
+		//System.out.println("UPDATE! " + actors.size());
 
 		// check for dead monsters
 		for (int n = 1; n < actors.size(); n++) {
@@ -285,12 +286,85 @@ public class Game {
 								break;
 							}
 							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
+								System.out.println("yeet!");
 								((Monster) actors.get(n)).setState(MonsterStates.TEST);
 							}
 							break;
 						case TEST:
 							if (((Monster) actors.get(n)).withinRange(actors.get(0), 3)) {
-								//Game.log = "Within Range";
+								// When the monster is within range, it moves towards the player
+							//	Game.log = "Within Range";
+								Player player = (Player)actors.get(0);
+								int pX = player.getX();
+								int pY = player.getY();
+								Monster m = (Monster)actors.get(n);
+								int mX = m.getX();
+								int mY = m.getY();
+								
+								boolean sameRow = (pY==mY) ? true: false;
+								boolean sameCol = (pX==mX) ? true: false;
+								
+								// check if the monster is next to the player and attack if so
+								if ((sameCol && (mY==pY+1 || mY==pY-1)) || (sameRow && (mX==pX+1|| mX==pX-1))) {
+									// attack the player
+									int damage = ((Monster)actors.get(n)).attack(player.getAgility());
+									if(damage!=0) {
+										//player.takeDamage(damage);
+										//effects(0, damage, Effect.DAMAGE_HEALTH);
+										actors.get(0).setCurHp(actors.get(0).getCurHp() - damage);
+										log = "The " + actors.get(n).getName() + " strikes " + Game.actors.get(0).getName() + " for " + damage + "damage!";
+										System.out.println("Now thats a lot of damage!");
+									} else {
+										System.out.println("The monster missed.");
+										log = "The " + actors.get(n).getName() + " misses " + Game.actors.get(0).getName() + "!";
+									}
+									// player takes damage
+									
+								} else {
+									// move closer if not adjacent
+									if (sameRow) {
+										// move horizontally
+										if(pX < mX) {
+											actors.get(n).move(-1, 0);
+										} else if (pX > mX) {
+											actors.get(n).move(1, 0);
+										} else {
+											System.out.println("Something's wrong with enemy movement");
+										}
+										
+									} else if (sameCol) {
+										// move horizontally
+										if(pY < mY) {
+											actors.get(n).move(0, -1);
+										} else if (pY > mY) {
+											actors.get(n).move(0, 1);
+										} else {
+											System.out.println("Something's wrong with enemy movement");
+										}
+									} else {
+										// not in same row or col
+										// move horizontally or vertically (random)
+										Random rand2 = new Random();
+										int axis = rand2.nextInt(2);  // 0 = x-axis, 1 = y-axis
+										
+										if(axis == 0) {
+											// move along the x-axis
+											if (pX < mX) {
+												actors.get(n).move(-1, 0);
+											} else if (pX > mX) {
+												actors.get(n).move(1, 0);
+											}
+										} else {
+											//move along the y-axis
+											if (pY < mY) {
+												actors.get(n).move(0, -1);
+											} else if (pY > mY) {
+												actors.get(n).move(0, 1);
+											}
+										}
+									}
+								}
+								
 							} else {
 								((Monster) actors.get(n)).setState(MonsterStates.IDLE);
 							}

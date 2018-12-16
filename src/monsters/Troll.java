@@ -16,8 +16,8 @@ public class Troll  extends Monster{
 	private static final long serialVersionUID = 1L;
 	private static String name = "Troll";
 
-	private static Item[] loot = {Items.smallPoison, Items.smallPotion, Items.smallPoison, Items.smallPotion, Items.scrollMinorFrozenTime, Items.smallPotion, Items.largePotion};
-	private static int expOnKill = 15;
+	private static Item[] loot = {Items.smallPoison, Items.smallPotion, Items.club, Items.smallPotion, Items.scrollMinorFrozenTime, Items.smallPotion, Items.largePotion};
+	private static int expOnKill = 10;
 	private static int str = 3;
 	private static int agi = 1;
 	private static int vit = 4;

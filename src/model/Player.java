@@ -36,7 +36,7 @@ public class Player extends Character implements Serializable {
 	 */
 	public Player(String name, int str, int agi, int vit, char icon, String color, int x, int y) {
 
-		super(name, str, agi, vit, new Weapon("dagger", '!', 5), new Armor("clothes", '#', 1), icon, color, x, y);
+		super(name, str, agi, vit, new Weapon("No Weapon", '!', 0), new Armor("No Armor", '#', 0), icon, color, x, y);
 
 		this.name = name;
 		level = 1;
@@ -165,12 +165,22 @@ public class Player extends Character implements Serializable {
 			Armor newArmor = (Armor)backpack.get(index);
 			Armor oldArmor = this.getArmor();
 			this.setArmor(newArmor);
-			backpack.set(index, oldArmor);
+			if (oldArmor.getName().equals("No Armor")) {
+				backpack.add(0, oldArmor);
+			}
+			else {
+				backpack.set(index, oldArmor);
+			}
 		} else if (type.equals("weapon")) {
 			Weapon newWeapon = (Weapon)backpack.get(index);
 			Weapon oldWeapon = this.getWeapon();
 			this.setWeapon(newWeapon);
-			backpack.set(index, oldWeapon);
+			if (oldWeapon.getName().equals("No Weapon")) {
+				backpack.add(0, oldWeapon);
+			}
+			else {
+				backpack.set(index, oldWeapon);
+			}
 		}
 
 		// this code doesn't make sense for equipping an item
@@ -205,10 +215,8 @@ public class Player extends Character implements Serializable {
 	public String displayBackpack() {
 
 		StringBuilder pack = new StringBuilder();
-		pack.append("<i>&nbsp;" + getWeapon().getName() + " |<span style=\"color:" + Game.debuffColor + "\"> Power: "
-				+ getWeapon().getDamage() + "&nbsp;</span></i><br>");
-		pack.append("<i>&nbsp;" + getArmor().getName() + " |<span style=\"color:" + Game.buffColor + "\"> Rating: "
-				+ getArmor().getHpBonus() + "&nbsp;</span></i><br>");
+		pack.append("<i>&nbsp;" + getWeapon().toString() +" \"&nbsp;</i><br>");
+		pack.append("<i>&nbsp;" + getArmor().toString()  +"&nbsp;</i><br>");
 		for (int i = 0; i < backpack.size(); i++) {
 			if (Game.innerSelect == i) {
 				pack.append("[" + backpack.get(i).toString() + "]<br>");

@@ -6,9 +6,9 @@ public class Items {
 	// Generate weapons
 
 	public static Weapon club = new Weapon("club", '!', 5);
-	static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
+	public static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
 	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
-
+	public static Weapon steelLongblade = new Weapon("Steel Longblade", '!', 10);
 
 
 
