@@ -36,7 +36,7 @@ public class Player extends Character implements Serializable {
 	 */
 	public Player(String name, int str, int agi, int vit, char icon, String color, int x, int y) {
 
-		super(name, str, agi, vit, new Weapon("No Weapon", '!', 0), new Armor("No Armor", '#', 0), icon, color, x, y);
+		super(name, str, agi, vit, new Weapon("No Weapon", '!', 0), new Armor("No Armor", '#', 0, 0, 0), icon, color, x, y);
 
 		this.name = name;
 		level = 1;
@@ -46,6 +46,7 @@ public class Player extends Character implements Serializable {
 		backpack = new ArrayList<Item>();
 
 		// Calculate other stats
+		//super.calcStrength();
 		super.calcDamage();
 		super.calcMoveSpeed();
 		super.calcHP();
@@ -162,24 +163,30 @@ public class Player extends Character implements Serializable {
 	 */
 	public void useFromBackpack(int index, String type) {
 		if (type.equals("armor")) {
-			Armor newArmor = (Armor)backpack.get(index);
 			Armor oldArmor = this.getArmor();
+			Armor newArmor = (Armor)backpack.get(index);
 			this.setArmor(newArmor);
+			backpack.remove(index);
 			if (oldArmor.getName().equals("No Armor")) {
+				System.out.println("yes");
 				backpack.add(0, oldArmor);
 			}
 			else {
-				backpack.set(index, oldArmor);
+				backpack.add(index, oldArmor);
+				System.out.println("no");
+
+				//backpack.remove(index);
 			}
 		} else if (type.equals("weapon")) {
 			Weapon newWeapon = (Weapon)backpack.get(index);
 			Weapon oldWeapon = this.getWeapon();
 			this.setWeapon(newWeapon);
+			backpack.remove(index);
 			if (oldWeapon.getName().equals("No Weapon")) {
-				backpack.add(0, oldWeapon);
+				backpack.add(1, oldWeapon);
 			}
 			else {
-				backpack.set(index, oldWeapon);
+				backpack.add(index, oldWeapon);
 			}
 		}
 
@@ -215,7 +222,7 @@ public class Player extends Character implements Serializable {
 	public String displayBackpack() {
 
 		StringBuilder pack = new StringBuilder();
-		pack.append("<i>&nbsp;" + getWeapon().toString() +" \"&nbsp;</i><br>");
+		pack.append("<i>&nbsp;" + getWeapon().toString() +"&nbsp;</i>");
 		pack.append("<i>&nbsp;" + getArmor().toString()  +"&nbsp;</i><br>");
 		for (int i = 0; i < backpack.size(); i++) {
 			if (Game.innerSelect == i) {
@@ -313,12 +320,13 @@ public class Player extends Character implements Serializable {
 			// Increment chosen stat and recalculate dependent stat
 			switch (stat) {
 			case "strength":
-				setStrength(1 + getStrength());
+				setOldStrength(1 + getStrength());
+				calcStrength();
 				calcDamage();
 				break;
 			case "agility":
-				setAgility(1 + getAgility());
-				;
+				setOldAgi(1 + getAgility());
+				calcAgility();
 				calcMoveSpeed();
 				break;
 			case "vitality":
@@ -416,7 +424,7 @@ public class Player extends Character implements Serializable {
 		int lowestStat = c.getVitality();
 		int lowestIndex = 0;
 		int highestIndex = 0;
-		int[] stats = {c.getVitality(), c.getStrength(), c.getAgility()};
+		int[] stats = {c.getVitality(), c.getOldStrength(), c.getOldAgi()};
 		
 		// find highest stat
 		for (int i = 0; i < stats.length; i++) {
@@ -440,10 +448,12 @@ public class Player extends Character implements Serializable {
 			this.setCurHp(this.getHp());
 			break;
 		case 1:
-			this.setStrength(this.getStrength() + c.getStrength());
+			this.setOldStrength(this.getOldStrength() + c.getOldStrength());
+			this.calcStrength();
 			break;
 		case 2:
-			this.setAgility(this.getAgility() + c.getAgility());
+			this.setOldAgi(this.getOldAgi() + c.getOldAgi());
+			calcAgility();
 			break;
 		}
 		
@@ -454,7 +464,8 @@ public class Player extends Character implements Serializable {
 			this.setCurHp(this.getHp());
 			break;
 		case 1:
-			this.setStrength((this.getStrength() + c.getStrength()) /2);
+			this.setOldStrength((this.getOldStrength() + c.getOldStrength()) /2);
+			this.calcStrength();
 			break;
 		case 2:
 			this.setAgility((this.getAgility() + c.getAgility()) /2);

@@ -60,11 +60,8 @@ public class GameServlet extends HttpServlet {
 		 * 
 		 * System.out.println("Item 2: " + Game.smallPotion.getName());
 		 */
-		player.pickUp(Items.scrollGreaterFireball);
-		player.pickUp(Items.scrollGreaterFireball);
-		player.pickUp(Items.scrollGreaterFireball);
-		player.pickUp(Items.scrollGreaterFireball);
-		player.pickUp(Items.scrollGreaterFireball);
+
+		//player.pickUp(Items.blessedArmor);
 
 
 		// Game.itemsFloor.add(new ItemFloor(Game.scrollMinorFrozenTime, 8, 9));
@@ -131,7 +128,9 @@ public class GameServlet extends HttpServlet {
 	    	player.setY(this.location[0]);
 	    	player.setName(pUpdate.getName());
 	   	    player.setStrength(pUpdate.getStrength());
+	   	   player.setOldStrength(pUpdate.getOldStrength());
 	   	    player.setAgility(pUpdate.getAgility());
+	   	    player.setOldAgi(pUpdate.getOldAgi());
 	   	    player.setVitality(pUpdate.getVitality());
 	   	    player.setArmor(pUpdate.getArmor());
 	   	    player.setWeapon(pUpdate.getWeapon());
@@ -154,6 +153,8 @@ public class GameServlet extends HttpServlet {
 	   	   // pack.add(armor);
 	   	   // player.setBackpack(pack);
 	   	    player.pickUp(Items.scrollTeleportation);
+
+
 		}
 		
 		int dead = Game.actors.get(0).getCurHp();

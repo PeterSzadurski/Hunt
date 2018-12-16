@@ -815,9 +815,252 @@ public class Dungeon {
 			}
 			break;
 			
+		case 7:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 13) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+					
+				case 4:
+					location = getLocation();
+					actors.add(new Ninja(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 7: 
+					location = getLocation();
+					actors.add(new Duelist(location[1], location[0], index));
+					break;
+				case 8: 
+					location = getLocation();
+					actors.add(new Knight(location[1], location[0], index));
+					break;
+				case 9: 
+					location = getLocation();
+					actors.add(new Knight(location[1], location[0], index));
+					break;
+				case 10: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 11: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 12: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable7 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.ironLongblade, Items.ironLongblade, Items.lightLeather, Items.chainmail, Items.chainmail,
+					 Items.chainmail, Items.scrollTeleportation, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable7.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable7[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			break;
+			
+		case 8:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 13) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));
+					break;
+					
+				case 4:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 7: 
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));
+					break;
+				case 8: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 9: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 10: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 11: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 12: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable8 = {Items.smallPotion, Items.scrollTeleportation, Items.scrollTeleportation, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.potionMinorOfImprovement, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.royalLance, Items.royalLance, Items.blessedArmor, Items.blessedArmor, Items.chainmail,
+					 Items.blessedArmor, Items.scrollTeleportation, Items.blessedArmor, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable8.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable8[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			break;
+			
 		case 9:
 			location = getLocation();
 			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 13) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));
+					break;
+					
+				case 4:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 6:
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 7: 
+					location = getLocation();
+					actors.add(new RoyalGuard(location[1], location[0], index));
+					break;
+				case 8: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 9: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 10: 
+					location = getLocation();
+					actors.add(new Vampire(location[1], location[0], index));
+					break;
+				case 11: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				case 12: 
+					location = getLocation();
+					actors.add(new Assassin(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable9 = {Items.smallPotion, Items.scrollTeleportation, Items.scrollTeleportation, Items.smallPotion, Items.largePotion, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.scrollGreaterFrozenTime, Items.potionMinorOfImprovement, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.royalLance, Items.royalLance, Items.blessedArmor, Items.blessedArmor, Items.chainmail,
+					 Items.blessedArmor, Items.scrollTeleportation, Items.blessedArmor, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement, Items.scrollTeleportation};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable9.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable9[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
 			break;
 		default:
 			break;

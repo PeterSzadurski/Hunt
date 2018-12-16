@@ -2,6 +2,8 @@ package model;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.swing.plaf.synth.SynthSplitPaneUI;
+
 public class Character implements Serializable {
 	private static final long serialVersionUID = 63535810039368495L;
 	
@@ -18,6 +20,9 @@ public class Character implements Serializable {
 	private boolean solid = true;
 	private int x;
 	private int y;
+	int oldStrength;
+	int oldAgi;
+	
 
 	private char icon;
 
@@ -31,7 +36,9 @@ public class Character implements Serializable {
 		this.name = name;
 		
 		strength = str;
+		oldStrength = strength;
 		agility = agi;
+		oldAgi = agility;
 		vitality = vit;
 		weapon = w;
 		armor = a;
@@ -42,8 +49,9 @@ public class Character implements Serializable {
 
 		this.x = x;
 		this.y = y;
-
+		calcStrength();
 		calcDamage();
+		calcAgility();
 		calcMoveSpeed();
 		calcHP();
 		curHp = hp;
@@ -248,6 +256,42 @@ public class Character implements Serializable {
 
 	public String getColor() {
 		return color;
+	}
+	
+	public void calcStrength () {
+		this.strength = this.oldStrength;
+		if (armor != null) {
+			this.strength += armor.getStrAlter();
+			if (this.strength < 1) {
+				this.strength = 1;
+			} 
+		}
+	}
+	
+	public void calcAgility () {
+		this.agility = this.oldAgi;
+		if (armor != null) {
+			this.agility += armor.getAgiAlter();
+			if (this.agility < 1) {
+				this.agility = 1;
+			} 
+		}
+	}
+
+	public int getOldStrength() {
+		return oldStrength;
+	}
+
+	public void setOldStrength(int oldStrength) {
+		this.oldStrength = oldStrength;
+	}
+
+	public int getOldAgi() {
+		return oldAgi;
+	}
+
+	public void setOldAgi(int oldAgi) {
+		this.oldAgi = oldAgi;
 	}
 
 	public void calcDamage() {

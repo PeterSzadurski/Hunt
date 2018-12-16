@@ -19,7 +19,7 @@ public class Knight  extends Monster{
 	private static String name = "Knight";
 	private static int expOnKill = 20;
 	private static int str = 4;
-	private static int agi = 3;
+	private static int agi = 4;
 	private static int vit = 5;
 
 	private static Weapon weapon = Items.ironLongblade;

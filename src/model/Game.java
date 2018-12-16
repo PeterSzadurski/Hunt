@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
+import monsters.Assassin;
+import monsters.Bat;
+import monsters.Ninja;
+import monsters.RoyalGuard;
+
 public class Game {
 
 	public static ArrayList<Character> actors = new ArrayList<Character>();
@@ -203,6 +208,57 @@ public class Game {
 	}
 	
 	public static void update() {
+		
+		if (Game.actors.size() < 5 && coinFlip()) {
+			int[] spawn;
+			if (((Player)actors.get(0)).getBackpack().contains(Items.winItem)) {
+				spawn = dungeon[floor].getLocation();
+				actors.add(new RoyalGuard(spawn[1], spawn[0], floor));
+			}
+			switch (floor) {
+			// spawn fodder monsters
+			case 0:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Bat(spawn[1], spawn[0], floor));
+				break;
+			case 1:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Bat(spawn[1], spawn[0], floor));
+				break;
+			case 2:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Bat(spawn[1], spawn[0], floor));
+				break;
+			case 3:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Ninja(spawn[1], spawn[0], floor));
+				break;
+			case 4:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Ninja(spawn[1], spawn[0], floor));
+				break;
+			case 5:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Ninja(spawn[1], spawn[0], floor));
+				break;
+			case 6:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Ninja(spawn[1], spawn[0], floor));
+				break;
+			case 7:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Assassin(spawn[1], spawn[0], floor));
+				break;
+			case 8:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new Ninja(spawn[1], spawn[0], floor));
+				break;
+			case 9:
+				spawn = dungeon[floor].getLocation();
+				actors.add(new RoyalGuard(spawn[1], spawn[0], floor));
+				break;
+			}
+		}
 
 		int turn = 1;
 
@@ -704,6 +760,9 @@ public class Game {
 		int oldArmorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
 		((Player)actors.get(0)).useFromBackpack(innerSelect, "armor");
 		((Player)actors.get(0)).calcHP();
+		((Player)actors.get(0)).calcStrength();
+		((Player)actors.get(0)).calcAgility();
+		((Player)actors.get(0)).calcDamage();
 		int curHp = ((Player)actors.get(0)).getCurHp();
 		int armorRating = ((Player)actors.get(0)).getArmor().getHpBonus();
 		((Player)actors.get(0)).setCurHp(curHp - oldArmorRating + armorRating);

@@ -33,7 +33,7 @@ public class Weapon extends Item implements Serializable{
 	
 	public String toString() {
 		return  this.getName() + " |<span style=\"color:" + Game.debuffColor + "\"> Power: "
-					+ this.getDamage() + "&nbsp;</span></i><br>";
+					+ this.getDamage() + "&nbsp;</span></i>";
 
 	}
 	

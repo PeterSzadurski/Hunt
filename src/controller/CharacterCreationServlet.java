@@ -35,7 +35,7 @@ public class CharacterCreationServlet extends HttpServlet {
 		int str = Integer.parseInt(request.getParameter("str"));
 		int agi = Integer.parseInt(request.getParameter("agi"));
 		int vit = Integer.parseInt(request.getParameter("vit"));
-		
+		System.out.println("Str: " + str);
 		Player player = new Player(name, str, agi, vit, '@', "#FFFF00", 0, 0);
 		player.setIsSolid(true);
 		
