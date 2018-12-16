@@ -4,12 +4,13 @@
 <html>
 <head>
 <style>
+
 	body {
-	 	margin:0 auto; 
 		background-color: black;
 		color: white;
 		font-family: "Courier New", Courier, monospace;
 	}
+
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -18,9 +19,21 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
+
 $(document).keydown(function(e){
-
-
+	console.log("test");
+	//switch (e.keyCode) {
+		//case 38:
+			//document.getElementById("key").value = "yeeto"
+		//	console.log(document.getElementById("key").value)
+		//	$.get('myservlet', {
+		//		key : e.keycode
+		//		},
+		//		function(responseText) {
+		//			$('#gameOutput').text(responseText);
+		//		});
+	
+		//document.getElementById("key").value = e.keyCode;
 		var keys = e.keyCode;
 		console.log (keys);
 		$.get('GameServlet', {
@@ -31,7 +44,23 @@ $(document).keydown(function(e){
 	});		
 	
 $(document).ready (function(){
+	console.log("test2");
+	
+	var keys = 93;
+	//switch (e.keyCode) {
+		//case 38:
+			//document.getElementById("key").value = "yeeto"
+		//	console.log(document.getElementById("key").value)
+		//	$.get('myservlet', {
+		//		key : e.keycode
+		//		},
+		//		function(responseText) {
+		//			$('#gameOutput').text(responseText);
+		//		});
+	
+		//document.getElementById("key").value = e.keyCode;
 
+		$.get('GameServlet', {
 			key : keys
 		
 		}, function(responseText) {
@@ -51,10 +80,12 @@ $(document).ready (function(){
 	text-align: center;
 	font-size: 12px;
 }
+
 </style>
 
 </head>
 <body>
+test
 <form id="keyInput" action = "GameServlet">
 <input type = "hidden" id = "key" name = "key">
 </form>
