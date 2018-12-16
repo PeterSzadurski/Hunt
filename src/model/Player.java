@@ -397,4 +397,72 @@ public class Player extends Character implements Serializable {
 					+ "/" + Game.actors.get(collideActor).getHp());
 		}
 	}
+	
+	public void fuseWithMonster (Character c) {
+		int highestStat = c.getVitality();
+		int lowestStat = c.getVitality();
+		int lowestIndex = 0;
+		int highestIndex = 0;
+		int[] stats = {c.getVitality(), c.getStrength(), c.getAgility()};
+		
+		// find highest stat
+		for (int i = 0; i < stats.length; i++) {
+			if (highestStat < stats[i]) {
+				highestStat = stats[i];
+				highestIndex = i;
+			}
+		}
+		// find lowest stat
+		for (int i = 0; i < stats.length; i++) {
+			if (lowestStat > stats[i]) {
+				lowestStat = stats[i];
+				lowestIndex = i;
+			}
+		}
+		
+		switch (highestIndex) {
+		case 0:
+			this.setVitality(this.getVitality() + c.getVitality());
+			this.calcHP();
+			this.setCurHp(this.getHp());
+			break;
+		case 1:
+			this.setStrength(this.getStrength() + c.getStrength());
+			break;
+		case 2:
+			this.setAgility(this.getAgility() + c.getAgility());
+			break;
+		}
+		
+		switch (lowestIndex) {
+		case 0:
+			this.setVitality((this.getVitality() + c.getVitality()) / 2);
+			this.calcHP();
+			this.setCurHp(this.getHp());
+			break;
+		case 1:
+			this.setStrength((this.getStrength() + c.getStrength()) /2);
+			break;
+		case 2:
+			this.setAgility((this.getAgility() + c.getAgility()) /2);
+			break;
+		}
+		
+		this.calcDamage();
+		this.calcMoveSpeed();
+		System.out.println("New hp = "+this.getCurHp() + " | " + this.getHp());
+		
+		Game.log = "You <span style =\"color: " + Game.magicEffectColor + "\">fused</span> with the " + c.getName() + "!";
+		
+		// check for highest stat
+	/*	if (c.getVitality() < c.getStrength()) {
+			if (c.getStrength() < c.getAgility()) {
+				this.setAgility(this.getAgility() + c.getAgility());
+				this.calcMoveSpeed();
+			}
+			else {}
+			
+		}
+		else if (c.getVitality() < c.getAgility()) {} */
+	}
 }

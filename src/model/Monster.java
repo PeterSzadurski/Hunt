@@ -8,8 +8,17 @@ public class Monster extends Character implements Serializable {
 	private String type;
 	private int expOnKill;
 	private double turnCount = 0;
+<<<<<<< HEAD
 	private int id;
 	private int currentDungeonLevel;
+=======
+	int id;
+
+	private int floor;
+	
+	private Item[] loot;
+
+>>>>>>> test_branch
 	
 	MonsterStates state = MonsterStates.IDLE;
 	
@@ -21,13 +30,13 @@ public class Monster extends Character implements Serializable {
 	}
 	
 	public Monster(String name, int expOnKill, int str, int agi, int vit, Weapon weapon, 
-			Armor armor, char icon, String color, int x, int y) {
+			Armor armor, char icon, String color, int x, int y, int floor) {
 		
 		super(name, str, agi, vit, weapon, armor, icon, color, x, y);
 		
 		//this.name = name;
 		this.expOnKill = expOnKill;
-		
+		this.floor =floor;
 		super.calcDamage();
 		super.calcHP();
 		super.calcMoveSpeed();
@@ -41,8 +50,22 @@ public class Monster extends Character implements Serializable {
 		this.type = type;
 	}
 	
+<<<<<<< HEAD
 	
 	
+=======
+	
+	
+	
+	public Item[] getLoot() {
+		return loot;
+	}
+
+	public void setLoot(Item[] loot) {
+		this.loot = loot;
+	}
+
+>>>>>>> test_branch
 	public MonsterStates getState() {
 		return state;
 	}
@@ -53,6 +76,28 @@ public class Monster extends Character implements Serializable {
 
 	public int getExpOnKill() {
 		return expOnKill;
+	}
+	
+	public Item getLootItem() {
+		// will only drop items half the time
+			int choose = (int) (Math.random() * loot.length) + 0;
+			return loot[choose];
+	}
+
+	/*public int getCurrentLevel() {
+		return currentDungeonLevel;
+	}
+
+	public void setCurrentLevel(int currentLevel) {
+		this.currentDungeonLevel = currentLevel;
+	}
+*/
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int monsterId) {
+		this.id = monsterId;
 	}
 
 	public int getCurrentLevel() {

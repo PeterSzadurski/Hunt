@@ -1,11 +1,15 @@
 package model;
 public class Tile {
-	
+
 	private char icon;
 	private boolean solid;
 	private String color;
 	private String type;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> test_branch
 	public String getType() {
 		return type;
 	}
@@ -26,10 +30,14 @@ public class Tile {
 		this.color = color;
 	}
 
+<<<<<<< HEAD
 
 	public Tile (char icon, boolean solid, String color, String type) {
 
 //	Tile (char icon, boolean solid, String color, String type) {
+=======
+	Tile (char icon, boolean solid, String color, String type) {
+>>>>>>> test_branch
 		this.icon = icon;
 		this.solid = solid;
 		this.color = color;
@@ -42,9 +50,9 @@ public class Tile {
 		this.color = color;
 		this.type = type;
 	}
-	
+
 	public boolean isSolid(){
-		return solid;	
+		return solid;
 	}
 
 	public char getIcon() {
@@ -53,8 +61,16 @@ public class Tile {
 	public String getColor() {
 		return color;
 	}
+<<<<<<< HEAD
 	
 	public String toString() {
 		return this.type;
 	}
 }
+=======
+
+	public String toString() {
+		return this.type;
+	}
+}
+>>>>>>> test_branch

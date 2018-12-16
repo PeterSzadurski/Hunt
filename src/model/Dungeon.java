@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import monsters.*;
+<<<<<<< HEAD
 
 public class Dungeon {
 	
@@ -31,6 +32,12 @@ public class Dungeon {
 	public Dungeon() {
 	}
 //=======
+=======
+import model.Game;
+
+public class Dungeon {
+	
+>>>>>>> test_branch
 	//Dungeon[] dungeon = new Dungeon[10];// array of dungeons
 	
 	
@@ -40,10 +47,19 @@ public class Dungeon {
 	Tile upFloor = new Tile('%',false, "#009900", "upFloor");//green
 	Tile downFloor = new Tile('%',false, "#000099", "downFloor");//blue
 	Tile layout[][] = new Tile[50][50];
+<<<<<<< HEAD
 //>>>>>>> menu
 
 	Entity entities[][] = new Entity [50][50];
 	
+=======
+
+	Entity entities[][] = new Entity [50][50];
+	
+	ArrayList<Character> actors = new ArrayList<Character>();
+	ArrayList <ItemFloor> dungeonItems = new ArrayList<ItemFloor>();
+	
+>>>>>>> test_branch
 	public Dungeon(int index) {
 	
 		for(int i = 0; i < layout[0].length; i++) {
@@ -259,15 +275,20 @@ public class Dungeon {
 			for (int n = 0; n < entities[1].length; n++) {
 				//entities[i][n].setIcon(layout[i][n].getIcon());
 				
+<<<<<<< HEAD
 //<<<<<<< HEAD
 				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor(), layout[i][n].getType()); 				
 //=======
 				//entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor()); 				
 //>>>>>>> menu
+=======
+				entities[i][n] = new Entity (layout[i][n].getIcon(), layout[i][n].isSolid() , layout[i][n].getColor(), null); 				
+>>>>>>> test_branch
 				//entities[i][n].setColor(layout[i][n].getColor());
 				//entities[i][n].setSolid(false);
 			}
 		}
+<<<<<<< HEAD
 //<<<<<<< HEAD
 	} // end of no param constructor
 	
@@ -326,6 +347,10 @@ public class Dungeon {
 	
 	public int getDungeonID() {
 		return dungeonID;
+=======
+		populate (index);
+		
+>>>>>>> test_branch
 	}
 
 	public void setDungeonID(int dungeonID) {
@@ -337,7 +362,21 @@ public class Dungeon {
 //	}
 	
 	
+<<<<<<< HEAD
 //>>>>>>> menu
+=======
+	
+	public ArrayList<Character> getActors() {
+		return actors;
+	}
+
+
+	public void setActors(ArrayList<Character> actors) {
+		this.actors = actors;
+	}
+
+
+>>>>>>> test_branch
 	public int getWidth() {
 		return layout[0].length;
 	}
@@ -470,17 +509,26 @@ public class Dungeon {
 		return down;
 	}
 	
+<<<<<<< HEAD
 	public void populate () {
 		int rand;
 		int itemRange;
 		int[] location = Game.getDungeon()[Game.floor].getLocation();
 		switch (Game.floor) {
+=======
+	public void populate (int index) {
+		int rand;
+		int itemRange;
+		int[] location = getLocation();
+		switch (index) {
+>>>>>>> test_branch
 		// place monsters and in the dungeon
 		case 0:
 			for (int i = 0; i < 10; i++) {
 				rand = (int) (Math.random() * 6) + 0;
 				switch (rand) {
 				default:
+<<<<<<< HEAD
 					location = Game.getDungeon()[Game.floor].getLocation();
 					Game.addActors(new Bat(location[1], location[0]));
 					break;
@@ -503,12 +551,37 @@ public class Dungeon {
 				case 5:
 					location = Game.getDungeon()[Game.floor].getLocation();
 					Game.addActors(new Troll(location[1], location[0]));
+=======
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+>>>>>>> test_branch
 					break;
 				}
 			}
 			
 			itemRange = (int) (Math.random() * 5) + 2;
 			System.out.println("Setting up items");
+<<<<<<< HEAD
 			for (int i = 0; i < itemRange; i++) {
 				System.out.println("Placing itemes");
 				int pick = (int) (Math.random() * (Game.itemTable().length -1)) + 0;
@@ -517,9 +590,108 @@ public class Dungeon {
 				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
 			}
 			
+=======
+			//System.out.println("Item: " +
+			//Items.smallPotion.getName());
+			//Item[] itemTable = Game.itemTable(0);
+			Item[] itemTable = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.scrollGreaterFireball, Items.scrollGreaterFireball};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable.length -1)) + 0;
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			
+			
+			
+			break;
+		case 1:
+			for (int i = 0; i < 10; i++) {
+				rand = (int) (Math.random() * 6) + 0;
+				switch (rand) {
+				default:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 0:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));
+					break;
+				case 2:
+					location = getLocation();
+					actors.add(new Goblin(location[1], location[0], index));//
+					break;
+				case 3: 
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 4:
+					location = getLocation();
+					actors.add(new Bat(location[1], location[0], index));
+					break;
+				case 5:
+					location = getLocation();
+					actors.add(new Troll(location[1], location[0], index));
+					break;
+				}
+			}
+			
+			itemRange = (int) (Math.random() * 5) + 2;
+		//	System.out.println("Setting up items");
+			Item[] itemTable1 = {Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion, Items.smallPotion,
+					Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.scrollFireball, Items.club, Items.club, Items.lightLeather, Items.lightLeather, Items.lightLeather,
+					Items.smallPoison, Items.chainmail, Items.chainmail, Items.ironPlate, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.scrollFrozenTime, Items.potionMinorOfImprovement, Items.potionMinorOfImprovement};
+					
+			//System.out.println("Length: " + itemTable.length);
+			for (int i = 0; i < itemRange; i++) {
+				System.out.println("Placing itemes");
+
+				int pick = (int) (Math.random() * (itemTable1.length )) + 0;
+				
+				System.out.println("Pick: " + pick);
+				location = getLocation();
+				//System.out.println(Game.itemTable(0)[0].getName());
+				dungeonItems.add(new ItemFloor(itemTable1[pick], location[1], location[0]));
+				//System.out.println("Added: " + dungeonItems.get(0).getItem().getName());
+				//Game.itemsFloor.add(new ItemFloor Game.smallPotion ,location[1], location[0] );
+			}
+			
+			
+			
+			break;
+			
+		case 9:
+			location = getLocation();
+			dungeonItems.add(new ItemFloor(Items.winItem, location[1], location[0]));
+>>>>>>> test_branch
 			break;
 		default:
 			break;
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+
+
+	public ArrayList<ItemFloor> getDungeonItems() {
+		return dungeonItems;
+	}
+
+
+	public void setDungeonItems(ArrayList<ItemFloor> dungeonItems) {
+		this.dungeonItems = dungeonItems;
+	}
+}
+>>>>>>> test_branch
