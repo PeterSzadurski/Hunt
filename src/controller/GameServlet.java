@@ -435,7 +435,7 @@ public class GameServlet extends HttpServlet {
 						case TELEPORT:
 							// used to prevent the effect from triggering right when it is selected
 							doublePress++;
-								if (doublePress == 2) {
+								if (!(Game.aiming.getX() == player.getX() && Game.aiming.getY() == player.getY())) {
 									int collideActor = -1;
 									for (int i = 0; i < Game.actors.size(); i++) {
 										if (((Game.aiming.x) == Game.actors.get(i).getX()) && ((Game.aiming.y)) == Game.actors.get(i).getY()) {
