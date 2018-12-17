@@ -21,6 +21,7 @@ import model.Items;
 import model.Monster;
 import model.Player;
 import model.Projectile;
+import model.User;
 import model.Weapon;
 import monsters.*;
 import util.ServletUtil;
@@ -96,6 +97,7 @@ public class GameServlet extends HttpServlet {
 	// Dungeon dungeon = new Dungeon();
 	Player player = new Player("Dave", 10, 2, 10, '@', "#FFFF00", this.location[1], location[0]);
 
+
 	// Monster monster = new Monster("Goblin", 10, 2, 2, 2, Game.club, null, 'G',
 	// "#006400"
 	// , 0, 2);
@@ -121,6 +123,7 @@ public class GameServlet extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
+		Game.setUser((User) session.getAttribute("User"));
 		if(counter == 0) {
 			// set the player's attributes
 			Player pUpdate = (Player)session.getAttribute("player");
@@ -133,6 +136,9 @@ public class GameServlet extends HttpServlet {
 	   	    player.setOldAgi(pUpdate.getOldAgi());
 	   	    player.setVitality(pUpdate.getVitality());
 	   	    player.setArmor(pUpdate.getArmor());
+	   	    System.out.println("Original armor" + pUpdate.getArmor());
+	   	    //System.out.println("The SAme armor" + Items.ids[7]);
+	   	    System.out.println("ID " + pUpdate.getArmorId());
 	   	    player.setWeapon(pUpdate.getWeapon());
 	   	    player.setHp(pUpdate.getHp());
 	   	    player.setCurHp(pUpdate.getCurHp());
@@ -141,24 +147,38 @@ public class GameServlet extends HttpServlet {
 	   	    player.setExpForNextLevel(pUpdate.getExpForNextLevel());
 	   	    player.setHunger(pUpdate.getHunger());
 	   	    player.setBackpack(pUpdate.getBackpack());
+	   	    
+	   	    
+			//Armor test = new Armor("No Armor",'#',0,0,0);
+		//	Weapon test2 = new Weapon("No Armor",'!',0);
+			//player.setArmor(test);
+			//player.setWeapon(test2);
+	   	    
 	   	    player.calcDamage();
 	   	    player.calcHP();
+	   	   // player.setCurHp(1);
 	   	    player.calcMoveSpeed();
+	   	   // player.setArmor(Items.armors[7]);
+	   	    System.out.println("New armor " + player.getArmor());
 	   	    
+	   	 //   System.out.println"Wep power " + ;
+	   	    
+			System.out.println("Shadow die test " + pUpdate.getCurHp());
+
 	   	    // code for debugging equip
 	   	    //ArrayList<Item> pack = new ArrayList<>();
 	   	   // Weapon sword = new Weapon("sword", '!', 10);
 	   	   // Armor armor = new Armor("chainmail", '#', 40);
 	   	   // pack.add(sword);
 	   	   // pack.add(armor);
-	   	   // player.setBackpack(pack);
-	   	    player.pickUp(Items.scrollTeleportation);
 
 
 		}
 		
-		int dead = Game.actors.get(0).getCurHp();
+		
+		int dead = player.getCurHp();
 		if (dead <= 0) {
+			System.out.println("Die test "  + player.getCurHp());
 			PlayerDAO pDAO = new PlayerDAO();
 			pDAO.deletePlayer(player);
 			session.setAttribute("player", null);

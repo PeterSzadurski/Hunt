@@ -4,28 +4,42 @@ package model;
 public class Items {
 	
 	// Nothing items
-	public static Weapon nothingWep = new Weapon("nothing weapon", '!', 0);
-	public static Armor nothingArm = new Armor("nothing armor", '+', 0, 0, 0);
+	public static Weapon nothingWep = new Weapon("nothing weapon", '!', 0, 8);
+	public static Armor nothingArm = new Armor("nothing armor", '+', 0, 0, 0, 8);
 
 	// Generate weapons
-
-	public static Weapon club = new Weapon("Club", '!', 5);
-	public static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2);
-	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8);
-	public static Weapon steelLongblade = new Weapon("Steel Longblade", '!', 10);
-	public static Weapon royalLance = new Weapon("Royal Lance", '!', 15);
-	public static Weapon holyLance = new Weapon("Holy Lance", '!', 25);
+	public static Weapon fists = new Weapon ("No Weapon", '!', 0, 1);
+	public static Weapon club = new Weapon("Club", '!', 5,2);
+	public static Weapon rustyDagger = new Weapon("Rusty Dagger", '!', 2,3);
+	public static Weapon ironLongblade = new Weapon("Iron Longblade", '!', 8,4);
+	public static Weapon steelLongblade = new Weapon("Steel Longblade", '!', 10,5);
+	public static Weapon royalLance = new Weapon("Royal Lance", '!', 15,6);
+	public static Weapon holyLance = new Weapon("Holy Lance", '!', 25,7);
+	
+	public static Weapon[] weapons = {nothingWep, fists, rustyDagger, ironLongblade, steelLongblade, royalLance, holyLance};
+	
 
 	// Generate armors
 
-	public static Armor clothes = new Armor("Clothes", '+', 1, 0, 0);
-	public static Armor lightLeather = new Armor("Light Leather", '+', 5, 1, 0);
-	public static Armor chainmail = new Armor("Chainmail", '+', 10, 0, 0);
-	public static Armor steelPlate = new Armor("Steel Plate", '+', 20, -1, 0);
-	public static Armor ironPlate = new Armor("Iron Plate", '+', 15, -1, 0);
-	public static Armor blessedArmor = new Armor("Blessed Armor", '+', 25, -2, 3);
-	public static Armor immortalArmor = new Armor("Immortal Armor", '+', 50, -1, 6);
+	public static Armor[] getArmors() {
+		return armors;
+	}
 
+	public static void setArmors(Armor[] armors) {
+		Items.armors = armors;
+	}
+
+	public static Armor clothes = new Armor("Clothes", '+', 1, 0, 0, 0);
+	public static Armor lightLeather = new Armor("Light Leather", '+', 5, 1, 0, 1);
+	public static Armor chainmail = new Armor("Chainmail", '+', 10, 0, 0, 2);
+	public static Armor steelPlate = new Armor("Steel Plate", '+', 20, -1, 0, 3);
+	public static Armor ironPlate = new Armor("Iron Plate", '+', 15, -1, 0, 4);
+	public static Armor blessedArmor = new Armor("Blessed Armor", '+', 25, -2, 3, 5);
+	public static Armor immortalArmor = new Armor("Immortal Armor", '+', 50, -1, 6, 6);
+	public static Armor naked = new Armor("No Armor", '#', 0, 0, 0, 7);
+	
+	public static Armor[] armors = {clothes, lightLeather, chainmail, steelPlate, ironPlate, blessedArmor, immortalArmor, naked, nothingArm};
+	
 	// Generate items
 	public static Item smallPotion = new Item("Small Potion", 'i',
 			"<span style = \"color:" + Game.buffColor + "\">Restores</span> 10HP", 10, Effect.RESTORE_HEALTH, null);

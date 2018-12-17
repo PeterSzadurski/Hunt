@@ -3,17 +3,27 @@ import java.io.Serializable;
 public class Weapon extends Item implements Serializable{
 	private static final long serialVersionUID = 1673858350622172505L;
 	private int damage;
+	private int id;
 	
 	public Weapon() {
 		super();
 		// makes it a bean
 	}
 	
-	public Weapon(String name, char icon, int damage) {
+	public Weapon(String name, char icon, int damage,int id) {
 		super(name, icon);
 		this.damage = damage;
+		this.id =id;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Weapon(String weapon) {
 		super();
 		String[] delim = weapon.split("|");
@@ -38,7 +48,7 @@ public class Weapon extends Item implements Serializable{
 	}
 	
 	public String getWeaponStorageString() {
-		return getName() + "|" + getDamage();
+		return getName() + "," + getIcon() + "," + getDamage();
 	}
 
 }

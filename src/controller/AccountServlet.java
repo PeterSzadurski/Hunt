@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.PlayerDAO;
 import dao.UserDAO;
+import model.Player;
 import model.User;
 import util.ServletUtil;
 
@@ -95,11 +96,16 @@ public class AccountServlet extends HttpServlet {
 						
 						// check if the user has a player
 						PlayerDAO pDAO = new PlayerDAO();
-						boolean hasPlayer = pDAO.playerExists(user.getUserID());
+						System.out.println("The input is: " + user.getUsername());
+						boolean hasPlayer = pDAO.playerExists(user.getUsername());
 						
 						if(hasPlayer) {
 							System.out.println("The user has a player");
 							
+							Player player = new Player();
+							player = pDAO.getPlayerActual(user.getUsername());
+							System.out.println("Player cur hp " + player.getCurHp());
+							session.setAttribute("player", player);
 							// redirect to index.jsp
 							ServletUtil.redirect("Index.jsp", response);
 							

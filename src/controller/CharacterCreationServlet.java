@@ -46,7 +46,7 @@ public class CharacterCreationServlet extends HttpServlet {
 		// Add player to database
 		PlayerDAO pDAO = new PlayerDAO();
 		User user = (User) session.getAttribute("user");
-		//pDAO.addPlayer(player, user.getUsername());
+		pDAO.addPlayer(player, user.getUsername());
 		System.out.println("In character creation. Player is: " + player.getName());
 		
 		ServletUtil.forward("Index.jsp", request, response);

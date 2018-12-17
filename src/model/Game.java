@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import dao.MonsterDAO;
 import dao.PlayerDAO;
 import monsters.Assassin;
@@ -12,7 +14,13 @@ import monsters.Ninja;
 import monsters.RoyalGuard;
 
 public class Game {
+	//HttpSession session = request.getSession();
 
+	//User user = new User();
+	//user = session
+			
+	//		session.setAttribute("user", user
+	static User user = new User();
 	public static ArrayList<Character> actors = new ArrayList<Character>();
 	public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public static ArrayList<ItemFloor> itemsFloor = new ArrayList<ItemFloor>();
@@ -98,7 +106,10 @@ public class Game {
 		
 	}
 
-
+	public static void setUser (User user) {
+		Game.user = user;
+	}
+	
 	// effects methods
 	public static void effects(int target, int magnitude, Effect effect) {
 		// boolean ifUsed = false;
@@ -587,6 +598,7 @@ public class Game {
 				writer.print("<tr><td>" + ((Player) actors.get(0)).displayBackpack() + "</td>");
 				break;
 			case 1: /// ADD Save HERE ---
+				Game.save(user);
 				break;
 			case 2:
 				writer.print("<tr><td>" + actors.get(0).toString() + "</td>");

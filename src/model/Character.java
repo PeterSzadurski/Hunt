@@ -228,6 +228,9 @@ public class Character implements Serializable {
 
 	public void setCurHp(int curHp) {
 		this.curHp = curHp;
+		//if (this instanceof Player) {
+			//System.out.println("PLayer current hp has been set");
+		//}
 	}
 
 	public Weapon getWeapon() {

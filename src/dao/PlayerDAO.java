@@ -11,6 +11,7 @@ import java.util.List;
 import model.Armor;
 import model.Effect;
 import model.Item;
+import model.Items;
 import model.Player;
 import model.User;
 import model.Weapon;
@@ -73,15 +74,15 @@ public class PlayerDAO {
 			pStmt.setInt(7, player.getMoveSpeed());
 			pStmt.setInt(8, player.getHp());
 			pStmt.setInt(9, player.getCurHp());
-			pStmt.setString(10, player.getWeapon().getWeaponStorageString());
-			pStmt.setString(11, player.getArmor().getArmorStorageString());
+			pStmt.setInt(10, player.getWeapon().getId());
+			pStmt.setInt(11, player.getArmor().getId());
 			pStmt.setInt(12, player.getX()); // x
 			pStmt.setInt(13, player.getY()); // y
 			pStmt.setInt(14, player.getLevel());
 			pStmt.setInt(15, player.getExpForNextLevel());
 			pStmt.setInt(16, player.getExp());
 			pStmt.setInt(17, player.getHunger());
-			pStmt.setString(18, "item");
+			pStmt.setString(18, player.backpackStorageString());
 			
 			
 
@@ -166,10 +167,11 @@ public class PlayerDAO {
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement(
-					"select * from Player where playerName = ?");
+					"select * from Player where username = ?");
+			pStmt.setString(1, playerName);
 			ResultSet result = pStmt.executeQuery();
 			if (result.next()) {
-				if(playerName.equals(result.getString("playerName"))) {
+				if(playerName.equals(result.getString("username"))) {
 					playerExists = true;
 				}
 			}
@@ -192,7 +194,6 @@ public class PlayerDAO {
 					"select * from Player where PlayerId = ?");
 			pStmt.setInt(1, playerId);
 			ResultSet result = pStmt.executeQuery();
-			
 			while(result.next()) {
 				player.setName(result.getString("playerName"));
 				player.setPlayerID(result.getInt("playerId"));
@@ -200,22 +201,29 @@ public class PlayerDAO {
 				player.setStrength(result.getInt("playerStrength"));
 				player.setAgility(result.getInt("playerAgility"));
 				player.setVitality(result.getInt("playerVitality"));
-				Armor armor = new Armor(result.getString("PlayerArmor"));
-				player.setArmor(armor);
-				Weapon weapon = new Weapon(result.getString("WeaponArmor"));
-				player.setArmor(armor);
-				player.calcDamage();
-				player.calcHP();
-				player.calcMoveSpeed();
-				player.setCurHp(result.getInt("PlayerCurrentHealthPoints"));
-				player.setLevel(result.getInt("playerLevel"));
+				player.setMoveSpeed(result.getInt("PlayerSpeed"));
+				player.setHp(result.getInt("PlayerHealthPoints"));
+				//player.setHp(result.getInt("PlayerHealthPoints"));
+				player.setCurHp(result.getInt("PlayerHealthPoints"));
+				//player.setWeapon(Items.holyLance);
+				player.setArmorId(result.getInt("PlayerArmor"));
+				//Armor work = new Armor(result.getString("PlayerArmor"));
+				//player.setName(work.getName());
+				//player.setArmor(Items.armors[1]);
+				//player.setArmor(othertest);
+				//Weapon weapon = new Weapon(result.getString("PlayerWeapon"));
+				//player.setWeapon(weapon);
+				
+				//System.out.println("Current hp stter: " + result.getInt("PlayerCurrentHealthPoints"));
+				//player.setCurHp(result.getInt("PlayerCurrentHealthPoints"));
+				player.setLevel(result.getInt("PlayerLevel"));
 				player.setExpForNextLevel(result.getInt("PlayerExpForNextLevel"));
 				player.setExp(result.getInt("PlayerExp"));
 				player.setHunger(result.getInt("PlayerHunger"));
-				String[] packString = result.getString("PlayerBackpack").split(",");
-				Item item;
-				ArrayList<Item> pack = new ArrayList<>();
-				for (int i = 0; i < packString.length; i++) {
+				//String[] packString = result.getString("PlayerBackpack").split(",");
+				//Item item;
+				//ArrayList<Item> pack = new ArrayList<>();
+		/*		for (int i = 0; i < packString.length; i++) {
 					String[] itemString = packString[i].split("|");
 					item = new Item();
 					item.setName(itemString[0]);
@@ -224,13 +232,78 @@ public class PlayerDAO {
 					
 					pack.add(item);
 				}
-				player.setBackpack(pack);
+				player.setBackpack(pack); */
+				//player.setArmor(othertest);
+
 			}
+			//player.setBackpack(pack);
+			//player.setCurHp(400);
+			//player.setCurHp(result.getInt("PlayerHealthPoints"));
+			player.calcDamage();
+			player.calcHP();
+			player.calcMoveSpeed();
+			player.setArmorId(5);
+
+
 		} catch (SQLException ex) {
 			ex.getMessage();
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
+		return player;
+	}
+	
+	public Player getPlayerActual (String user) {
+		Player player = new Player();
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			
+			PreparedStatement pStmt = conn.prepareStatement(
+					"select * from Player where Username = ?" );
+			pStmt.setString(1, user);
+			ResultSet result = pStmt.executeQuery();
+			while(result.next()) {
+				player.setName(result.getString("UserName"));
+				player.setAgility(result.getInt("PlayerAgility"));
+				player.setStrength(result.getInt("PlayerStrength"));
+				player.setVitality(result.getInt("PlayerVitality"));
+				player.setCurHp(result.getInt("PlayerCurrentHealthPoints"));
+				player.setArmor(Items.armors[result.getInt("PlayerArmor")]);
+				player.setWeapon(Items.weapons[result.getInt("PlayerWeapon")]);
+				player.setLevel(result.getInt("playerlevel"));
+				player.setExp(result.getInt("playerexp"));
+				player.setExpForNextLevel(result.getInt("Playerexpfornextlevel"));
+				player.setBackpack(new ArrayList<>());
+
+				//String[] packString = result.getString("PlayerBackpack").split(",");
+				//Item item;
+				//ArrayList<Item> pack = new ArrayList<>();
+		/*		for (int i = 0; i < packString.length; i++) {
+					String[] itemString = packString[i].split("|");
+					item = new Item();
+					item.setName(itemString[0]);
+					item.setEffectText(itemString[1]);
+					item.setCount(Integer.parseInt(itemString[4]));
+					
+					pack.add(item);
+				}
+				player.setBackpack(pack); */
+				//player.setArmor(othertest);
+
+			}
+			//player.setBackpack(pack);
+				
+			
+			
+		}
+	 catch (Exception ex) {
+		ex.getMessage();
+	}
+		player.calcHP();
+		player.calcMoveSpeed();
+		player.calcDamage();
+		
 		return player;
 	}
 	
@@ -267,15 +340,15 @@ public class PlayerDAO {
 		int pSpeed = p.getMoveSpeed();
 		int pHealth = p.getHp();
 		int pCurrentHealth = p.getCurHp();
-		String pWeapon = p.getWeapon().toString();
-		String pArmor = p.getArmor().toString();
+		int pWeapon = p.getWeapon().getId();
+		int pArmor = p.getArmor().getId();
 		int pX = p.getX();
 		int pY = p.getY();
 		int pLevel = p.getLevel();
 		int pExpForNextLevel = p.getExpForNextLevel();
 		int pExp = p.getExp();
 		int pHunger = p.getHunger();
-		String pBackpack = p.getBackpack().toString();
+		//String pBackpack = p.getBackpack().toString();
 		
 		Connection conn = null;
 		try {
@@ -300,7 +373,7 @@ public class PlayerDAO {
 					+ "PlayerExp," // 15
 					+ "PlayerHunger," //16
 					+ "PlayerBackpack" // 17
-					+ ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) where Playername = ? and Username = ?"); 
+					+ ") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) where Playername = ? and Username = ?"); 
 			pStmt.setInt(1, currentDungeonLevelID);
 			pStmt.setInt(2, pStrength);
 			pStmt.setInt(3, pAgility);
@@ -309,17 +382,17 @@ public class PlayerDAO {
 			pStmt.setInt(6, pSpeed);
 			pStmt.setInt(7, pHealth);
 			pStmt.setInt(8, pCurrentHealth);
-			pStmt.setString(9, pWeapon);
-			pStmt.setString(10, pArmor);
+			pStmt.setInt(9, pWeapon);
+			pStmt.setInt(10, pArmor);
 			pStmt.setInt(11, pX);
 			pStmt.setInt(12, pY);
 			pStmt.setInt(13, pLevel);
 			pStmt.setInt(14, pExpForNextLevel);
 			pStmt.setInt(15, pExp);
 			pStmt.setInt(16, pHunger);
-			pStmt.setString(17, pBackpack);
-			pStmt.setString(18, p.getName());
-			pStmt.setString(19, u.getUsername());
+			//pStmt.setString(17, pBackpack);
+			pStmt.setString(17, p.getName());
+			pStmt.setString(18, u.getUsername());
 			
 			pStmt.executeUpdate();
 		} catch (SQLException ex) {

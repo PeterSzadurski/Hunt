@@ -63,7 +63,7 @@ public class Testing {
 		mDao.addMonster(bat);
 		
 		PlayerDAO  pDao = new PlayerDAO(); 
-		Player player = new Player("test",1, 1, 1, '@', "#FFFF00", 2, 3);
+		Player player = new Player("yes",1, 1, 1, '@', "#FFFF00", 2, 3);
 		pDao.addPlayer(player, "Dave");
 		
 	}

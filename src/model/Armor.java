@@ -7,6 +7,7 @@ public class Armor extends Item implements Serializable {
 	private int hpBonus;
 	private int agiAlter;
 	private int strAlter;
+	private int id;
 	
 	public int getAgiAlter() {
 		return agiAlter;
@@ -28,14 +29,23 @@ public class Armor extends Item implements Serializable {
 		super();
 	}
 	
-	public Armor(String name, char icon, int hpBonus, int agiAlter, int strAlter) {
+	public Armor(String name, char icon, int hpBonus, int agiAlter, int strAlter, int id) {
 		super(name, icon);
 		
 		this.hpBonus = hpBonus;
 		this.agiAlter = agiAlter;
 		this.strAlter = strAlter;
+		this.id = id;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Armor(String armor) {
 		super();
 		String[] delim = armor.split(",");
@@ -76,7 +86,7 @@ public class Armor extends Item implements Serializable {
 	}
 	
 	public String getArmorStorageString() {
-		return getName() + "," + getHpBonus();
+		return getName() + "," + getIcon() +"," + getHpBonus() + "," + agiAlter + "," + strAlter;
 	}
 
 }

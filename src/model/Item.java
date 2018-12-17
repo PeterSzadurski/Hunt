@@ -11,6 +11,7 @@ public class Item implements Serializable {
 	private int magnitude = 0;
 	private Effect effect;
 	private String color = "#C5B358";
+	private int itemId;
 	public Item() {
 		
 	}

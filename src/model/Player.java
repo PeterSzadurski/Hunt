@@ -15,7 +15,7 @@ public class Player extends Character implements Serializable {
 	private int expForNextLevel;
 	private int hunger;
 	private ArrayList<Item> backpack;
-
+	private int armorId;
 	private char icon = '@';
 	private String color = "#FFFF00";
 
@@ -36,7 +36,7 @@ public class Player extends Character implements Serializable {
 	 */
 	public Player(String name, int str, int agi, int vit, char icon, String color, int x, int y) {
 
-		super(name, str, agi, vit, new Weapon("No Weapon", '!', 0), new Armor("No Armor", '#', 0, 0, 0), icon, color, x, y);
+		super(name, str, agi, vit, Items.fists, Items.naked, icon, color, x, y);
 
 		this.name = name;
 		level = 1;
@@ -44,7 +44,7 @@ public class Player extends Character implements Serializable {
 		expForNextLevel = 10;
 		hunger = 100;
 		backpack = new ArrayList<Item>();
-		backpack.add(Items.largePotion);
+		//backpack.add(Items.largePotion);
 
 		// Calculate other stats
 		//super.calcStrength();
@@ -494,5 +494,14 @@ public class Player extends Character implements Serializable {
 			
 		}
 		else if (c.getVitality() < c.getAgility()) {} */
+	}
+
+	public void setArmorId(int id) {
+		this.armorId = id;
+		// TODO Auto-generated method stub
+		
+	}
+	public int getArmorId () {
+		return this.armorId;
 	}
 }
