@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS TimeFreeze (
 DROP TABLE IF EXISTS ItemFloor;
 
 CREATE TABLE IF NOT EXISTS ItemFloor (
-    itemFloorId INT AUTO_INCREMENT,
-    items VARCHAR(255),
-    PRIMARY KEY (itemFloorId)
+    item varchar(30),
+    x int,
+    y int
 );
 
 DROP TABLE IF EXISTS Projectile;
