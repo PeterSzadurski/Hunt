@@ -12,10 +12,6 @@ public class Items {
 	public static Weapon royalLance = new Weapon("Royal Lance", '!', 15);
 	public static Weapon holyLance = new Weapon("Holy Lance", '!', 25);
 
-
-
-
-
 	// Generate armors
 
 	public static Armor clothes = new Armor("Clothes", '+', 1, 0, 0);
@@ -58,5 +54,207 @@ public class Items {
 			null);
 	
 	public static Item winItem = new Item("Patriots Game Ticket",'$',"A <span style = \"color:yellow\">Prized Treasure</span>", 0, Effect.WIN_ITEM, null);
+
+	public static Weapon getClub() {
+		return club;
+	}
+
+	public static void setClub(Weapon club) {
+		Items.club = club;
+	}
+
+	public static Weapon getRustyDagger() {
+		return rustyDagger;
+	}
+
+	public static void setRustyDagger(Weapon rustyDagger) {
+		Items.rustyDagger = rustyDagger;
+	}
+
+	public static Weapon getIronLongblade() {
+		return ironLongblade;
+	}
+
+	public static void setIronLongblade(Weapon ironLongblade) {
+		Items.ironLongblade = ironLongblade;
+	}
+
+	public static Weapon getSteelLongblade() {
+		return steelLongblade;
+	}
+
+	public static void setSteelLongblade(Weapon steelLongblade) {
+		Items.steelLongblade = steelLongblade;
+	}
+
+	public static Weapon getRoyalLance() {
+		return royalLance;
+	}
+
+	public static void setRoyalLance(Weapon royalLance) {
+		Items.royalLance = royalLance;
+	}
+
+	public static Weapon getHolyLance() {
+		return holyLance;
+	}
+
+	public static void setHolyLance(Weapon holyLance) {
+		Items.holyLance = holyLance;
+	}
+
+	public static Armor getClothes() {
+		return clothes;
+	}
+
+	public static void setClothes(Armor clothes) {
+		Items.clothes = clothes;
+	}
+
+	public static Armor getLightLeather() {
+		return lightLeather;
+	}
+
+	public static void setLightLeather(Armor lightLeather) {
+		Items.lightLeather = lightLeather;
+	}
+
+	public static Armor getChainmail() {
+		return chainmail;
+	}
+
+	public static void setChainmail(Armor chainmail) {
+		Items.chainmail = chainmail;
+	}
+
+	public static Armor getSteelPlate() {
+		return steelPlate;
+	}
+
+	public static void setSteelPlate(Armor steelPlate) {
+		Items.steelPlate = steelPlate;
+	}
+
+	public static Armor getIronPlate() {
+		return ironPlate;
+	}
+
+	public static void setIronPlate(Armor ironPlate) {
+		Items.ironPlate = ironPlate;
+	}
+
+	public static Armor getBlessedArmor() {
+		return blessedArmor;
+	}
+
+	public static void setBlessedArmor(Armor blessedArmor) {
+		Items.blessedArmor = blessedArmor;
+	}
+
+	public static Armor getImmortalArmor() {
+		return immortalArmor;
+	}
+
+	public static void setImmortalArmor(Armor immortalArmor) {
+		Items.immortalArmor = immortalArmor;
+	}
+
+	public static Item getSmallPotion() {
+		return smallPotion;
+	}
+
+	public static void setSmallPotion(Item smallPotion) {
+		Items.smallPotion = smallPotion;
+	}
+
+	public static Item getLargePotion() {
+		return largePotion;
+	}
+
+	public static void setLargePotion(Item largePotion) {
+		Items.largePotion = largePotion;
+	}
+
+	public static Item getSmallPoison() {
+		return smallPoison;
+	}
+
+	public static void setSmallPoison(Item smallPoison) {
+		Items.smallPoison = smallPoison;
+	}
+
+	public static Item getScrollTeleportation() {
+		return scrollTeleportation;
+	}
+
+	public static void setScrollTeleportation(Item scrollTeleportation) {
+		Items.scrollTeleportation = scrollTeleportation;
+	}
+
+	public static Item getScrollFireball() {
+		return scrollFireball;
+	}
+
+	public static void setScrollFireball(Item scrollFireball) {
+		Items.scrollFireball = scrollFireball;
+	}
+
+	public static Item getScrollGreaterFireball() {
+		return scrollGreaterFireball;
+	}
+
+	public static void setScrollGreaterFireball(Item scrollGreaterFireball) {
+		Items.scrollGreaterFireball = scrollGreaterFireball;
+	}
+
+	public static Item getScrollMinorFrozenTime() {
+		return scrollMinorFrozenTime;
+	}
+
+	public static void setScrollMinorFrozenTime(Item scrollMinorFrozenTime) {
+		Items.scrollMinorFrozenTime = scrollMinorFrozenTime;
+	}
+
+	public static Item getScrollFrozenTime() {
+		return scrollFrozenTime;
+	}
+
+	public static void setScrollFrozenTime(Item scrollFrozenTime) {
+		Items.scrollFrozenTime = scrollFrozenTime;
+	}
+
+	public static Item getScrollGreaterFrozenTime() {
+		return scrollGreaterFrozenTime;
+	}
+
+	public static void setScrollGreaterFrozenTime(Item scrollGreaterFrozenTime) {
+		Items.scrollGreaterFrozenTime = scrollGreaterFrozenTime;
+	}
+
+	public static Item getScrollMasterFrozenTime() {
+		return scrollMasterFrozenTime;
+	}
+
+	public static void setScrollMasterFrozenTime(Item scrollMasterFrozenTime) {
+		Items.scrollMasterFrozenTime = scrollMasterFrozenTime;
+	}
+
+	public static Item getPotionMinorOfImprovement() {
+		return potionMinorOfImprovement;
+	}
+
+	public static void setPotionMinorOfImprovement(Item potionMinorOfImprovement) {
+		Items.potionMinorOfImprovement = potionMinorOfImprovement;
+	}
+
+	public static Item getWinItem() {
+		return winItem;
+	}
+
+	public static void setWinItem(Item winItem) {
+		Items.winItem = winItem;
+	}
+	
+	
 }
 

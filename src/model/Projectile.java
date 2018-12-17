@@ -12,7 +12,7 @@ public class Projectile {
 	int damage;
 	boolean setDestroy = false;
 	private double turnCount = 0; 
-	Projectile(){}
+	public Projectile(){}
 	public Projectile (String color, int x, int y, int movX, int movY, int agility, int damage) {
 		this.color = color;
 		this.x = x;
@@ -33,6 +33,25 @@ public class Projectile {
 	}
 	public void setIcon(char icon) {
 		this.icon = icon;
+	}
+	
+	public int getMovX() {
+		return movX;
+	}
+	public void setMovX(int movX) {
+		this.movX = movX;
+	}
+	public int getMovY() {
+		return movY;
+	}
+	public void setMovY(int movY) {
+		this.movY = movY;
+	}
+	public int getDamage() {
+		return damage;
+	}
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 	public String getColor() {
 		return color;
