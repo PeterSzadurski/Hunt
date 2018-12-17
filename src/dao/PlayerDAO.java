@@ -44,7 +44,7 @@ public class PlayerDAO {
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement(""
-					+ "INSERT INTO Player ("
+					+ "INSERT Into player ("
 					+ "playername, "
 					+ "username, "
 					+ "playerstrength, "
@@ -56,7 +56,6 @@ public class PlayerDAO {
 					+ "playercurrenthealthpoints, "
 					+ "playerweapon, "
 					+ "playerarmor, "
-					+ "isPlayerSolid, "
 					+ "playerposx, "
 					+ "playerposy, "
 					+ "playerlevel, "
@@ -64,7 +63,7 @@ public class PlayerDAO {
 					+ "playerexp, "
 					+ "playerhunger, "
 					+ "playerinventory) "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");		
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");			
 			pStmt.setString(1, player.getName());
 			pStmt.setString(2, username);
 			pStmt.setInt(3, player.getStrength());
@@ -76,15 +75,18 @@ public class PlayerDAO {
 			pStmt.setInt(9, player.getCurHp());
 			pStmt.setString(10, player.getWeapon().getWeaponStorageString());
 			pStmt.setString(11, player.getArmor().getArmorStorageString());
-			pStmt.setInt(12, 1); // isSolid
-			pStmt.setInt(13, player.getX()); // x
-			pStmt.setInt(14, player.getY()); // y
-			pStmt.setInt(15, player.getLevel());
-			pStmt.setInt(16, player.getExpForNextLevel());
-			pStmt.setInt(17, player.getExp());
-			pStmt.setInt(18, player.getHunger());
-			pStmt.setString(19, "item");
+			pStmt.setInt(12, player.getX()); // x
+			pStmt.setInt(13, player.getY()); // y
+			pStmt.setInt(14, player.getLevel());
+			pStmt.setInt(15, player.getExpForNextLevel());
+			pStmt.setInt(16, player.getExp());
+			pStmt.setInt(17, player.getHunger());
+			pStmt.setString(18, "item");
+			
+			
+
 			int result = pStmt.executeUpdate();
+			//pStmt.e
 			
 			if(result > 0) {
 				System.out.println("Successful player add");

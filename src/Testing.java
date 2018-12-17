@@ -3,9 +3,11 @@ import java.util.Arrays;
 
 import dao.DungeonDAO;
 import dao.MonsterDAO;
+import dao.PlayerDAO;
 import model.Armor;
 import model.Dungeon;
 import model.Monster;
+import model.Player;
 import model.Tile;
 import model.Weapon;
 import monsters.Bat;
@@ -59,6 +61,10 @@ public class Testing {
 		MonsterDAO mDao = new MonsterDAO();
 		Bat bat = new Bat(0, 0, 0);
 		mDao.addMonster(bat);
+		
+		PlayerDAO  pDao = new PlayerDAO(); 
+		Player player = new Player("test",1, 1, 1, '@', "#FFFF00", 2, 3);
+		pDao.addPlayer(player, "Dave");
 		
 	}
 

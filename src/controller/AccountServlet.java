@@ -50,8 +50,8 @@ public class AccountServlet extends HttpServlet {
 					
 					// put username in a session attribute
 					session.setAttribute("username", username);
-					//int id = userDAO.getUserId(username);
-					//session.setAttribute("userid", id);	
+					int id = userDAO.getUserId(username);
+					session.setAttribute("userid", id);	
 					
 					ServletUtil.forward("characterCreation.html", request, response);
 					
@@ -90,8 +90,8 @@ public class AccountServlet extends HttpServlet {
 						
 						// put username in a session attribute
 						session.setAttribute("username", username);
-						//int id = userDAO.getUserId(username);
-						//session.setAttribute("userid", id);	
+						int id = userDAO.getUserId(username);
+						session.setAttribute("userid", id);	
 						
 						// check if the user has a player
 						PlayerDAO pDAO = new PlayerDAO();

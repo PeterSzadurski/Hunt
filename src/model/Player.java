@@ -44,6 +44,7 @@ public class Player extends Character implements Serializable {
 		expForNextLevel = 10;
 		hunger = 100;
 		backpack = new ArrayList<Item>();
+		backpack.add(Items.largePotion);
 
 		// Calculate other stats
 		//super.calcStrength();

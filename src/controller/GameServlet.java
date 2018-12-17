@@ -422,6 +422,9 @@ public class GameServlet extends HttpServlet {
 								//player.useFromBackpack(Game.innerSelect);
 							
 							break;
+						case 1:
+							//Game.save(session.getAttribute("User"));
+							break;
 					
 				        case 4: 
 				            Game.levelUp();
