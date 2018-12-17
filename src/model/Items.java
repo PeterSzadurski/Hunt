@@ -2,6 +2,10 @@
 package model;
 
 public class Items {
+	
+	// Nothing items
+	public static Weapon nothingWep = new Weapon("nothing weapon", '!', 0);
+	public static Armor nothingArm = new Armor("nothing armor", '+', 0, 0, 0);
 
 	// Generate weapons
 

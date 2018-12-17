@@ -28,7 +28,7 @@ public class Goblin  extends Monster{
 
 
 	private static Weapon weapon = Items.club;
-	private static Armor armor = null;
+	private static Armor armor = Items.nothingArm;
 	private static char icon = 'G';
 	private static String color ="#006400";
 

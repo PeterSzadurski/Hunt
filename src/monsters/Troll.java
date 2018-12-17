@@ -23,7 +23,7 @@ public class Troll  extends Monster{
 	private static int vit = 4;
 
 	private static Weapon weapon = Items.club;
-	private static Armor armor = null;
+	private static Armor armor = Items.nothingArm;
 	private static char icon = 'T';
 	private static String color ="#006400";
 

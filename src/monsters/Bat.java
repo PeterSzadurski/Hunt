@@ -21,8 +21,8 @@ public class Bat  extends Monster{
 	private static int str = 1;
 	private static int agi = 2;
 	private static int vit = 1;
-	private static Weapon weapon = null;
-	private static Armor armor = null;
+	private static Weapon weapon = Items.nothingWep;
+	private static Armor armor = Items.nothingArm;
 	private static char icon = 'B';
 	private static String color ="#ffffff";
 
