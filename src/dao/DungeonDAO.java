@@ -20,25 +20,27 @@ public class DungeonDAO {
 		try {
 			conn = DBUtil.getConnection();
 			
-			PreparedStatement pStmt = conn.prepareStatement("insert into dungeon (dungeonlevelid) values (?)");
+			// create dungeon in database with given dungeonLevel param
+			PreparedStatement pStmt = conn.prepareStatement("insert into dungeonlevel (dungeonlevelid) values (?)");
 			pStmt.setInt(1, dungeonLevel);
 			
 			int result1 = pStmt.executeUpdate();
 			
 			if (result1 > 0) {
-				System.out.println("Successful Add");
+				System.out.println("Successful dungeon Add");
 			} else {
-				System.out.println("Unsuccessful Add");
+				System.out.println("Unsuccessful dungeon Add");
 			}
 			
+			// loop through given dungeonLayout param and add dungeon rows to database for given dungeonLevel param
 			for(int i = 0; i < dungeonLayout.size(); i++) {
 				String row = dungeonLayout.get(i);
 				
 				try {
-					PreparedStatement pStmt2 = conn.prepareStatement("insert into dungeonlayoutrow (dungeonlayoutrowid, dungeonlayoutrow, dungeonlevelid) values (?, ?, ?)");
-					pStmt2.setInt(1, i + 1);
+					PreparedStatement pStmt2 = conn.prepareStatement("insert into dungeonrow (dungeonrow, rowtiles, dungeonlevelid) values (?, ?, ?)");
+					pStmt2.setInt(1, i);
 					pStmt2.setString(2, row);
-					pStmt2 .setInt(3, dungeonLevel);
+					pStmt2.setInt(3, dungeonLevel);
 					
 					int result2 = pStmt2.executeUpdate();
 					
@@ -68,19 +70,22 @@ public class DungeonDAO {
 		}
 	}
 	
-	public void removeDungeon(int id) {
+	public ArrayList<String> getDungeonByLevel(int id) {
+		//Dungeon dungeon = null;
 		Connection conn = null;
+		ArrayList<String> dLayout = new ArrayList<String>();
 		try {
 			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement("delete from dungeon where dungeonlevelid = ?");
+			PreparedStatement pStmt = conn.prepareStatement("SELECT * FROM DungeonRow WHERE dungeonLevelId = ?");
 			pStmt.setInt(1, id);
+				
+			ResultSet rs = pStmt.executeQuery();
 			
-			int result = pStmt.executeUpdate();
-			if (result == 1) {
-				// dungeon removal is successfull
-			} else {
-				// dungeon removal is unsuccessfull
+			while(rs.next()) {
+				// add each row 
+				dLayout.add(rs.getString("rowTiles"));
 			}
+			
 		} catch (SQLException ex) {
 			ex.getMessage();
 		} catch (Exception ex) {
@@ -88,15 +93,14 @@ public class DungeonDAO {
 		} finally {
 			DBUtil.closeConnection();
 		}
+		return dLayout;
 	}
-	
-	// do we need this? idk what we would need to update in a dungeon
+
 	public void updateDungeon(Dungeon dungeon) {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement("insert into dungeon (DungeonLayout) values (?)");
-			pStmt.setString(1, dungeon.getLayoutAsStr());
+			PreparedStatement pStmt = conn.prepareStatement("insert into dungeonlevel (DungeonLayout) values (?)");
 			int result = pStmt.executeUpdate();
 			if (result == 1) {
 				// dungeon update is successfull
@@ -111,32 +115,4 @@ public class DungeonDAO {
 			DBUtil.closeConnection();
 		}
 	}
-	
-	// change return type to dungeon 
-	public Dungeon getDungeonByID(int id) {
-		Dungeon dungeon = null;
-		Connection conn = null;
-		ArrayList<String> dLayout = new ArrayList<String>();
-		try {
-			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement("select * from dungeonlayoutrow dlr join dungeon d on dlr.dungeonlevelid = d.dungeonlevelid where dlr.dungeonlevelid = ?");
-			pStmt.setInt(1, id);
-			ResultSet rs = pStmt.executeQuery();
-		
-			while(rs.next()) {
-				// add each row 
-				dLayout.add(rs.getString("dungeonlayoutrow"));
-			}
-			
-			dungeon = new Dungeon(dLayout);
-		} catch (SQLException ex) {
-			ex.getMessage();
-		} catch (Exception ex) {
-			ex.getMessage();
-		} finally {
-			DBUtil.closeConnection();
-		}
-		return dungeon;
-	}
-
 }

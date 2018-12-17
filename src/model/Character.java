@@ -22,7 +22,6 @@ public class Character implements Serializable {
 	private int y;
 	int oldStrength;
 	int oldAgi;
-	
 
 	private char icon;
 
@@ -95,6 +94,10 @@ public class Character implements Serializable {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int attack(Character c) {

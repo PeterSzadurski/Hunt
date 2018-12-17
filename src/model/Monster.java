@@ -9,6 +9,7 @@ public class Monster extends Character implements Serializable {
 	private int expOnKill;
 	private double turnCount = 0;
 	int id;
+	boolean isMonster = true;
 
 	private int floor;
 	
@@ -36,6 +37,7 @@ public class Monster extends Character implements Serializable {
 		super.calcHP();
 		super.calcMoveSpeed();
 	}
+
 
 	public String getType() {
 		return type;
@@ -170,5 +172,9 @@ public class Monster extends Character implements Serializable {
 			}
 	}
 		}
+
+	public int getCurrentLevel() {
+		return floor;
+	}
 	
 }

@@ -128,7 +128,7 @@ public class GameServlet extends HttpServlet {
 	    	player.setY(this.location[0]);
 	    	player.setName(pUpdate.getName());
 	   	    player.setStrength(pUpdate.getStrength());
-	   	   player.setOldStrength(pUpdate.getOldStrength());
+	   	    player.setOldStrength(pUpdate.getOldStrength());
 	   	    player.setAgility(pUpdate.getAgility());
 	   	    player.setOldAgi(pUpdate.getOldAgi());
 	   	    player.setVitality(pUpdate.getVitality());

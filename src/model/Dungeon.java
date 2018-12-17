@@ -3,6 +3,9 @@ package model;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+
+import dao.DungeonDAO;
+import dao.MonsterDAO;
 import monsters.*;
 import model.Game;
 
@@ -243,9 +246,135 @@ public class Dungeon {
 				//entities[i][n].setSolid(false);
 			}
 		}
-		populate (index);
+		
+		/*
+		 * Adds dungeon layout to database
+		 */
+		DungeonDAO dao = new DungeonDAO();
+		ArrayList<String> dLayout = new ArrayList<String>();
+		
+		for(int i = 0; i < layout.length; i++) {
+			String row = "";
+			for(int j = 0; j < layout[i].length; j++) {
+				if(j == layout[i].length - 1) {
+					row += layout[i][j].toString();
+				} else {
+					row += layout[i][j].toString() + ",";
+				}
+			}
+			dLayout.add(row);
+		}
+		dao.addDungeon(dLayout, index);
+		
+		
+		// adds monsters to dungeon 
+		populate(index);
+		
+		// add monsters to database
+		MonsterDAO mDao = new MonsterDAO();
+		for (int i = 0; i < this.actors.size(); i++) {
+			System.out.println(i + ": " + this.actors.get(i).toString());
+			//if(this.actors.get(i) instanceof Bat) {
+			mDao.addMonster((Monster) this.actors.get(i));
+				
+//			} else if (this.actors.get(i) instanceof Troll) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Assassin) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Duelist) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Emperor) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Goblin) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Knight) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Ninja) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof RoyalGuard) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} else if (this.actors.get(i) instanceof Vampire) {
+//				mDao.addMonster((Monster) this.actors.get(i));
+//				
+//			} 
+		}
 		
 	}
+	
+	// constructor for using layout from database
+	public Dungeon(ArrayList<String> lo, boolean is) {
+			
+		Tile dungeonLayout[][] = new Tile[50][50];
+			
+		// loop through layout
+		for(int i = 0; i < lo.size(); i++) {
+			// get row from passed arraylist
+			String row = (String) lo.get(i);
+					
+			// split row into array on ","
+			String[] array = row.split(",");
+					
+			// tile arraylist to hold row values changed to respective tile type (wall or floor)
+			Tile[] rowTiles = new Tile[50];
+					
+			// loop through 'Tile' strings in array
+			for(int j = 0; j < array.length; j++) {
+						
+				// check if string equals wall
+				if (array[j].equals("wall")) {
+							
+					// create a wall tile
+					Tile wall = new Tile(' ', true, "#878787", "wall");
+								
+					// add wall tile to tile arraylist
+					rowTiles[j] = wall;
+							
+				// check if string equals floor 
+				} else if(array[j].equals("floor")) {
+							
+					// create a floor tile
+					Tile floor = new Tile('.', false, "#878787", "floor");
+								
+					// add floor tile to tile arraylist
+					rowTiles[j] = floor;
+							
+				} else if(array[j].equals("path")) {
+					// create a path tile
+					Tile path = new Tile('#', false, "#878787", "path");
+								
+					// add path tile to tile arraylist
+					rowTiles[j] = path;
+							
+				} else if(array[j].equals("upFloor")) {
+					// create a upFloor tile
+					Tile upFloor = new Tile('%',false, "#009900", "upFloor");//green
+							
+					// add upFloor tile to tile arraylist
+					rowTiles[j] = upFloor;
+							
+				} else if(array[j].equals("downFloor")) {
+					// create a upFloor tile
+					Tile downFloor = new Tile('%',false, "#000099", "downFloor");//blue
+								
+					// add downFloor tile to tile arraylist
+					rowTiles[j] = downFloor;
+				}
+			} // end of inside for loop
+				
+			// add rowTiles array to dungeon array
+			dungeonLayout[i] = rowTiles;
+				
+		} // end of outside for loop
+			
+	} // end of dungeon(ArrayList layout) constructor
 	
 	
 	public ArrayList<Character> getActors() {
@@ -385,7 +514,7 @@ public class Dungeon {
 		return down;
 	}
 	
-	public void populate (int index) {
+	public void populate(int index) {
 		int rand;
 		int itemRange;
 		int[] location = getLocation();

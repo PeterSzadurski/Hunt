@@ -5,6 +5,19 @@ public class Tile {
 	private boolean solid;
 	private String color;
 	private String type;
+	
+	public Tile (char icon, boolean solid, String color, String type) {
+		this.icon = icon;
+		this.solid = solid;
+		this.color = color;
+		this.type = type;
+	}
+	
+	public Tile (char icon, boolean solid, String color) {
+		this.icon = icon;
+		this.solid = solid;
+		this.color = color;
+	}
 
 	public String getType() {
 		return type;
@@ -24,19 +37,6 @@ public class Tile {
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	Tile (char icon, boolean solid, String color, String type) {
-		this.icon = icon;
-		this.solid = solid;
-		this.color = color;
-		this.type = type;
-	}
-	Tile (char icon, boolean solid, String color) {
-		this.icon = icon;
-		this.solid = solid;
-		this.color = color;
-		this.type = type;
 	}
 
 	public boolean isSolid(){

@@ -28,11 +28,10 @@ public class DungeonOld {
 			for (int n = 0; n < entities[1].length; n++) {
 				//entities[i][n].setIcon(layout[i][n].getIcon());
 				
-<<<<<<< HEAD
+
 				//entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor()); 				
-=======
-				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor()); 				
->>>>>>> test_branch
+
+				entities[i][n] = new Entity (layout[i][n].getIcon(), false, layout[i][n].getColor(), null); 				
 				//entities[i][n].setColor(layout[i][n].getColor());
 				//entities[i][n].setSolid(false);
 			}

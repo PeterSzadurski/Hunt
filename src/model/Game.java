@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
+import dao.MonsterDAO;
+import dao.PlayerDAO;
 import monsters.Assassin;
 import monsters.Bat;
 import monsters.Ninja;
@@ -20,10 +22,6 @@ public class Game {
 										new Dungeon(9)};
 	
 	//dungeon[0] = new Dungeon(0);
-
-
-
-
 	public  Game() {
 		  //  for (int i = 0; i < 10; i++) {
     	//dungeon[i] = new Dungeon(i);
@@ -62,6 +60,43 @@ public class Game {
 	public static int floor;
 	public static Aiming aiming = new Aiming(0, 0);
     
+	// save game
+	public static void save(User user) {
+		PlayerDAO pDao = new PlayerDAO();
+		MonsterDAO mDao = new MonsterDAO();
+		for(int i = 0; i < Game.actors.size(); i++) {
+			if(Game.actors.get(i) instanceof Player) {
+				// save player
+				pDao.savePlayerAttributes((Player) Game.actors.get(i), user);
+			} else if(Game.actors.get(i) instanceof Monster) {
+				// save monster
+				//mDao.saveMonsterAttributes((Monster) Game.actors.get(i));
+			}
+		}
+		
+		// save items
+		
+		// save projectiles
+		
+		// same time freeze 
+		
+	}
+	
+	// load game from database
+	public static void load(Player p, User u) {
+		// load player
+		
+		// load dungeons
+		
+		// load item floor
+		
+		// load monsters 
+		
+		// load projectiles
+		
+		// load time freeze
+		
+	}
 
 
 	// effects methods
