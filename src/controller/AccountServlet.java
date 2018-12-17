@@ -53,6 +53,8 @@ public class AccountServlet extends HttpServlet {
 					//int id = userDAO.getUserId(username);
 					//session.setAttribute("userid", id);	
 					
+					ServletUtil.forward("characterCreation.html", request, response);
+					
 				} else if (userDAO.userExists(username)){ // if user does exist
 					
 					// create a user exists session attribute

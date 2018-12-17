@@ -22,7 +22,28 @@ public class PlayerDAO {
 		Connection conn = null;
 		try {
 			conn = DBUtil.getConnection();
-			PreparedStatement pStmt = conn.prepareStatement("INSERT INTO Player (playername, userid, playerstrength, playeragility, playervitality, playerdamage, playerspeed, playerhealthpoints, playercurrenthealthpoints, playerweapon, playerarmor, isPlayerSolid, playerposx, playerposy, playerlevel, playerexpfornextlevel, playerexp, playerhunger, playerbackpack) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");		
+			PreparedStatement pStmt = conn.prepareStatement(""
+					+ "INSERT INTO Player ("
+					+ "playername, "
+					+ "userid, "
+					+ "playerstrength, "
+					+ "playeragility, "
+					+ "playervitality, "
+					+ "playerdamage, "
+					+ "playerspeed, p"
+					+ "layerhealthpoints, "
+					+ "playercurrenthealthpoints, "
+					+ "playerweapon, "
+					+ "playerarmor, "
+					+ "isPlayerSolid, "
+					+ "playerposx, "
+					+ "playerposy, "
+					+ "playerlevel, "
+					+ "playerexpfornextlevel, "
+					+ "playerexp, "
+					+ "playerhunger, "
+					+ "playerinventory) "
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");		
 			pStmt.setString(1, player.getName());
 			pStmt.setInt(2, userid);
 			pStmt.setInt(3, player.getStrength());
@@ -42,7 +63,13 @@ public class PlayerDAO {
 			pStmt.setInt(17, player.getExp());
 			pStmt.setInt(18, player.getHunger());
 			pStmt.setString(19, player.backpackStorageString());
-			pStmt.executeUpdate();
+			int result = pStmt.executeUpdate();
+			
+			if(result > 0) {
+				System.out.println("Successful player add");
+			} else {
+				System.out.println("Unsuccessful player add");
+			}
 			pStmt.close();
 		} catch (SQLException ex) {
 			ex.getMessage();

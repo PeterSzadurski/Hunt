@@ -15,8 +15,6 @@ public class MonsterDAO {
 	
 	public void addMonster(Monster m) {
 		Connection conn = null;
-		System.out.println("inside addMonster()");
-		System.out.println(m.getName());
 		try {
 			conn = DBUtil.getConnection();
 			PreparedStatement pStmt = conn.prepareStatement(
@@ -67,7 +65,6 @@ public class MonsterDAO {
 		} finally {
 			DBUtil.closeConnection();
 		}
-		System.out.println("end of addMonster()");
 	}
 	
 	public void deleteMonster(Monster monster) {
