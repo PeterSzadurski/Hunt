@@ -153,8 +153,6 @@ public class GameServlet extends HttpServlet {
 	   	   // pack.add(armor);
 	   	   // player.setBackpack(pack);
 	   	    player.pickUp(Items.scrollTeleportation);
-	   	    player.pickUp(Items.winItem);
-
 
 		}
 		
