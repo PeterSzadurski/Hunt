@@ -41,6 +41,8 @@ public class Monster extends Character implements Serializable {
 		return type;
 	}
 	
+	
+	
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -170,5 +172,9 @@ public class Monster extends Character implements Serializable {
 			}
 	}
 		}
+
+public int getCurrentLevel() {
+	return floor;
+}
 	
 }

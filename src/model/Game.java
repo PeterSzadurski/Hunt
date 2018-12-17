@@ -331,7 +331,7 @@ public class Game {
 			if (Game.actors.get(n) instanceof Monster) {	
 				((Monster) actors.get(n))
 						.setTurnCount(((Monster) actors.get(n)).getTurnCount() + turnRate(actors.get(n).getAgility()));
-
+				
 				if (((Monster) actors.get(n)).getTurnCount() >= turn) {
 					for (int t = 0; t < turnRate(actors.get(n).getAgility()); t++) {
 

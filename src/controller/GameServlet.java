@@ -153,6 +153,7 @@ public class GameServlet extends HttpServlet {
 	   	   // pack.add(armor);
 	   	   // player.setBackpack(pack);
 	   	    player.pickUp(Items.scrollTeleportation);
+	   	    player.pickUp(Items.winItem);
 
 
 		}
@@ -369,7 +370,9 @@ public class GameServlet extends HttpServlet {
 					else if (Game.onUp(player)) {
 						if (Game.floor == 0) {
 							if (player.getBackpack().contains(Items.winItem)) {
-								Game.log = player.getName() + " wins!";
+								session.setAttribute("name", player.getName());
+								request.getRequestDispatcher("youwin.jsp").forward(request, response);
+								
 							}
 							else Game.log = "You compel yourself to search for treasure before giving up";
 						}
